@@ -41,7 +41,7 @@ namespace VisualPacker.Views
             {
                 foreach (VerticalBlock v in r.Blocks)
                 {
-                    foreach (Container c in v.blocks)
+                    foreach (Container c in v.Blocks)
                     {
                         if (r.Included)
                         {

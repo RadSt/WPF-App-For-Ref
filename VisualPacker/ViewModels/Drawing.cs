@@ -84,7 +84,7 @@ namespace VisualPacker.ViewModels
                 foreach (VerticalBlock vBlock in rBlock.Blocks)
                 {
                     //MessageBox.Show("Печатаем verticalBlocks");
-                    foreach (Container c in vBlock.blocks)
+                    foreach (Container c in vBlock.Blocks)
                     {
                         // MessageBox.Show("Печатаем Container");
                         // MessageBox.Show(c.FirstPoint.ToString()+" "+c.Length+" "+c.Width+" "+c.Height);

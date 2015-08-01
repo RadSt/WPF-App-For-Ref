@@ -40,7 +40,7 @@ namespace VisualPacker.ViewModels
            if (rBlock.Mass == 0) { return massCenterPoint; }
            foreach (VerticalBlock v in rBlock.Blocks)
            {
-               foreach (Container c in v.blocks)
+               foreach (Container c in v.Blocks)
                {
                    nLength = nLength + c.Mass * (c.FirstPoint.Y + c.Length / 2);
                    nWidth = nWidth + c.Mass * (c.FirstPoint.X + c.Width / 2);

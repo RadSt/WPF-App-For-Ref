@@ -72,7 +72,7 @@ namespace VisualPacker.Views
         
          public List<Container> unpackVerticalBlock(List<Container> tempList, VerticalBlock vBlock)
         {   
-            foreach (Object cont in vBlock.blocks) 
+            foreach (Object cont in vBlock.Blocks) 
                {
                if (cont is VerticalBlock)  {  tempList= unpackVerticalBlock(tempList,(VerticalBlock) cont); }
                else if (cont is HorizontalBlock) { tempList = unpackHorizontalBlock(tempList, (HorizontalBlock)cont); }
@@ -83,7 +83,7 @@ namespace VisualPacker.Views
          } 
         private List<Container> unpackHorizontalBlock(List<Container> tempList, HorizontalBlock hBlock)
         {   
-            foreach (Object cont in hBlock.blocks) 
+            foreach (Object cont in hBlock.Blocks) 
                { if (cont is Container)  { tempList.Add((Container)cont);}
                // else if (cont is VerticalBlock) { tempList= unpackVerticalBlock(tempList,(VerticalBlock) cont); }
                else {MessageBox.Show("В процедуру unpackHorizontalBlock передан неизвестный объект");}

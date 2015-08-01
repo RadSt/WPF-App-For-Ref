@@ -55,7 +55,7 @@ namespace VisualPacker.Models
         {
             foreach (VerticalBlock v in Blocks)
             {
-                if (vBlock.blocks[0].Name == v.blocks[0].Name)
+                if (vBlock.Blocks[0].Name == v.Blocks[0].Name)
                 {
                     return true;
                 }
@@ -75,7 +75,7 @@ namespace VisualPacker.Models
                 Height = Math.Max(Height, c.Height);
                 MinHeight = MinHeight == 0 ? c.Height : Math.Max(MinHeight, c.Height);
                 Mass = Mass + c.Mass;
-                RealVolume = RealVolume + c.realVolume;
+                RealVolume = RealVolume + c.RealVolume;
                 Count = Count + c.Count;
                 Order = c.Order;
                 return true;
@@ -89,7 +89,7 @@ namespace VisualPacker.Models
                 Width = Math.Max(Width, c.Width);
                 Height = Math.Max(Height, c.Height);
                 Mass = Mass + c.Mass;
-                RealVolume = RealVolume + c.realVolume;
+                RealVolume = RealVolume + c.RealVolume;
                 Count = Count + c.Count;
                 Order = c.Order;
                 return true;

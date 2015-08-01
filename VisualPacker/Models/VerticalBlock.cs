@@ -8,9 +8,9 @@ namespace VisualPacker.Models
 {
    public class VerticalBlock: Container
     {
-         public List<Container> blocks=new List<Container>();
-         public double realVolume;
-         public double maxPress = 10000;
+         public List<Container> Blocks=new List<Container>();
+         public double RealVolume;
+         public double MaxPress = 10000;
 
      public VerticalBlock()
      {
@@ -39,12 +39,12 @@ namespace VisualPacker.Models
               Only4Bottom = Only4Bottom,
               FirstPoint = new Point3D(FirstPoint.X, FirstPoint.Y, FirstPoint.Z)
           };
-          foreach (Object o in this.blocks)
+          foreach (Object o in Blocks)
           {
               if (o is VerticalBlock)
               {
                   VerticalBlock vBlock = (VerticalBlock)o;
-                  verticalBlock.blocks.Add(vBlock.Clone() as VerticalBlock);
+                  verticalBlock.Blocks.Add(vBlock.Clone() as VerticalBlock);
               }
               else if (o is RowBlock)
               {
@@ -54,7 +54,7 @@ namespace VisualPacker.Models
               else if (o is Container)
               {
                   Container cont = (Container)o;
-                  verticalBlock.blocks.Add(cont.Clone() as Container);
+                  verticalBlock.Blocks.Add(cont.Clone() as Container);
               }
           }
           return verticalBlock;
@@ -62,44 +62,41 @@ namespace VisualPacker.Models
         public bool Add(Container c, int maxHeight)
         {
             if (
-                (this.Height + c.Height) <= maxHeight &  (((blocks.Count > 0) & (c.Only4Bottom == 1))) == false & (maxPress>=c.Mass)) 
+                (Height + c.Height) <= maxHeight &  (((Blocks.Count > 0) & (c.Only4Bottom == 1))) == false & (MaxPress>=c.Mass)) 
             {   if (c.DirLength != "a") //если направленность контейнера не подходит, то блок не добавляем
                  {
-                     if (this.DirLength == "a") { this.DirLength = c.DirLength;}
-                     else if (this.DirLength!=c.DirLength) {return false;} 
+                     if (DirLength == "a") { DirLength = c.DirLength;}
+                     else if (DirLength!=c.DirLength) {return false;} 
                  };
-                if (this.Order != c.Order & Count != 0) { 
+                if (Order != c.Order & Count != 0) { 
                     return false; 
                 } //в одном блоке не может быть контейнеров из разных заказов
-                blocks.Add(c);
-                this.Height = this.Height + c.Height;
-                this.Length = Math.Max(this.Length, c.Length);
-                this.Width = Math.Max(this.Width, c.Width);
-                this.Mass = this.Mass + c.Mass;
-                this.Price = this.Price + c.Price;
-                this.maxPress = Math.Min(this.maxPress-c.Mass, c.PressHeight);
-                this.Count=this.Count+c.Count;
-                this.Order = c.Order;
-                this.realVolume = realVolume + c.Volume;
-                this.Priority = Math.Min(this.Priority, c.Priority);
+                Blocks.Add(c);
+                Height = Height + c.Height;
+                Length = Math.Max(Length, c.Length);
+                Width = Math.Max(Width, c.Width);
+                Mass = Mass + c.Mass;
+                Price = Price + c.Price;
+                MaxPress = Math.Min(MaxPress-c.Mass, c.PressHeight);
+                Count=Count+c.Count;
+                Order = c.Order;
+                RealVolume = RealVolume + c.Volume;
+                Priority = Math.Min(Priority, c.Priority);
                 return true;
             }
-            else
-            { 
-                return false; 
-            }
-
+            return false;
         }
+
        public List<Container> AddOneContainerFromList(List<Container> tempList,int maxHeight)
         {  
-           int maxLength=this.blocks[this.blocks.Count()-1].Length;
-           int maxWidth=this.blocks[this.blocks.Count()-1].Width;
-           int oldCount=this.blocks.Count();
-           List<Container> SameList = tempList.Where(c => c.Length <= maxLength & c.Width <= maxWidth & c.Order == this.Order).OrderBy(s => s.Priority).ThenByDescending(s => s.Length).ThenByDescending(s => s.Price).ToList();
-           tempList=tempList.Where(c => c.Length>maxLength |c.Width>maxWidth |c.Order!=this.Order).ToList();
+           int maxLength=Blocks[Blocks.Count()-1].Length;
+           int maxWidth=Blocks[Blocks.Count()-1].Width;
+           int oldCount=Blocks.Count();
+           List<Container> SameList = tempList.Where(c => c.Length <= maxLength & c.Width <= maxWidth & c.Order == Order).OrderBy(s => s.Priority).ThenByDescending(s => s.Length).ThenByDescending(s => s.Price).ToList();
+           tempList=tempList.Where(c => c.Length>maxLength |c.Width>maxWidth |c.Order!=Order).ToList();
            foreach (Container c in SameList ){
-               if (oldCount==this.blocks.Count())  {
-                   if (this.Add(c, maxHeight) == false)
+               if (oldCount==Blocks.Count())  {
+                   if (Add(c, maxHeight) == false)
                    {
                        tempList.Add(c);}
        
@@ -110,30 +107,27 @@ namespace VisualPacker.Models
         }
         public bool AreSame(VerticalBlock v)
         {
-           
-            if (0.8*this.Width <= v.Width & 1.2*this.Width >= v.Width) return true;
-            else return false; 
-
+            if (0.8*Width <= v.Width & 1.2*Width >= v.Width) return true;
+            return false;
         }
-        public bool AreSame01(VerticalBlock v)
+
+       public bool AreSame01(VerticalBlock v)
+       {
+           if (0.9 * Width <= v.Width & 1.1 * Width >= v.Width) return true;
+           return false;
+       }
+
+       public bool AreEqual(VerticalBlock v)
+       {
+           if (Width == v.Width & Length == v.Length) return true;
+           return false;
+       }
+
+       public void SetFirstPoint(Point3D point)
         {
-
-            if (0.9 * this.Width <= v.Width & 1.1 * this.Width >= v.Width) return true;
-            else return false;
-
-        }
-        public bool AreEqual(VerticalBlock v)
-        {
-
-            if (this.Width == v.Width & this.Length == v.Length) return true;
-            else return false;
-
-        }
-        public void SetFirstPoint(Point3D point)
-        {
-            this.FirstPoint = point;
+            FirstPoint = point;
             Point3D tempPoint = point;
-            foreach (Object Data in blocks)
+            foreach (Object Data in Blocks)
             {
                 if (Data is VerticalBlock)
                 {
@@ -167,10 +161,10 @@ namespace VisualPacker.Models
         }
         public new void RotateH()
         {
-            int temp = this.Length;
-            this.Length = this.Width;
-            this.Width = temp;
-            foreach (Object Data in blocks)
+            int temp = Length;
+            Length = Width;
+            Width = temp;
+            foreach (Object Data in Blocks)
             {
                 if (Data is VerticalBlock)
                 {
@@ -204,7 +198,7 @@ namespace VisualPacker.Models
 
         new public void ToContainerList(List<Container> tempList)
         {
-            foreach (Object Data in blocks)
+            foreach (Object Data in Blocks)
             {
                 if (Data is VerticalBlock)
                 {
@@ -241,7 +235,7 @@ namespace VisualPacker.Models
         }
            public void  ToContainerListIncludeVerticalPallet(List<Container> tempList)
         {
-           foreach (Object Data in blocks)
+           foreach (Object Data in Blocks)
            {   
                 if (Data is VerticalBlock)
                 {   
@@ -269,7 +263,5 @@ namespace VisualPacker.Models
                 }
            }
         }
-
-
     }
 }

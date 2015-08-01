@@ -6,64 +6,61 @@ namespace VisualPacker.Models
 {
     class HorizontalBlock : Container
     {
-        public List<Container> blocks = new List<Container>();
-        public int rowCount = 1;
-        public double realVolume = 0;
+        public List<Container> Blocks = new List<Container>();
+        public int RowCount = 1;
+        public double RealVolume = 0;
         public bool NotEmpty()
         {
             if (Count > 0) { 
                 return true; }
-            else { 
-                return false; }
+            return false;
         }
+
         public HorizontalBlock()
         {
-            this.Kind = "HorizontalBlock";
-            this.Length = 0;
-            this.Width = 0;
-            this.Height = 0;
-            this.Color = "Blue";
-            this.Only4Bottom = 0;
-            this.Count = 0;
-            this.Name = "горизонтальный блок";
-            this.Mass = 0;
-            this.Price = 0;
-            this.PressLength = 0; //Допустимое давление на яшик, если его длина ориентирована вертикально. 
-            this.PressWidth = 0;
-            this.PressHeight = 0;
-            this.FragilityLength = 1;
-            this.FragilityWidth = 1;
-            this.FragilityHeight = 1;
-            this.Freezable = 0;
-            this.Level = 0;
+            Kind = "HorizontalBlock";
+            Length = 0;
+            Width = 0;
+            Height = 0;
+            Color = "Blue";
+            Only4Bottom = 0;
+            Count = 0;
+            Name = "горизонтальный блок";
+            Mass = 0;
+            Price = 0;
+            PressLength = 0; //Допустимое давление на яшик, если его длина ориентирована вертикально. 
+            PressWidth = 0;
+            PressHeight = 0;
+            FragilityLength = 1;
+            FragilityWidth = 1;
+            FragilityHeight = 1;
+            Freezable = 0;
+            Level = 0;
 
         }
         public bool Add(Container c)
         {
             int CurrentWidth = 0;
-            foreach (Container b in blocks)
+            foreach (Container b in Blocks)
             { CurrentWidth = CurrentWidth + b.Width; }
-            if (CurrentWidth + c.Width < Width * rowCount)
+            if (CurrentWidth + c.Width < Width * RowCount)
             {
-                blocks.Add(c);
-                this.Height = Math.Max(this.Height, c.Height);
-                this.Mass = this.Mass + c.Mass;
+                Blocks.Add(c);
+                Height = Math.Max(Height, c.Height);
+                Mass = Mass + c.Mass;
                 Count = Count + c.Count;
-                if (c.Height == this.Height)
-                { this.PressHeight = this.PressHeight + c.PressHeight; }
+                if (c.Height == Height)
+                { PressHeight = PressHeight + c.PressHeight; }
 
-                this.Order = c.Order;
-                realVolume = realVolume + c.Volume;
+                Order = c.Order;
+                RealVolume = RealVolume + c.Volume;
                 return true;
             }
-            else
-            { return false; }
-
-
+            return false;
         }
         new public void ToContainerList(List<Container> tempList)
         {
-            foreach (Object Data in blocks)
+            foreach (Object Data in Blocks)
             {
                 if (Data is VerticalBlock)
                 {

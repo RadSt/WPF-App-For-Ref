@@ -136,7 +136,7 @@ namespace VisualPacker.Views
 
             vBlock.SetFirstPoint(new Point3D(0, 0, 0));
             //рисуем контейнеры
-                 foreach (Container c in vBlock.blocks)
+                 foreach (Container c in vBlock.Blocks)
                      {
 
                          r = new Rectangle();
@@ -283,7 +283,7 @@ namespace VisualPacker.Views
             {
                 //MessageBox.Show("Количество ящиков в вертикальном блоке " + v.Blocks.Count.ToString());             
                 //foreach (Container c in v.Blocks)
-                foreach (Object p in v.blocks)
+                foreach (Object p in v.Blocks)
                 {
 
                     Container c = (Container)p;
@@ -330,7 +330,7 @@ namespace VisualPacker.Views
                         if (p is VerticalBlock )
                         { 
                             VerticalBlock vB=(VerticalBlock)p;
-                            foreach (Container cont in vB.blocks)
+                            foreach (Container cont in vB.Blocks)
                             {
                                 t = new TextBlock();
                                 t.Text = cont.Name;
@@ -346,7 +346,7 @@ namespace VisualPacker.Views
                         else if (p is HorizontalBlock)
                         {
                             HorizontalBlock vB=(HorizontalBlock)p;
-                            foreach (Container cont in vB.blocks)
+                            foreach (Container cont in vB.Blocks)
                             {
                                 t = new TextBlock();
                                 t.Text = cont.Name;
@@ -476,7 +476,7 @@ namespace VisualPacker.Views
             {
                 //MessageBox.Show("Количество ящиков в вертикальном блоке " + v.Blocks.Count.ToString());             
                 //foreach (Container c in v.Blocks)
-                foreach (Object p in v.blocks)
+                foreach (Object p in v.Blocks)
                 {
                     Container c = (Container)p;
                     r = new Rectangle();
@@ -523,7 +523,7 @@ namespace VisualPacker.Views
                         t2.Text = t2.Text + "  Габариты:" + c.Vgh + "\n";
                         t2.Text = t2.Text + "  Вес:" + c.Mass + "\n"; 
                         VerticalBlock vB = (VerticalBlock)p;
-                        foreach (Container cont in vB.blocks)
+                        foreach (Container cont in vB.Blocks)
                         {
                             t2.Text = t2.Text + "  * "+cont.Name + " ("+ cont.ContainerType+")"+" \n";
                            // t2.Text = t2.Text + "  Тип:" + cont.ContainerType + "\n";
@@ -547,7 +547,7 @@ namespace VisualPacker.Views
                         t2.Text = t2.Text + "  Габариты:" + c.Vgh + "\n";
                         t2.Text = t2.Text + "  Вес:" + c.Mass + "\n";
                         HorizontalBlock vB = (HorizontalBlock)p;
-                        foreach (Container cont in vB.blocks)
+                        foreach (Container cont in vB.Blocks)
                         {
                             t2.Text = t2.Text + "  * " + cont.Name + " (" + cont.ContainerType + ")" + " \n";
                             //t2.Text = t2.Text + "  Тип:" + cont.ContainerType + "\n";

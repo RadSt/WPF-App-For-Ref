@@ -137,7 +137,7 @@ namespace VisualPacker.Views
             if (Data is VerticalBlock)
             {
                 VerticalBlock v = (VerticalBlock)Data;
-                foreach (Container c in v.blocks) { DrawBlock(canvas, c, direction, currentVehicle); }
+                foreach (Container c in v.Blocks) { DrawBlock(canvas, c, direction, currentVehicle); }
             }
             else if (Data is RowBlock)
             {

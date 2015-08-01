@@ -194,7 +194,7 @@ namespace VisualPacker.Models
             bool result = false;
             foreach (VerticalBlock t in tempList)
             {
-                if (t.blocks[0].Name == v.Name)
+                if (t.Blocks[0].Name == v.Name)
                 {
                     result = true;
                 }
@@ -355,7 +355,7 @@ namespace VisualPacker.Models
                 result = rBlocks[0];
                 vBlocks = vBlocks.Where(s => result.ContainsVerticalBlock(s) == false).ToList();
 
-                if ((result.FullnessWidth > 0.4 | containers.Count() == 1) & (this.Mass + result.Mass) <= maxTonnage)
+                if ((result.FullnessWidth > 0.4 | containers.Count() == 1) & (Mass + result.Mass) <= maxTonnage)
                     // if (result.FullnessWidth > 0.4 | containers.Count() <= 5)
                 {
                     if (result.FullnessWidth < 0.9)
@@ -397,7 +397,7 @@ namespace VisualPacker.Models
             List<VerticalBlock> extraBlocks =
                 vBlocks.Where(
                     v => (v.Length <= length & v.Width <= rBlock.Width) | (v.Length <= rBlock.Width & v.Width <= length))
-                    .OrderByDescending(v => v.realVolume)
+                    .OrderByDescending(v => v.RealVolume)
                     .ToList();
             List<VerticalBlock> tempBlocks =
                 vBlocks.Where(
@@ -471,7 +471,7 @@ namespace VisualPacker.Models
                 }
                 else if (vBlock.Count == 1)
                 {
-                    tempList.Add(vBlock.blocks[0]);
+                    tempList.Add(vBlock.Blocks[0]);
                 }
             }
             List<Container> t2 = Calculation.ListToContainerList(tempList);
@@ -522,7 +522,7 @@ namespace VisualPacker.Models
 
                 if (vBlock.Count == 1)
                 {
-                    tempList2.Add(vBlock.blocks[0]);
+                    tempList2.Add(vBlock.Blocks[0]);
                 }
                 else if (vBlock.Count == 2)
                 {
@@ -553,14 +553,14 @@ namespace VisualPacker.Models
 
         public List<Container> DownloadContainers(List<Container> containers, int maxTonnage)
         {
-            this.MaxHeight = this.Height - 350;
+            MaxHeight = Height - 350;
             List<Container> tempList = new List<Container>();
-            while (CannotDownloadAll(containers, maxTonnage) == false & this.MaxHeight > 800)
+            while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > 800)
             {
-                this.MaxHeight = this.MaxHeight - 100;
+                MaxHeight = MaxHeight - 100;
             }
 
-            this.MaxHeight = Math.Min(this.Height - 350, this.MaxHeight + 100);
+            MaxHeight = Math.Min(Height - 350, MaxHeight + 100);
             tempList = DownloadContainersToVehicle(containers, maxTonnage);
             return tempList;
         }
@@ -568,7 +568,7 @@ namespace VisualPacker.Models
         private bool CannotDownloadAll(List<Container> containers, int maxTonnage)
         {
             List<Container> tempList = DownloadContainersToVehicle(containers, maxTonnage);
-            if (NotEmpty(tempList) & this.MaxLength < 500)
+            if (NotEmpty(tempList) & MaxLength < 500)
             {
                 return true;
             }
@@ -587,19 +587,19 @@ namespace VisualPacker.Models
         private List<Container> DownloadContainersToVehicle(List<Container> containers, int maxTonnage)
         {
             ClearVehicle();
-            this.MaxLength = this.Length;
+            MaxLength = Length;
             //делим тары на вертикальные блоки 
             List<VerticalBlock> vBlocks = new List<VerticalBlock>();
             //разные заказы обрабатываем отдельно т.к. их нужно будет выгружать из машины в разное время
 
             //Негабаритный товар отсекаем 
-            List<Container> containerList = containers.Where(s => s.IsSutableLength(this.Width) == true).ToList();
-            this.wasteList = containers.Where(s => s.IsSutableLength(this.Width) == false).ToList();
-            List<Container> wasteList2 = containerList.Where(s => s.Height > this.MaxHeight).ToList();
-            containerList = containerList.Where(s => s.Height <= this.MaxHeight).ToList();
+            List<Container> containerList = containers.Where(s => s.IsSutableLength(Width) == true).ToList();
+            wasteList = containers.Where(s => s.IsSutableLength(Width) == false).ToList();
+            List<Container> wasteList2 = containerList.Where(s => s.Height > MaxHeight).ToList();
+            containerList = containerList.Where(s => s.Height <= MaxHeight).ToList();
             foreach (Container c in wasteList2)
             {
-                this.wasteList.Add(c);
+                wasteList.Add(c);
             }
 
             //маленькие тары будем загружать после основных тар 
@@ -624,7 +624,7 @@ namespace VisualPacker.Models
                 //Если есть кабины то строим лесенку для предотвращения повреждения кабин
                 //формируем первый ряд в один ярус
                 int minHeight = 100;
-                if (this.NotEmpty())
+                if (NotEmpty())
                 {
                     int ch = 0;
                     for (ch = 1; ch < 7; ch++)
@@ -633,22 +633,22 @@ namespace VisualPacker.Models
                         {
                             minHeight = Blocks[Blocks.Count() - 1].MinHeight;
                         }
-                        tempList = CreateRow3(tempList, minHeight, this.MaxHeight, Width, 0, maxTonnage);
+                        tempList = CreateRow3(tempList, minHeight, MaxHeight, Width, 0, maxTonnage);
                     }
                 }
 
                 //контейнеры которые штабелируются в два яруса и ставятся только на пол
-                tempList = CreateVerticalPalletsLevel2(tempList, this.MaxHeight);
+                tempList = CreateVerticalPalletsLevel2(tempList, MaxHeight);
                 //отбираем контейнеры которые штабелируются в 3 яруса и ставятся только на пол
-                tempList = CreateVerticalPalletsLevel3(tempList, 800, 400, 390, this.MaxHeight, "1-");
-                tempList = CreateVerticalPalletsLevel3(tempList, 800, 400, 500, this.MaxHeight, "2-");
-                tempList = CreateVerticalPalletsLevel3(tempList, 900, 360, 420, this.MaxHeight, "3-");
-                tempList = CreateVerticalPalletsLevel3(tempList, 890, 570, 540, this.MaxHeight, "4-");
+                tempList = CreateVerticalPalletsLevel3(tempList, 800, 400, 390, MaxHeight, "1-");
+                tempList = CreateVerticalPalletsLevel3(tempList, 800, 400, 500, MaxHeight, "2-");
+                tempList = CreateVerticalPalletsLevel3(tempList, 900, 360, 420, MaxHeight, "3-");
+                tempList = CreateVerticalPalletsLevel3(tempList, 890, 570, 540, MaxHeight, "4-");
 
                 //Обрабатываем остальные контейнеры
-                if (this.NotEmpty())
+                if (NotEmpty())
                 {
-                    minHeight = this.Blocks[Blocks.Count() - 1].MinHeight;
+                    minHeight = Blocks[Blocks.Count() - 1].MinHeight;
                 } //если есть ряды, то смотрим высоту последнего
                 else
                 {
@@ -657,7 +657,7 @@ namespace VisualPacker.Models
                 while (tempList.Any() & minHeight > 0 & MaxLength > 0)
                 {
                     int ch2 = Blocks.Count();
-                    tempList = CreateRow3(tempList, minHeight, this.MaxHeight, Width, 0, maxTonnage);
+                    tempList = CreateRow3(tempList, minHeight, MaxHeight, Width, 0, maxTonnage);
                     if (ch2 == Blocks.Count())
                     {
                         minHeight = minHeight - 100;
@@ -668,22 +668,22 @@ namespace VisualPacker.Models
 
 
                 /////////////////////////////////////
-                this.wasteList.AddRange(tempList);
+                wasteList.AddRange(tempList);
             }
-            this.wasteList = Calculation.ListToContainerListIncludeVerticalPallet(this.wasteList);
-            this.wasteList = AddOnTopRow(this.wasteList);
+            wasteList = Calculation.ListToContainerListIncludeVerticalPallet(wasteList);
+            wasteList = AddOnTopRow(wasteList);
 
             LoadSmallContainersBySquare(tempSmall, orderList);
-            return this.wasteList;
+            return wasteList;
         }
 
         private void ClearVehicle()
         {
-            this.Blocks.Clear();
-            this.SmallBlocks.Clear();
-            this.wasteList.Clear();
-            this.Count = 0;
-            this.Mass = 0;
+            Blocks.Clear();
+            SmallBlocks.Clear();
+            wasteList.Clear();
+            Count = 0;
+            Mass = 0;
         }
 
         private List<Container> ProcessingCabin(List<Container> tempList, int maxTonnage)
@@ -693,9 +693,9 @@ namespace VisualPacker.Models
 
             foreach (Container c in tempCabin)
             {
-                if (c.Length > this.Width)
+                if (c.Length > Width)
                 {
-                    if (c.Width <= this.Width & c.DirLength == "a")
+                    if (c.Width <= Width & c.DirLength == "a")
                     {
                         c.RotateH();
                     }
@@ -705,7 +705,7 @@ namespace VisualPacker.Models
                         break;
                     }
                 }
-                if (this.Mass + c.Mass <= maxTonnage)
+                if (Mass + c.Mass <= maxTonnage)
                 {
                     AddCabinToRow(c);
                 }
@@ -728,7 +728,7 @@ namespace VisualPacker.Models
                 return tempList;
             }
             HorizontalBlock hBlock = new HorizontalBlock();
-            hBlock.rowCount = 2;
+            hBlock.RowCount = 2;
             hBlock.Width = tempRama[0].Width + 800;
             hBlock.Length = 2400;
             //добавляем в подушку ящики размеров 1200х800х800
@@ -751,7 +751,7 @@ namespace VisualPacker.Models
             //добавляем в подушку ящики размеров 1100х800х720
             temp500 = tempList.Where(s => s.Length == 1100 & s.Width == 800 & s.Height == 720).ToList();
 
-            if (this.NotEmpty() | temp500.Count() >= 6)
+            if (NotEmpty() | temp500.Count() >= 6)
             {
                 tempList = tempList.Where(s => s.Length != 1100 | s.Width != 800 | s.Height != 720).ToList();
                 foreach (Container c in temp500)
@@ -764,7 +764,7 @@ namespace VisualPacker.Models
             }
 
             VerticalBlock vBlock = new VerticalBlock();
-            if (hBlock.NotEmpty() & (this.Mass + hBlock.Mass) <= maxTonnage)
+            if (hBlock.NotEmpty() & (Mass + hBlock.Mass) <= maxTonnage)
             {
                 vBlock.Add(hBlock, Height - 250);
             }
@@ -775,7 +775,7 @@ namespace VisualPacker.Models
 
             foreach (Container r in tempRama)
             {
-                if ((this.Mass + r.Mass) <= maxTonnage)
+                if ((Mass + r.Mass) <= maxTonnage)
                 {
                     if (vBlock.Add(r, Height - 350) == false)
                     {
@@ -794,10 +794,10 @@ namespace VisualPacker.Models
 
         private void AddRowToVehicle(RowBlock rBlock)
         {
-            this.Blocks.Add(rBlock);
-            this.MaxLength = this.MaxLength - rBlock.Width;
-            this.Mass = this.Mass + rBlock.Mass;
-            this.Count = this.Count + rBlock.Count;
+            Blocks.Add(rBlock);
+            MaxLength = MaxLength - rBlock.Width;
+            Mass = Mass + rBlock.Mass;
+            Count = Count + rBlock.Count;
         }
 
         private void AddCabinToRow(Container c)
@@ -810,31 +810,31 @@ namespace VisualPacker.Models
             }
             //добавляем вертикальный ряд в горизонтальный ряд
             RowBlock rBlock = new RowBlock();
-            rBlock.Add(vBlock, this.MaxLength);
+            rBlock.Add(vBlock, MaxLength);
 
-            if (this.MaxLength >= rBlock.Width & Tonnage >= rBlock.Mass + Mass)
+            if (MaxLength >= rBlock.Width & Tonnage >= rBlock.Mass + Mass)
             {
                 AddRowToVehicle(rBlock);
             }
             else
             {
                 //помещаем кабину в список невместившихся контейнеров
-                this.wasteList.Add(c);
+                wasteList.Add(c);
             }
         }
 
         private List<Container> AddOnTopRow(List<Container> tempList)
         {
             List<Container> returnList = tempList.ToList();
-            foreach (RowBlock r in this.Blocks)
+            foreach (RowBlock r in Blocks)
             {
                 foreach (VerticalBlock v in r.Blocks)
                 {
                     int oldCount = returnList.Count();
-                    returnList = v.AddOneContainerFromList(returnList, this.MaxHeight);
+                    returnList = v.AddOneContainerFromList(returnList, MaxHeight);
                     if (oldCount == returnList.Count() + 1)
                     {
-                        this.Count = this.Count + 1;
+                        Count = Count + 1;
                     }
                 }
             }
@@ -863,13 +863,13 @@ namespace VisualPacker.Models
                         .ThenByDescending(s => s.Price)
                         .ToList();
                 tempList = tempList.Where(c => c.Order != order).ToList();
-                int tempS = this.Width*orderLength;
+                int tempS = Width*orderLength;
 
                 foreach (Container c in tempSmall)
                 {
                     if (tempS > 0)
                     {
-                        this.SmallBlocks.Add(c);
+                        SmallBlocks.Add(c);
                         tempS = tempS - c.Width*c.Length;
                     }
                     else
@@ -878,12 +878,12 @@ namespace VisualPacker.Models
                     }
                 }
             }
-            foreach (Container s in this.SmallBlocks)
+            foreach (Container s in SmallBlocks)
             {
-                this.Mass = this.Mass + s.Mass;
+                Mass = Mass + s.Mass;
             }
-            this.Count = this.Count + this.SmallBlocks.Count();
-            this.wasteList.AddRange(tempList);
+            Count = Count + SmallBlocks.Count();
+            wasteList.AddRange(tempList);
         }
 
         public Point3D GetMassCenter()
