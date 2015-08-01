@@ -1,0 +1,159 @@
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\bin\Debug\VisualPacker.exe
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\bin\Debug\VisualPacker.pdb
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\MainWindow.baml
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\MainWindow.g.cs
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\App.g.cs
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.exe
+c:\users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\Users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\ReportWindow.baml
+C:\Users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\obj\x86\Debug\ReportWindow.g.cs
+C:\Users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\bin\Debug\WPFToolkit.dll
+C:\Users\stepanovvv\documents\visual studio 2010\Projects\VisualPacker\VisualPacker\bin\Debug\WPFToolkit.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\bin\Debug\VisualPacker.exe
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\bin\Debug\VisualPacker.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\bin\Debug\WPFToolkit.dll
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\bin\Debug\WPFToolkit.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\MainWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\ReportWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\MainWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\ReportWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\App.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker__\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\WPFToolkit.dll
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\WPFToolkit.pdb
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.ru-RU.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.baml
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.g.cs
+C:\Users\stepanovvv\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.ru-RU.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.baml
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.g.cs
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.pdb
+C:\Users\stepanovvvl\Documents\Visual Studio 2010\Projects\VisualPacker_FW4\VisualPacker\bin\Debug\WPFToolkit.pdb
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.exe
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\bin\Debug\VisualPacker.pdb
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\bin\Debug\WPFToolkit.pdb
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.ru-RU.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\Resources\StringResources.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\aboutWindow.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ContainerList.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\MainWindow.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\PreferenceWindow.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\ReportWindow.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view2d.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\view3d.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\App.g.cs
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\InputDialog.baml
+C:\AZK_DEV\Slava\VisualPacker_FW4\VisualPacker\obj\x86\Debug\InputDialog.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Resources\StringResources.ru-RU.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Resources\StringResources.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\App.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\App.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker_MarkupCompile.cache
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\bin\Debug\VisualPacker.exe
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\bin\Debug\VisualPacker.pdb
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\aboutWindow.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\ContainerList.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\InputDialog.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\MainWindow.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\PreferenceWindow.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\ReportWindow.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\view2d.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\view3d.baml
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\aboutWindow.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\ContainerList.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\InputDialog.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\MainWindow.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\PreferenceWindow.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\ReportWindow.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\view2d.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\Views\view3d.g.cs
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker_FW4_2\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\user198\New folder\Project\WPF C# Applications\VisualPacker_FW4_2\VisualPacker_FW4_2\VisualPacker\obj\x86\Debug\VisualPacker.pdb
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\bin\Debug\VisualPacker.exe.config
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.exe
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.pdb

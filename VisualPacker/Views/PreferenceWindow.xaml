@@ -1,0 +1,44 @@
+﻿<Window x:Class="VisualPacker.Views.PreferenceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource preferences}" Height="320" Width="538" WindowStartupLocation="CenterOwner" Closed="Window_Closed">
+    <TabControl Margin="0,0,0,33">
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock Text="{DynamicResource generalPreferences}" />
+            </TabItem.Header>
+            <TextBlock Text="основные настройки" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock Text="{DynamicResource calculatePreferences}" />
+            </TabItem.Header>
+            <InlineUIContainer>
+                <StackPanel Height="219" Width="519">
+                    <CheckBox Name="weightRestriction_CheckBox" Content="{DynamicResource useSeasonWeightLimitation}"/>
+                    <Grid Height="31" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <!-- Устанавливаем три столбца -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource firstDateOfWeightRestriction}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
+                        <DatePicker Name="datePicker1" IsDropDownOpen="False" SelectedDateFormat="Short"
+                    SelectedDateChanged="calendar_SelectedDatesChanged" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource lastDateOfWeightRestriction}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
+                        <DatePicker Name="datePicker2" IsDropDownOpen="false" SelectedDateFormat="Short"
+                    SelectedDateChanged="calendar_SelectedDatesChanged" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+
+                    </Grid>
+                </StackPanel>
+            </InlineUIContainer>
+
+        </TabItem>
+    </TabControl>
+</Window>

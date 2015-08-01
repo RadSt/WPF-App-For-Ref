@@ -1,0 +1,8 @@
+﻿<Window x:Class="VisualPacker.Views.aboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource aboutVisualPacker}" Height="300" Width="300">
+    <Grid>
+        <TextBlock Name="aboutText" Text="{DynamicResource aboutText}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    </Grid>
+</Window>
