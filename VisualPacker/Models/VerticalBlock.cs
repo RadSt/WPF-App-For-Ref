@@ -215,7 +215,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                     RowBlock r = (RowBlock)Data;
-                    r.ToContainerList(tempList);
+                    r.ToContainerList(tempList, r.Blocks);
                 }
                 else if (Data is HorizontalBlock)
                 {
@@ -245,7 +245,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                    RowBlock r =(RowBlock)Data;
-                    r.ToContainerList(tempList); 
+                    r.ToContainerList(tempList, r.Blocks); 
                 }
                 else if (Data is HorizontalBlock)
                 {

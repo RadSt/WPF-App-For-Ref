@@ -353,7 +353,7 @@ namespace VisualPacker.Models
             {
                 rBlocks = rBlocks.OrderByDescending(s => s.FullnessWidth).ThenByDescending(s => s.MinHeight).ToList();
                 result = rBlocks[0];
-                vBlocks = vBlocks.Where(s => result.ContainsVerticalBlock(s) == false).ToList();
+                vBlocks = vBlocks.Where(s => result.ContainsVerticalBlock(s, vBlocks) == false).ToList();
 
                 if ((result.FullnessWidth > 0.4 | containers.Count() == 1) & (Mass + result.Mass) <= maxTonnage)
                     // if (result.FullnessWidth > 0.4 | containers.Count() <= 5)
@@ -918,7 +918,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                     RowBlock r = (RowBlock) Data;
-                    r.ToContainerList(tempList);
+                    r.ToContainerList(tempList, r.Blocks);
                 }
                 else if (Data is HorizontalBlock)
                 {

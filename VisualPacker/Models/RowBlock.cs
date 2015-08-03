@@ -51,7 +51,7 @@ namespace VisualPacker.Models
             }
         }
 
-        public bool ContainsVerticalBlock(VerticalBlock vBlock)
+        public bool ContainsVerticalBlock(VerticalBlock vBlock, List<VerticalBlock> blocks)
         {
             foreach (VerticalBlock v in Blocks)
             {
@@ -108,9 +108,9 @@ namespace VisualPacker.Models
             }
         }
 
-        public void ToContainerList(List<Container> tempList)
+        public void ToContainerList(List<Container> tempList, List<VerticalBlock> blocks)
         {
-            foreach (Object data in Blocks)
+            foreach (Object data in blocks)
             {
                 if (data is VerticalBlock)
                 {
@@ -120,7 +120,7 @@ namespace VisualPacker.Models
                 else if (data is RowBlock)
                 {
                     RowBlock c = (RowBlock) data;
-                    c.ToContainerList(tempList);
+                    c.ToContainerList(tempList, blocks);
                 }
                 else if (data is HorizontalBlock)
                 {
