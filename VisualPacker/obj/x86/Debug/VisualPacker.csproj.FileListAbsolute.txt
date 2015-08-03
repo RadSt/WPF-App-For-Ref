@@ -159,7 +159,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.exe
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.pdb
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\bin\Debug\VisualPacker.exe
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\bin\Debug\VisualPacker.pdb
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\aboutWindow.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\ContainerList.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\InputDialog.baml

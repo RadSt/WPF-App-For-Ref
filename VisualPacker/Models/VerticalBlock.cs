@@ -198,6 +198,7 @@ namespace VisualPacker.Models
 
         new public void ToContainerList(List<Container> tempList)
         {
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
             foreach (Object Data in Blocks)
             {
                 if (Data is VerticalBlock)
@@ -215,7 +216,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                     RowBlock r = (RowBlock)Data;
-                    r.ToContainerList(tempList, r.Blocks);
+                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
                 }
                 else if (Data is HorizontalBlock)
                 {
@@ -235,6 +236,7 @@ namespace VisualPacker.Models
         }
            public void  ToContainerListIncludeVerticalPallet(List<Container> tempList)
         {
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
            foreach (Object Data in Blocks)
            {   
                 if (Data is VerticalBlock)
@@ -245,7 +247,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                    RowBlock r =(RowBlock)Data;
-                    r.ToContainerList(tempList, r.Blocks); 
+                   fromTempListToContList.ToContainerList(tempList, r.Blocks); 
                 }
                 else if (Data is HorizontalBlock)
                 {

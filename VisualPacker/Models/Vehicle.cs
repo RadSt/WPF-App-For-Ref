@@ -907,6 +907,7 @@ namespace VisualPacker.Models
 
         public List<Container> VehicleToContainerList()
         {
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
             List<Container> tempList = new List<Container>();
             foreach (Object Data in Blocks)
             {
@@ -918,7 +919,7 @@ namespace VisualPacker.Models
                 else if (Data is RowBlock)
                 {
                     RowBlock r = (RowBlock) Data;
-                    r.ToContainerList(tempList, r.Blocks);
+                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
                 }
                 else if (Data is HorizontalBlock)
                 {

@@ -108,36 +108,36 @@ namespace VisualPacker.Models
             }
         }
 
-        public void ToContainerList(List<Container> tempList, List<VerticalBlock> blocks)
-        {
-            foreach (Object data in blocks)
-            {
-                if (data is VerticalBlock)
-                {
-                    VerticalBlock c = (VerticalBlock) data;
-                    c.ToContainerList(tempList);
-                }
-                else if (data is RowBlock)
-                {
-                    RowBlock c = (RowBlock) data;
-                    c.ToContainerList(tempList, blocks);
-                }
-                else if (data is HorizontalBlock)
-                {
-                    HorizontalBlock c = (HorizontalBlock) data;
-                    c.ToContainerList(tempList);
-                }
-                else if (data is Container)
-                {
-                    Container c = (Container) data;
-                    c.ToContainerList(tempList);
-                }
-                else
-                {
-                    MessageBox.Show("В процедуру выгрузки контейнеров класса RowBlock передан неверный тип данных:" +
-                                    data.GetType());
-                }
-            }
-        }
+        //public void ToContainerList(List<Container> tempList, List<VerticalBlock> blocks)
+        //{
+        //    foreach (Object data in blocks)
+        //    {
+        //        if (data is VerticalBlock)
+        //        {
+        //            VerticalBlock c = (VerticalBlock)data;
+        //            c.ToContainerList(tempList);
+        //        }
+        //        else if (data is RowBlock)
+        //        {
+        //            RowBlock c = (RowBlock)data;
+        //            c.ToContainerList(tempList, c.Blocks);
+        //        }
+        //        else if (data is HorizontalBlock)
+        //        {
+        //            HorizontalBlock c = (HorizontalBlock)data;
+        //            c.ToContainerList(tempList);
+        //        }
+        //        else if (data is Container)
+        //        {
+        //            Container c = (Container)data;
+        //            c.ToContainerList(tempList);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("В процедуру выгрузки контейнеров класса RowBlock передан неверный тип данных:" +
+        //                            data.GetType());
+        //        }
+        //    }
+        //}
     }
 }
