@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace VisualPacker.Models
 {
     public class FromTempListToContList
     {
-        public void ToContainerList(List<Container> tempList, List<VerticalBlock> blocks)
+        public void ToContainerList<T>(List<Container> tempList, List<T> blocks)
         {
             foreach (Object data in blocks)
             {
