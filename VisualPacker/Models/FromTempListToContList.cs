@@ -13,28 +13,27 @@ namespace VisualPacker.Models
             {
                 if (data is VerticalBlock)
                 {
-                    VerticalBlock c = (VerticalBlock)data;
-                    c.ToContainerList(tempList);
+                    VerticalBlock verticalBlock = (VerticalBlock)data;
+                    verticalBlock.ToContainerList(tempList);
                 }
                 else if (data is RowBlock)
                 {
-                    RowBlock c = (RowBlock)data;
-                    ToContainerList(tempList, c.Blocks);
+                    RowBlock rowBlock = (RowBlock)data;
+                    ToContainerList(tempList, rowBlock.Blocks);
                 }
                 else if (data is HorizontalBlock)
                 {
-                    HorizontalBlock c = (HorizontalBlock)data;
-                    c.ToContainerList(tempList);
+                    HorizontalBlock horizontalBlock = (HorizontalBlock)data;
+                    horizontalBlock.ToContainerList(tempList);
                 }
                 else if (data is Container)
                 {
-                    Container c = (Container)data;
-                    c.ToContainerList(tempList);
+                    Container container = (Container)data;
+                    container.ToContainerList(tempList);
                 }
                 else
                 {
-                    MessageBox.Show("В процедуру выгрузки контейнеров класса RowBlock передан неверный тип данных:" +
-                                    data.GetType());
+                    MessageBox.Show("В процедуру выгрузки контейнеров класса RowBlock передан неверный тип данных:" + data.GetType());
                 }
             }
         } 

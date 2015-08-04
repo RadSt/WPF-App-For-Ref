@@ -196,12 +196,12 @@ namespace VisualPacker.Models
             return false;
         }
 
-        public void ToContainerList(List<Container> tempList)
+        public virtual void ToContainerList(List<Container> tempList)
         {
             tempList.Add(this);
         }
 
-/*ublic bool ExistsContainer(string lpn)
+/*public bool ExistsContainer(string lpn)
 {
     if (this.Name == lpn)  {
         return true; }

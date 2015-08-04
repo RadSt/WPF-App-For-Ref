@@ -58,37 +58,10 @@ namespace VisualPacker.Models
             }
             return false;
         }
-        new public void ToContainerList(List<Container> tempList)
+        public override void ToContainerList(List<Container> tempList)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
-            foreach (Object data in Blocks)
-            {
-                if (data is VerticalBlock)
-                {
-                    VerticalBlock v = (VerticalBlock)data;
-                    v.ToContainerList(tempList);
-                }
-                else if (data is RowBlock)
-                {
-                    RowBlock r = (RowBlock)data;
-                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
-                }
-                else if (data is HorizontalBlock)
-                {
-                    HorizontalBlock c = (HorizontalBlock)data;
-                    c.ToContainerList(tempList);
-                }
-                else if (data is Container)
-                {
-                    Container c = (Container)data;
-                    c.ToContainerList(tempList);
-                }
-                else
-                {
-                    MessageBox.Show("В процедуру выгрузки контейнеров класса HorizontalBlock  передан неверный тип данных:" + data.GetType());
-                }
-
-            }
+            fromTempListToContList.ToContainerList(tempList, Blocks);
         }
     }
 }
