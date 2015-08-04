@@ -199,58 +199,7 @@ namespace VisualPacker.Models
         public override void ToContainerList(List<Container> tempList)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
-            //foreach (Object data in Blocks)
-            //{
-                //if (data is VerticalBlock)
-                //{
-                //    VerticalBlock verticalBlock = (VerticalBlock)data;
-                //    if (verticalBlock.Kind == "VerticalPallet")
-                //    {
-                //        tempList.Add(verticalBlock);
-                //    }
-                //    else
-                //    {
-                //        ToContainerList(tempList);
-                //    }
-                //}
-                //else if (data is RowBlock)
-                //{
-                //    RowBlock rowBlock = (RowBlock)data;
-                //    fromTempListToContList.ToContainerList(tempList, rowBlock.Blocks);
-                //}
-                //else if (data is HorizontalBlock)
-                //{
-                //    HorizontalBlock horizontalBlock = (HorizontalBlock)data;
-                //    horizontalBlock.ToContainerList(tempList);
-                //}
-                //else if (data is Container)
-                //{
-                //    Container container = (Container)data;
-                //    container.ToContainerList(tempList);
-                //}
-                //else
-                //{
-                //    MessageBox.Show("В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" + data.GetType());
-                //}
-
-                //if (data is VerticalBlock)
-                //{
-                //    VerticalBlock verticalBlock = (VerticalBlock)data;
-                //    if (verticalBlock.Kind == "VerticalPallet")
-                //    {
-                //        tempList.Add(verticalBlock);
-                //    }
-                //    else
-                //    {
-                //        ToContainerList(tempList);
-                //    }
-                //}
-                //else
-                //{
-                    fromTempListToContList.ToContainerList(tempList, Blocks);
-                //}
-                
-            //}
+            fromTempListToContList.ToContainerList(tempList, Blocks);
         }
            public void  ToContainerListIncludeVerticalPallet(List<Container> tempList)
         {

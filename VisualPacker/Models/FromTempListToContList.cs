@@ -13,8 +13,6 @@ namespace VisualPacker.Models
             {
                 if (data is VerticalBlock)
                 {
-                    //VerticalBlock verticalBlock = (VerticalBlock)data;
-                    //verticalBlock.ToContainerList(tempList);
                     VerticalBlock verticalBlock = (VerticalBlock)data;
                     if (verticalBlock.Kind == "VerticalPallet")
                     {

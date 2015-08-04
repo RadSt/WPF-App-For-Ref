@@ -11,7 +11,7 @@ namespace VisualPacker.Models
     public class Vehicle : ICloneable
     {
         private List<Container> wasteList = new List<Container>();
-
+        const int minHeighCont=800;
         public Vehicle()
         {
             Length = 6000;
@@ -555,7 +555,7 @@ namespace VisualPacker.Models
         {
             MaxHeight = Height - 350;
             List<Container> tempList = new List<Container>();
-            while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > 800)
+            while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > minHeighCont)
             {
                 MaxHeight = MaxHeight - 100;
             }
@@ -595,7 +595,7 @@ namespace VisualPacker.Models
             //Негабаритный товар отсекаем 
             List<Container> containerList = containers.Where(s => s.IsSutableLength(Width) == true).ToList();
             wasteList = containers.Where(s => s.IsSutableLength(Width) == false).ToList();
-            List<Container> wasteList2 = containerList.Where(s => s.Height > MaxHeight).ToList();
+            List<Container> wasteList2 = containerList.Where(s => s.Height >= MaxHeight).ToList();
             containerList = containerList.Where(s => s.Height <= MaxHeight).ToList();
             foreach (Container c in wasteList2)
             {

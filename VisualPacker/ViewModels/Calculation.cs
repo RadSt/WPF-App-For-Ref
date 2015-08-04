@@ -12,26 +12,6 @@ namespace VisualPacker.ViewModels
 {
     internal static class Calculation
     {
-        private static List<int> DistinctOrders(List<Container> containers)
-        {
-            var orderList = new List<int>();
-            foreach (var c in containers)
-            {
-                var order = c.Order;
-                orderList.Contains(order);
-                if (orderList.Contains(order))
-                {
-                    //ничего не делаем
-                }
-                else
-                {
-                    orderList.Add(order);
-                }
-            }
-
-            return orderList;
-        }
-
         public static Point3D CalculateMassCenterRow(RowBlock rBlock)
         {
             double nLength = 0;
