@@ -4,12 +4,8 @@
         Title="Схема загрузки" Height="800" Width="1200" Closing="Window_Closing">
     <StackPanel>
         <Menu>
-            <MenuItem Name="Print" Header="Печать" Click="print_Click" >
-
-            </MenuItem>
+            <MenuItem Name="Print" Header="Печать" Click="print_Click" ></MenuItem>
         </Menu>
-        <FlowDocumentScrollViewer Name="flowDocViewer" Margin="5" Height="733">
-
-        </FlowDocumentScrollViewer >
+        <FlowDocumentScrollViewer Name="FlowDocViewer" Margin="5" Height="733"></FlowDocumentScrollViewer>
     </StackPanel>
 </Window>

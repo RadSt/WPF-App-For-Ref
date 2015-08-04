@@ -301,7 +301,7 @@ namespace VisualPacker.Views
                     DrawViewUpper(doc, v);
                 }
             }
-            flowDocViewer.Document = doc;
+            FlowDocViewer.Document = doc;
         }
         public void AddHeader(FlowDocument doc, String text)
         {
@@ -367,13 +367,13 @@ namespace VisualPacker.Views
             printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
             if (printDialog.ShowDialog() == true)
             {
-                FlowDocument doc = flowDocViewer.Document;
+                FlowDocument doc = FlowDocViewer.Document;
                 doc.PagePadding = new Thickness(20, 40, 20, 40);
                 doc.PageHeight = printDialog.PrintableAreaHeight;
                 doc.PageWidth = printDialog.PrintableAreaWidth - 40;
                 doc.ColumnWidth = printDialog.PrintableAreaWidth - 40;
                 doc.ColumnGap = 0;
-                printDialog.PrintDocument(((IDocumentPaginatorSource)flowDocViewer.Document).DocumentPaginator , "Печать");
+                printDialog.PrintDocument(((IDocumentPaginatorSource)FlowDocViewer.Document).DocumentPaginator , "Печать");
             }
         }
 
@@ -396,7 +396,7 @@ namespace VisualPacker.Views
                     using (var xpsDoc = new XpsDocument(package, CompressionOption.Maximum))
                     {
                         var rsm = new XpsSerializationManager(new XpsPackagingPolicy(xpsDoc), false);
-                        var paginator = ((IDocumentPaginatorSource)flowDocViewer.Document).DocumentPaginator;
+                        var paginator = ((IDocumentPaginatorSource)FlowDocViewer.Document).DocumentPaginator;
                         rsm.SaveAsXaml(paginator);
                         rsm.Commit();
                     }

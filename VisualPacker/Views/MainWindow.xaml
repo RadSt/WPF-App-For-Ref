@@ -24,11 +24,11 @@
                 <MenuItem Name="scheme3D" Header="{DynamicResource scheme3d}"   Click="Button_view3d_Click"/>
                 <MenuItem Name="scheme2D" Header="{DynamicResource scheme2d}"   Click="Button_view2d_Click"/>
             </MenuItem>
-            <MenuItem Name="help" Header="{DynamicResource help}">
-                <MenuItem Name="aboutVisualPacker" Header="{DynamicResource aboutVisualPacker}" Click="about_programm_Click"/>
+            <MenuItem Name="Help" Header="{DynamicResource help}">
+                <MenuItem Name="AboutVisualPacker" Header="{DynamicResource aboutVisualPacker}" Click="about_programm_Click"/>
             </MenuItem>
         </Menu>
-        <ToolBar Name="toolbar1">
+        <ToolBar Name="Toolbar1">
             <ToolBar.Items>
                 <Button Content="{DynamicResource run}" Click="Button_Calculate_Click" />
                 

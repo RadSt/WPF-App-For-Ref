@@ -180,7 +180,7 @@ namespace VisualPacker.Views
             else if (selectedVehicles.Count == 0) MessageBox.Show("Не выбран автомобиль.");
             else
             {
-                List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked == true).ToList(), selectedVehicles, textBox, MaxTonnage);
+                List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
                // view3d winView3d = new view3d(selectedVehicles);
                // winView3d.Show();
               UpdateCheckProperty(wasteContainers);

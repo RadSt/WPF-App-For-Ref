@@ -40,10 +40,10 @@ namespace VisualPacker.Models
         }
         public bool Add(Container c)
         {
-            int CurrentWidth = 0;
+            int currentWidth = 0;
             foreach (Container b in Blocks)
-            { CurrentWidth = CurrentWidth + b.Width; }
-            if (CurrentWidth + c.Width < Width * RowCount)
+            { currentWidth = currentWidth + b.Width; }
+            if (currentWidth + c.Width < Width * RowCount)
             {
                 Blocks.Add(c);
                 Height = Math.Max(Height, c.Height);
@@ -61,31 +61,31 @@ namespace VisualPacker.Models
         new public void ToContainerList(List<Container> tempList)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
-            foreach (Object Data in Blocks)
+            foreach (Object data in Blocks)
             {
-                if (Data is VerticalBlock)
+                if (data is VerticalBlock)
                 {
-                    VerticalBlock v = (VerticalBlock)Data;
+                    VerticalBlock v = (VerticalBlock)data;
                     v.ToContainerList(tempList);
                 }
-                else if (Data is RowBlock)
+                else if (data is RowBlock)
                 {
-                    RowBlock r = (RowBlock)Data;
+                    RowBlock r = (RowBlock)data;
                     fromTempListToContList.ToContainerList(tempList, r.Blocks);
                 }
-                else if (Data is HorizontalBlock)
+                else if (data is HorizontalBlock)
                 {
-                    HorizontalBlock c = (HorizontalBlock)Data;
+                    HorizontalBlock c = (HorizontalBlock)data;
                     c.ToContainerList(tempList);
                 }
-                else if (Data is Container)
+                else if (data is Container)
                 {
-                    Container c = (Container)Data;
+                    Container c = (Container)data;
                     c.ToContainerList(tempList);
                 }
                 else
                 {
-                    MessageBox.Show("В процедуру выгрузки контейнеров класса HorizontalBlock  передан неверный тип данных:" + Data.GetType());
+                    MessageBox.Show("В процедуру выгрузки контейнеров класса HorizontalBlock  передан неверный тип данных:" + data.GetType());
                 }
 
             }

@@ -183,3 +183,4 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker_Markup
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
