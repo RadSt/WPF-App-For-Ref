@@ -28,44 +28,44 @@ namespace VisualPacker.Views
     /// </summary>
     public partial class View2D
     {
-        public ObservableCollection<Vehicle> vehicles;
-        public List<VerticalBlock> vBlocks;
-        public List<RowBlock> rBlocks;
-        public List<Container> containers;
-        public int scale = 13;
+        public ObservableCollection<Vehicle> Vehicles;
+        public List<VerticalBlock> VBlocks;
+        public List<RowBlock> RBlocks;
+        public List<Container> Containers;
+        public int Scale = 13;
         public enum Direction { Up, Front };
 
-        public View2D(Object Data)
+        public View2D(Object data)
         {
             InitializeComponent();
-            if (Data is ObservableCollection<Vehicle>)
+            if (data is ObservableCollection<Vehicle>)
             {
-                vehicles = (ObservableCollection<Vehicle>)Data;
+                Vehicles = (ObservableCollection<Vehicle>)data;
                 ShowVehicles();
             }
-            else if (Data is List<VerticalBlock>)
+            else if (data is List<VerticalBlock>)
             {
                 //vBlocks = (List<VerticalBlock>)Data;
                 //ShowVerticalBlocks();
             }
-            else if (Data is List<RowBlock>)
+            else if (data is List<RowBlock>)
             {
                 //rBlocks = (List<RowBlock>)Data;
                 //ShowRowBlocks();
             }
-            else if (Data is List<Container>)
+            else if (data is List<Container>)
             {
                 //containers = (List<Container>)Data;
                 //ShowContainers();
             }
-            else { MessageBox.Show("В форму отчета передан неверный тип данных:" + Data.GetType()); }
+            else { MessageBox.Show("В форму отчета передан неверный тип данных:" + data.GetType()); }
         }
-        public void DrawContainerUp(Canvas canvas, Container c, Vehicle currentVehicle)
+        public void DrawContainerUp(Canvas canvas, Container container, Vehicle currentVehicle)
         {
-            int length = c.Width / scale;
-            int height = c.Height / scale;
-            double x = (c.FirstPoint.X - currentVehicle.FirstPoint.X) / scale;
-            double z = c.FirstPoint.Z / scale;
+            int length = container.Width / Scale;
+            int height = container.Height / Scale;
+            double x = (container.FirstPoint.X - currentVehicle.FirstPoint.X) / Scale;
+            double z = container.FirstPoint.Z / Scale;
             Rectangle r = new Rectangle();
             r.Width = length;
             r.Height = height;
@@ -80,7 +80,7 @@ namespace VisualPacker.Views
             canvas.Children.Add(r);
 
             TextBlock t = new TextBlock();
-            t.Text = Math.Round(c.Mass) + " кг";
+            t.Text = Math.Round(container.Mass) + " кг";
             t.FontSize = 12;
             Canvas.SetLeft(t, x + 2);
             int delta = 2;
@@ -88,7 +88,7 @@ namespace VisualPacker.Views
             canvas.Children.Add(t);
 
             t = new TextBlock();
-            t.Text = c.ShortName;
+            t.Text = container.ShortName;
             t.FontSize = 12;
             Canvas.SetLeft(t, x + 2);
             delta = delta + 15;
@@ -97,10 +97,10 @@ namespace VisualPacker.Views
         }
         public void DrawContainerFront(Canvas canvas, Container container, Vehicle currentVehicle)
         {
-            int length = container.Width / scale;
-            int height = container.Length / scale;
-            double x = container.FirstPoint.X / scale;
-            double z = (container.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale;
+            int length = container.Width / Scale;
+            int height = container.Length / Scale;
+            double x = container.FirstPoint.X / Scale;
+            double z = (container.FirstPoint.Y - currentVehicle.FirstPoint.Y) / Scale;
 
             Rectangle r = new Rectangle();
             r.Width = length;
@@ -160,20 +160,20 @@ namespace VisualPacker.Views
                 MessageBox.Show("В процедуру рисования DrawBlock передан неверный тип данных:" + Data.GetType());
             }
         }
-        public void DrawCanvas(FlowDocument doc, Vehicle v, Direction direction)
+        public void DrawCanvas(FlowDocument doc, Vehicle vehicle, Direction direction)
         {
 
-            double length = v.Length;
-            double height = v.Height;
+            double length = vehicle.Length;
+            double height = vehicle.Height;
             if (direction == Direction.Up)
             {
-                length = v.Length / scale;
-                height = v.Height / scale;
+                length = vehicle.Length / Scale;
+                height = vehicle.Height / Scale;
             }
             else if (direction == Direction.Front)
             {
-                length = v.Length / scale;
-                height = v.Width / scale;
+                length = vehicle.Length / Scale;
+                height = vehicle.Width / Scale;
             }
             else { MessageBox.Show("не опознан вид проекции"); };
 
@@ -197,19 +197,19 @@ namespace VisualPacker.Views
             canvas.Children.Add(rectangle);
 
             //рисуем контейнеры 
-            foreach (RowBlock rowBlock in v.Blocks)
+            foreach (RowBlock rowBlock in vehicle.Blocks)
             {
-                DrawBlock(canvas, rowBlock, direction, v);
+                DrawBlock(canvas, rowBlock, direction, vehicle);
             }
 
-            DrawMassCenter(v, canvas, direction);
+            DrawMassCenter(vehicle, canvas, direction);
             blockUiContainer.Child = canvas;
             doc.Blocks.Add(blockUiContainer);
         }
-        public void DrawCanvasVeels(FlowDocument doc, Vehicle v)
+        public void DrawCanvasVeels(FlowDocument doc, Vehicle vehicle)
         {
-            double length = v.Length / scale;
-            double height = 0.3 * v.Height / scale;
+            double length = vehicle.Length / Scale;
+            double height = 0.3 * vehicle.Height / Scale;
             //создаем объект для рисования
             BlockUIContainer b = new BlockUIContainer();
             Canvas canvas = new Canvas();
@@ -240,65 +240,65 @@ namespace VisualPacker.Views
             Canvas.SetTop(r, 0);
             canvas.Children.Add(r);
         }
-        public void DrawMassCenter(Vehicle v, Canvas canvas, Direction dir)
+        public void DrawMassCenter(Vehicle vehicle, Canvas canvas, Direction dir)
         {
-            Point3D p = v.GetMassCenter();
+            Point3D point3D = vehicle.GetMassCenter();
             int circleDiameter = 20;
             double height;
             if (dir == Direction.Up)
             {
-                height = canvas.Height - p.Z / scale - circleDiameter / 2;
+                height = canvas.Height - point3D.Z / Scale - circleDiameter / 2;
             }
             else
             {
-                height = p.Y / scale - circleDiameter / 2;
+                height = point3D.Y / Scale - circleDiameter / 2;
             }
 
-            Ellipse r = new Ellipse();
-            r.Width = circleDiameter;
-            r.Height = circleDiameter;
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = circleDiameter;
+            ellipse.Height = circleDiameter;
             Brush brush = new SolidColorBrush();
             brush = Brushes.Black;
-            r.Stroke = new SolidColorBrush(Colors.Black);
-            r.StrokeThickness = 2;
-            r.Fill = brush;
-            Canvas.SetLeft(r, p.X / scale - circleDiameter / 2);
-            Canvas.SetTop(r, height);
-            canvas.Children.Add(r);
+            ellipse.Stroke = new SolidColorBrush(Colors.Black);
+            ellipse.StrokeThickness = 2;
+            ellipse.Fill = brush;
+            Canvas.SetLeft(ellipse, point3D.X / Scale - circleDiameter / 2);
+            Canvas.SetTop(ellipse, height);
+            canvas.Children.Add(ellipse);
         }
         public void DrawAxelTonnage(Canvas canvas, double tonnage, double firstPointX)
         {
-            TextBlock t = new TextBlock();
-            t.Text = Math.Round(tonnage / 1000, 1) + " тонн";
-            t.FontSize = 12;
-            Canvas.SetLeft(t, firstPointX + 2);
-            Canvas.SetTop(t, 20);
-            canvas.Children.Add(t);
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = Math.Round(tonnage / 1000, 1) + " тонн";
+            textBlock.FontSize = 12;
+            Canvas.SetLeft(textBlock, firstPointX + 2);
+            Canvas.SetTop(textBlock, 20);
+            canvas.Children.Add(textBlock);
         }
 
-        public void DrawViewFront(FlowDocument doc, Vehicle v)
+        public void DrawViewFront(FlowDocument doc, Vehicle vehicle)
         {
-            DrawCanvas(doc, v, Direction.Up);
-            DrawCanvasVeels(doc, v);
+            DrawCanvas(doc, vehicle, Direction.Up);
+            DrawCanvasVeels(doc, vehicle);
         }
-        public void DrawViewUpper(FlowDocument doc, Vehicle v)
+        public void DrawViewUpper(FlowDocument doc, Vehicle vehicle)
         {
-            DrawCanvas(doc, v, Direction.Front);
+            DrawCanvas(doc, vehicle, Direction.Front);
         }
         public void ShowVehicles()
         {
             FlowDocument doc = new FlowDocument();
-            foreach (Vehicle v in vehicles)
+            foreach (Vehicle vehicle in Vehicles)
             {
-                AddMainHeader(doc, "Схема загрузки а/м " + v.Name + " (" + v.Length + "x" + v.Width + "x" + v.Height + ")");
-                if (!v.Blocks.Any()) { AddHeader(doc, "Нет груза для отображения"); }
+                AddMainHeader(doc, "Схема загрузки а/м " + vehicle.Name + " (" + vehicle.Length + "x" + vehicle.Width + "x" + vehicle.Height + ")");
+                if (!vehicle.Blocks.Any()) { AddHeader(doc, "Нет груза для отображения"); }
                 else
                 {
-                    AddDescription(doc, v);
+                    AddDescription(doc, vehicle);
                     AddHeader(doc, "Вид сбоку");
-                    DrawViewFront(doc, v);
+                    DrawViewFront(doc, vehicle);
                     AddHeader(doc, "Вид сверху");
-                    DrawViewUpper(doc, v);
+                    DrawViewUpper(doc, vehicle);
                 }
             }
             FlowDocViewer.Document = doc;
@@ -311,9 +311,9 @@ namespace VisualPacker.Views
             p.TextAlignment = TextAlignment.Left;
             doc.Blocks.Add(p);
         }
-        public void AddDescription(FlowDocument doc, Vehicle v)
+        public void AddDescription(FlowDocument doc, Vehicle vehicle)
         {
-            List<Container> tempList = v.VehicleToContainerList();
+            List<Container> tempList = vehicle.VehicleToContainerList();
             tempList = Calculation.ListToContainerListIncludeVerticalPallet(tempList);
             //tempList.AddRange(v.smallBlocks);
             List<string> shipmentList = DistinctShipmentID(tempList);
@@ -322,7 +322,7 @@ namespace VisualPacker.Views
                 List<Container> tempList2 = tempList.Where(c => c.ShipmentId == order).ToList();
                 AddRow(doc, "Грузоотправление: " + tempList2[0].ShipmentId + ".    Грузополучатель: " + tempList2[0].ShipToName + ".    Количество тар: " + tempList2.Count());
             }
-            AddRow(doc, "Общий вес:" + v.Mass + " кг.");
+            AddRow(doc, "Общий вес:" + vehicle.Mass + " кг.");
         }
         public List<string> DistinctShipmentID(List<Container> containers)
         {
