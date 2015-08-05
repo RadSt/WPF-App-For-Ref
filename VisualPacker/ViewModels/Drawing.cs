@@ -16,24 +16,6 @@ namespace VisualPacker.ViewModels
             line.Thickness = 1;
             mainViewport.Children.Add(line);
         }
-       /* private PerspectiveCamera CreateCamera(int distanse,List<Vehicle> vehicles)
-        {
-            double maxX = 0;
-            double maxY = 0;
-            double maxZ = 0;
-            foreach (Vehicle v in vehicles)
-            { maxX=Math.Max(maxX,v.firstPoint.X);
-            maxY = Math.Max(maxY, v.firstPoint.Y);
-            maxZ = Math.Max(maxZ, v.firstPoint.Z);
-            }
-            /*double camX= maxX/2+ distanse)/2
-            Point3D camPoint=(
-
-            PerspectiveCamera cam = new PerspectiveCamera(new Point3D(4000, 3500, 12000),
-            new Vector3D(-1, -2, -10), new Vector3D(0, -1, 0), 50000);
-
-            return cam;
-        } */
         public static void DrawVehicle2(Viewport3D mainViewport, Vehicle v)
         {
 
@@ -104,12 +86,12 @@ namespace VisualPacker.ViewModels
                             //brush = new BrushConverter().ConvertFromString(c.Color) as SolidColorBrush;
                         }
                         geomod.Material = new DiffuseMaterial(brush);
-                        drawCube(c, geomod);
+                        DrawCube(c, geomod);
                         // Create ModelVisual3D for GeometryModel3D.
                         ModelVisual3D modvis = new ModelVisual3D();
                         modvis.Content = geomod;
                         mainViewport.Children.Add(modvis);
-                        ScreenSpaceLines3D wireCube = drawWireCube(c);
+                        ScreenSpaceLines3D wireCube = DrawWireCube(c);
                         mainViewport.Children.Add(wireCube);
                         //break;
 
@@ -119,7 +101,7 @@ namespace VisualPacker.ViewModels
                 //break;
             } 
         }
-        public static ScreenSpaceLines3D drawWireCube( Container v)
+        public static ScreenSpaceLines3D DrawWireCube( Container v)
         {
             ScreenSpaceLines3D wireCube = new ScreenSpaceLines3D();
             Color c = Colors.Black;
@@ -172,7 +154,7 @@ namespace VisualPacker.ViewModels
             }
             return wireCube;
         }
-        public static void drawCube(Container item, GeometryModel3D geomod)
+        public static void DrawCube(Container item, GeometryModel3D geomod)
         {
             MeshGeometry3D mesh = new MeshGeometry3D();
             mesh.Positions.Add(new Point3D(item.FirstPoint.X, item.FirstPoint.Z, item.FirstPoint.Y));

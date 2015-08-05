@@ -164,25 +164,25 @@ namespace VisualPacker.Models
             get { return Length + "x" + Width + "x" + Height; }
         }
 
-        public bool AreSame(Container c)
+        public bool AreSame(Container container)
         {
-            if ((Length <= c.Length & Length >= 0.7 * c.Length) & (Width <= c.Width & Width >= 0.7 * c.Width)) return true;
+            if ((Length <= container.Length & Length >= 0.7 * container.Length) & (Width <= container.Width & Width >= 0.7 * container.Width)) return true;
             return false;
         }
 
-        public bool AreSame01(Container c)
+        public bool AreSame01(Container container)
         {
-            if ((Length <= c.Length & Length >= 0.8 * c.Length) & (Width <= c.Width & Width >= 0.8 * c.Width)) return true;
+            if ((Length <= container.Length & Length >= 0.8 * container.Length) & (Width <= container.Width & Width >= 0.8 * container.Width)) return true;
             return false;
         }
 
-        public bool IsSutableLength(double maxLength)
+        public bool IsSuitableLength(double maxLength)
         {
             if (Length <= maxLength | (Width <= maxLength & DirLength != "y")) return true;
             return false;
         }
 
-        public bool IsSutableWidth(double maxWidth)
+        public bool IsSuitableWidth(double maxWidth)
         {
             if (Length >= Width)
             {
@@ -206,7 +206,7 @@ namespace VisualPacker.Models
             return false;
         }
 
-        public void RotateH()
+        public virtual void RotateH()
         {
             int temp = Length;
             Length = Width;

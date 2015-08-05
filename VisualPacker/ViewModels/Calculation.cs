@@ -123,14 +123,7 @@ namespace VisualPacker.ViewModels
 
             foreach (var v in selectedVehicles)
             {
-                if (maxTonnage == 0)
-                {
-                    tempMaxTonnage = v.Tonnage;
-                }
-                else
-                {
-                    tempMaxTonnage = maxTonnage;
-                }
+                tempMaxTonnage = maxTonnage == 0 ? v.Tonnage : maxTonnage;
                 tempList = v.DownloadContainers(tempList, tempMaxTonnage);
                 v.SetFirstPoint(tempPoint);
                 tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;
@@ -245,7 +238,7 @@ namespace VisualPacker.ViewModels
             foreach (var c in containers)
             {
                 var newList2 = newList.Where(t => t.Name == c.Name).ToList();
-                if (newList2.Count() == 0)
+                if (!newList2.Any())
                 {
                     textBox.AppendText("Пропавший контейнер: " + c.Name + ".\n");
                 }

@@ -24,9 +24,9 @@ using Path = System.IO.Path;
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for view2d.xaml
+    /// Interaction logic for View2D.xaml
     /// </summary>
-    public partial class view2d : Window
+    public partial class View2D
     {
         public ObservableCollection<Vehicle> vehicles;
         public List<VerticalBlock> vBlocks;
@@ -35,7 +35,7 @@ namespace VisualPacker.Views
         public int scale = 13;
         public enum Direction { Up, Front };
 
-        public view2d(Object Data)
+        public View2D(Object Data)
         {
             InitializeComponent();
             if (Data is ObservableCollection<Vehicle>)
@@ -178,23 +178,23 @@ namespace VisualPacker.Views
             else { MessageBox.Show("не опознан вид проекции"); };
 
             //создаем объект для рисования
-            BlockUIContainer b = new BlockUIContainer();
+            BlockUIContainer blockUiContainer = new BlockUIContainer();
             Canvas canvas = new Canvas();
             canvas.Width = length;
             canvas.Height = height;
 
             //Рисуем рамку вокруг canvas
-            Rectangle r = new Rectangle();
-            r.Width = length;
-            r.Height = height;
+            Rectangle rectangle = new Rectangle();
+            rectangle.Width = length;
+            rectangle.Height = height;
             Brush brush = new SolidColorBrush();
             brush = Brushes.White;
-            r.Stroke = new SolidColorBrush(Colors.Black);
-            r.StrokeThickness = 2;
-            r.Fill = brush;
-            Canvas.SetLeft(r, 0);
-            Canvas.SetTop(r, 0);
-            canvas.Children.Add(r);
+            rectangle.Stroke = new SolidColorBrush(Colors.Black);
+            rectangle.StrokeThickness = 2;
+            rectangle.Fill = brush;
+            Canvas.SetLeft(rectangle, 0);
+            Canvas.SetTop(rectangle, 0);
+            canvas.Children.Add(rectangle);
 
             //рисуем контейнеры 
             foreach (RowBlock rowBlock in v.Blocks)
@@ -203,8 +203,8 @@ namespace VisualPacker.Views
             }
 
             DrawMassCenter(v, canvas, direction);
-            b.Child = canvas;
-            doc.Blocks.Add(b);
+            blockUiContainer.Child = canvas;
+            doc.Blocks.Add(blockUiContainer);
         }
         public void DrawCanvasVeels(FlowDocument doc, Vehicle v)
         {
@@ -291,7 +291,7 @@ namespace VisualPacker.Views
             foreach (Vehicle v in vehicles)
             {
                 AddMainHeader(doc, "Схема загрузки а/м " + v.Name + " (" + v.Length + "x" + v.Width + "x" + v.Height + ")");
-                if (v.Blocks.Count() == 0) { AddHeader(doc, "Нет груза для отображения"); }
+                if (!v.Blocks.Any()) { AddHeader(doc, "Нет груза для отображения"); }
                 else
                 {
                     AddDescription(doc, v);
@@ -316,8 +316,8 @@ namespace VisualPacker.Views
             List<Container> tempList = v.VehicleToContainerList();
             tempList = Calculation.ListToContainerListIncludeVerticalPallet(tempList);
             //tempList.AddRange(v.smallBlocks);
-            List<string> ShipmentList = DistinctShipmentID(tempList);
-            foreach (string order in ShipmentList)
+            List<string> shipmentList = DistinctShipmentID(tempList);
+            foreach (string order in shipmentList)
             {
                 List<Container> tempList2 = tempList.Where(c => c.ShipmentId == order).ToList();
                 AddRow(doc, "Грузоотправление: " + tempList2[0].ShipmentId + ".    Грузополучатель: " + tempList2[0].ShipToName + ".    Количество тар: " + tempList2.Count());
@@ -326,22 +326,22 @@ namespace VisualPacker.Views
         }
         public List<string> DistinctShipmentID(List<Container> containers)
         {
-            List<string> ShipmentList = new List<string>();
+            List<string> shipmentList = new List<string>();
             foreach (Container c in containers)
             {
                 string Shipment = c.ShipmentId;
-                ShipmentList.Contains(Shipment);
-                if (ShipmentList.Contains(Shipment))
+                shipmentList.Contains(Shipment);
+                if (shipmentList.Contains(Shipment))
                 {
                     //ничего не делаем
                 }
                 else
                 {
-                    ShipmentList.Add(Shipment);
+                    shipmentList.Add(Shipment);
                 }
             }
 
-            return ShipmentList;
+            return shipmentList;
         }
         public void AddRow(FlowDocument doc, String text)
         {

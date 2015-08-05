@@ -130,12 +130,6 @@ namespace VisualPacker.Models
                        v.SetFirstPointVerticalBlock(tempPoint);
                         tempPoint.Z = tempPoint.Z + v.Height;
                 }
-                else if (data is RowBlock)
-                {
-                    RowBlock r = (RowBlock)data;
-                    r.SetFirstPointForVerticalBlock(tempPoint);
-                    tempPoint.Z = tempPoint.Z + r.Height;
-                }
                 else if (data is HorizontalBlock)
                 {
                     HorizontalBlock h = (HorizontalBlock)data;
@@ -154,7 +148,7 @@ namespace VisualPacker.Models
                 }
             }
         }
-        public new void RotateH()
+        public override void RotateH()
         {
             int temp = Length;
             Length = Width;
@@ -165,11 +159,6 @@ namespace VisualPacker.Models
                 {
                     VerticalBlock c = (VerticalBlock)data;
                     c.RotateH();
-                }
-                else if (data is RowBlock)
-                {
-                    RowBlock c = (RowBlock)data;
-                    // ничего не делаем
                 }
                 else if (data is HorizontalBlock)
                 {
@@ -185,8 +174,6 @@ namespace VisualPacker.Models
                 {
                     MessageBox.Show("В процедуру поворота вертикального блока передан неверный тип данных:" + data.GetType());
                 }
-               
-            
             }
 
         }
@@ -206,11 +193,6 @@ namespace VisualPacker.Models
                 {   
                    VerticalBlock v=(VerticalBlock)data;
                        v.ToContainerList(tempList);
-                }
-                else if (data is RowBlock)
-                {
-                   RowBlock r =(RowBlock)data;
-                   fromTempListToContList.ToContainerList(tempList, r.Blocks); 
                 }
                 else if (data is HorizontalBlock)
                 {

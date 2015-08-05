@@ -180,11 +180,11 @@ namespace VisualPacker.Models
             return result;
         }
 
-        private int VerticalBlocksDistinctCount(List<VerticalBlock> Data)
+        private int VerticalBlocksDistinctCount(List<VerticalBlock> data)
         {
             // нужна для проверки потери вертикальных контейнеров в процедуре CreateRows
             List<VerticalBlock> tempList = new List<VerticalBlock>();
-            foreach (VerticalBlock c in Data)
+            foreach (VerticalBlock c in data)
             {
                 if (ListContainVerticalBlock(tempList, c) == false)
                 {
@@ -197,7 +197,7 @@ namespace VisualPacker.Models
         public void CreateRows(List<VerticalBlock> vBlocks, int sameWidth, List<RowBlock> rBlocks)
         {
             List<VerticalBlock> sameBlock =
-                vBlocks.Where(s => s.IsSutableWidth(sameWidth)).OrderByDescending(s => s.Width).ToList();
+                vBlocks.Where(s => s.IsSuitableWidth(sameWidth)).OrderByDescending(s => s.Width).ToList();
             while (sameBlock.Any())
             {
                 List<VerticalBlock> tempBlocks = new List<VerticalBlock>();
@@ -307,7 +307,7 @@ namespace VisualPacker.Models
             {
                 MessageBox.Show("Расхождение количества контейнеров 3");
             }
-            //ReportWindow win = new ReportWindow(vBlocks);
+            //ReportWindow win = new ReportWindow(VBlocks);
             //win.ShowDialog();
             //формируем ряды
             List<RowBlock> rBlocks = new List<RowBlock>();
@@ -332,7 +332,7 @@ namespace VisualPacker.Models
                 vBlocks = vBlocks.Where(s => result.ContainsVerticalBlock(s, vBlocks) == false).ToList();
 
                 if ((result.FullnessWidth > 0.4 | containers.Count() == 1) & (Mass + result.Mass) <= maxTonnage)
-                    // if (result.FullnessWidth > 0.4 | containers.Count() <= 5)
+                    // if (result.FullnessWidth > 0.4 | Containers.Count() <= 5)
                 {
                     if (result.FullnessWidth < 0.9)
                     {
@@ -413,8 +413,7 @@ namespace VisualPacker.Models
 
             while (tempOnly4Bottom.Any())
             {
-                VerticalBlock vBlock = new VerticalBlock();
-                vBlock.Kind = "VerticalPallet";
+                VerticalBlock vBlock = new VerticalBlock {Kind = "VerticalPallet"};
                 nameCh++;
                 vBlock.Name = "Связка паллет в 2 яруса №" + nameCh;
                 vBlock.Only4Bottom = 2;
@@ -568,8 +567,8 @@ namespace VisualPacker.Models
             //разные заказы обрабатываем отдельно т.к. их нужно будет выгружать из машины в разное время
 
             //Негабаритный товар отсекаем 
-            List<Container> containerList = containers.Where(s => s.IsSutableLength(Width) == true).ToList();
-            wasteList = containers.Where(s => s.IsSutableLength(Width) == false).ToList();
+            List<Container> containerList = containers.Where(s => s.IsSuitableLength(Width) == true).ToList();
+            wasteList = containers.Where(s => s.IsSuitableLength(Width) == false).ToList();
             List<Container> wasteList2 = containerList.Where(s => s.Height >= MaxHeight).ToList();
             containerList = containerList.Where(s => s.Height <= MaxHeight).ToList();
             foreach (Container c in wasteList2)

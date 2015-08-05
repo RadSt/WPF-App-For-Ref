@@ -57,7 +57,6 @@ namespace VisualPacker.Views
             if (notIncluded.Count==0)  notIncludedString="Все контейнеры вмещаются в машину.";
             else notIncludedString="Не поместились следующие контейнеры"+notIncluded;
             //MessageBox.Show("Заполнение машины - "+volUsage.ToString()+"%. Вес груза - "+weight.ToString()+" кг. " + notIncludedString);
-
         }
         public MainWindow()
         {
@@ -109,12 +108,6 @@ namespace VisualPacker.Views
             }
             this.Resources.MergedDictionaries.Add(dict);
         } 
-
-        private void message_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Текст сообщения");
-        }
-
         private void exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -146,7 +139,7 @@ namespace VisualPacker.Views
         }
         private void Button_view2d_Click(object sender, RoutedEventArgs e)
         {
-            view2d winView2d = new view2d(selectedVehicles);
+            View2D winView2d = new View2D(selectedVehicles);
 
             winView2d.Show();
         }
@@ -326,11 +319,6 @@ namespace VisualPacker.Views
         {
             Vehicle clonableVehicle = (Vehicle)vehicleTree.SelectedItem;
             selectedVehicles.Add(clonableVehicle.Clone() as Vehicle);
-        }
-
-        private void preferences_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
     
