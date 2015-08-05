@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Printing;
 using System.Reflection;
@@ -45,7 +46,7 @@ namespace VisualPacker.Views
             foreach (Vehicle v in selectedVehicles)
             {
                 //v.SetFirstPointForVerticalBlock(tempPoint);
-                Drawing.DrawVehicle2(mainViewport, v);
+                Drawing.DrawVehicle3D(mainViewport, v);
                 //tempPoint.Y = tempPoint.Y + 1000 + v.Width;
 
             }
@@ -93,7 +94,7 @@ namespace VisualPacker.Views
             saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
         }
 
-        private void Window_Closing(object sender, EventArgs e)
+        private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
         {
             saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
         }

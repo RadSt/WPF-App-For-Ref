@@ -106,7 +106,7 @@ namespace VisualPacker.Views
                                       UriKind.Relative);
                     break;
             }
-            this.Resources.MergedDictionaries.Add(dict);
+            Resources.MergedDictionaries.Add(dict);
         } 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
@@ -162,8 +162,8 @@ namespace VisualPacker.Views
             else if (selectedVehicles.Count == 0) MessageBox.Show("Не выбран автомобиль.");
             else
             {
-              List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
-              UpdateCheckProperty(wasteContainers);
+              List<Container> wasteContainersList = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
+              UpdateCheckProperty(wasteContainersList);
             }
             dataGrid1.ItemsSource = null;
             dataGrid1.ItemsSource = containers;

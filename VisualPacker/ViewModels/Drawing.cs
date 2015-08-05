@@ -16,7 +16,7 @@ namespace VisualPacker.ViewModels
             line.Thickness = 1;
             mainViewport.Children.Add(line);
         }
-        public static void DrawVehicle2(Viewport3D mainViewport, Vehicle v)
+        public static void DrawVehicle3D(Viewport3D mainViewport, Vehicle v)
         {
 
             ScreenSpaceLines3D wireVehicle = new ScreenSpaceLines3D();
@@ -25,12 +25,12 @@ namespace VisualPacker.ViewModels
 
             Point3D p0 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y);
             Point3D p1 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z, v.FirstPoint.Y);
-            Point3D p2 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z,v.FirstPoint.Y+ v.Width);
-            Point3D p3 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y+v.Width);
+            Point3D p2 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z, v.FirstPoint.Y + v.Width);
+            Point3D p3 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y + v.Width);
             Point3D p4 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z + v.Height, v.FirstPoint.Y);
             Point3D p5 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z + v.Height, v.FirstPoint.Y);
-            Point3D p6 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z + v.Height, v.FirstPoint.Y+v.Width);
-            Point3D p7 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z + v.Height, v.FirstPoint.Y+v.Width);
+            Point3D p6 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z + v.Height, v.FirstPoint.Y + v.Width);
+            Point3D p7 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z + v.Height, v.FirstPoint.Y + v.Width);
 
             wireVehicle.Thickness = width;
             wireVehicle.Color = color;
@@ -59,7 +59,7 @@ namespace VisualPacker.ViewModels
             wireVehicle.Points.Add(p3);
             wireVehicle.Points.Add(p7);
             mainViewport.Children.Add(wireVehicle);
- 
+
             foreach (RowBlock rBlock in v.Blocks)
             {
                 //MessageBox.Show("Печатаем rowBlocks");
