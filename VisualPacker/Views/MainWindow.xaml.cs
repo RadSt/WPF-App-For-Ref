@@ -19,18 +19,13 @@ namespace VisualPacker.Views
     /// Interaction logic for MainWindow.xaml
     /// </summary>
      
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        /*List<Vehicle> vehicles = new List<Vehicle>();
-        List<Vehicle> chosenVehicles = new List<Vehicle>();*/
         ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
         ObservableCollection<Vehicle> selectedVehicles = new ObservableCollection<Vehicle>();
-        List<RowBlock> rowBlocks=new List<RowBlock>();
         ObservableCollection<Container> containers = new ObservableCollection<Container>();
         List<Container> wasteContainers = new List<Container>();
         [STAThread]
-
-       
         public static void CreateResult(List<RowBlock> rowBlocks,Vehicle vehicle)
         {
             TextBlock txt = new TextBlock();
@@ -68,11 +63,7 @@ namespace VisualPacker.Views
         {
             InitializeComponent();
             SetLanguageDictionary();
-            //dataGrid1.AutoGenerateColumns = true;
-            //dataGrid2.AutoGenerateColumns = true;
             //Загружаем список автомобилей   
-            //try { vehicles = XmlHelper.LoadVehiclesFromXML(Environment.CurrentDirectory + "\\vehicles.xml"); }
-            //catch { MessageBox.Show("Ошибка открытия файла" + Environment.CurrentDirectory + "\\vehicles.xml"); }
             try { vehicles = XmlHelper.LoadVehiclesFromXML(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\vehicles.xml"); }
             catch { MessageBox.Show("Ошибка открытия файла" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\vehicles.xml"); }
 
@@ -82,8 +73,7 @@ namespace VisualPacker.Views
             try { containers = XmlHelper.LoadItemFromXML(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\items.xml"); }
             catch { MessageBox.Show("Ошибка открытия файла " + Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\items.xml"); }
 
-           // try { containers = XmlHelper.LoadItemFromXML(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\items.xml"); }
-           // catch { MessageBox.Show("Ошибка открытия файла " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\items.xml"); }
+
            dataGrid1.ItemsSource = containers;
            //MessageBox.Show(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\logs\\" + DateTime.Today.Year + DateTime.Today.Month + DateTime.Today.Day + ".log");
            WriteLog("Вход в программу");
@@ -172,7 +162,6 @@ namespace VisualPacker.Views
         {
             int MaxTonnage = 0;
             dataGrid1.CommitEdit();
-            //dataGrid1.CancelEdit();
             if (containers.Count == 0)
             {
                 MessageBox.Show("Нет груза для расчета.");
@@ -180,9 +169,7 @@ namespace VisualPacker.Views
             else if (selectedVehicles.Count == 0) MessageBox.Show("Не выбран автомобиль.");
             else
             {
-                List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
-               // view3d winView3d = new view3d(selectedVehicles);
-               // winView3d.Show();
+              List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
               UpdateCheckProperty(wasteContainers);
             }
             dataGrid1.ItemsSource = null;
@@ -232,27 +219,14 @@ namespace VisualPacker.Views
         foreach (Container c in wasteContainers)
         {
             List<Container> list =containers.Where(s => s.Name == c.Name).ToList();
-            if (list.Count() > 0)
+            if (list.Any())
             {
                 list[0].IsChecked = false;
             }
             else { MessageBox.Show("Ошибка при изменении поля IsCheked"); }
         }
     }
-        //private void Button_Calculate_WithWeightLimit_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int MaxTonnage = 8000;
-        //    if (containers.Count == 0)
-        //    {
-        //        MessageBox.Show("Нет груза для расчета.");
-        //    }
-        //    else if (selectedVehicles.Count == 0) MessageBox.Show("Не выбран автомобиль.");
-        //    else  {
-        //        List<Container> wasteContainers = Calculation.CalculateLoadScheme(containers.ToList(), selectedVehicles, textBox,MaxTonnage);
-        //    }
-        //}
 
-        
         private void MenuDeleteContainer_Click(object sender, RoutedEventArgs e)
         { 
             containers.Remove((Container)dataGrid1.SelectedItem); 
@@ -289,15 +263,11 @@ namespace VisualPacker.Views
         } 
         private void  SendRequestToService(List<string> list,string loadId)
         {
-            //string reqString="http://localhost/ILSIntegrationServices/ShipmentContainerTransferResource/MoveContainers?containerId="+string.Join(",", list.ToArray());
             string reqString = "http://localhost/ILSIntegrationServices/ShipmentContainerTransferResource/MoveContainers?containerId=" + string.Join(",", list.ToArray()) + "&load=" + loadId;
             HttpWebRequest r = WebRequest.Create(reqString) as HttpWebRequest;
             r.Method = "GET";
             r.Accept = "application/json";
             r.ContentType = "application/json";
-            //r.UserAgent = "user199";
-            //r.Headers.Add("Accept:application/json");
-            //r.Headers.Add("Content-Type:application/json");
             r.Headers.Add("UserName:user199");
             try
             {
@@ -321,7 +291,6 @@ namespace VisualPacker.Views
                 textBox.Text = textBox.Text + "\n";
                 textBox.Text = textBox.Text + "Текст запроса: " + reqString;
                 textBox.Text = textBox.Text + "\r\n";
-                // get error details sent from the server
                 StreamReader reader = new StreamReader(ex.Response.GetResponseStream());
                 textBox.Text = textBox.Text + reader.ReadToEnd();
 
@@ -341,7 +310,6 @@ namespace VisualPacker.Views
             {
                 if (c.Name==cont.Name) CheckContainer(c);
             }
-            //dataGrid1.DataBind();
         }
         private void CheckContainer(Container cont)
         {
@@ -350,7 +318,7 @@ namespace VisualPacker.Views
             //MessageBox.Show("Выбран элемент");
             //int index = containers.IndexOf(cont);
             //containers.SetItem(index, cont);
-            //dataGrid1.ItemsSource = containers;
+            //dataGrid1.ItemsSource = containers; :TODO Не дописанная функция
             
         }
 

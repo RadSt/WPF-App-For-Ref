@@ -134,7 +134,7 @@ namespace VisualPacker.Views
             Canvas.SetTop(t, 2);
             canvas.Children.Add(t);
 
-            vBlock.SetFirstPoint(new Point3D(0, 0, 0));
+            vBlock.SetFirstPointVerticalBlock(new Point3D(0, 0, 0));
             //рисуем контейнеры
                  foreach (Container c in vBlock.Blocks)
                      {
@@ -370,7 +370,7 @@ namespace VisualPacker.Views
                             Canvas.SetLeft(t, d.FirstPoint.Y / scale + 2);
                             delta = delta + 22;
                             Canvas.SetTop(t, canvas.Height - d.Height / scale - d.FirstPoint.Z / scale + delta);
-                            canvas.Children.Add(t);
+                            canvas.Children.AddContainer(t);
                         }
                     } */
 
@@ -380,7 +380,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
                     delta = delta + 22;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t);
+                    canvas.Children.AddContainer(t);
 
                     t = new TextBlock();
                     t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
@@ -388,7 +388,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale+ 2);
                     delta = delta + 13;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t);
+                    canvas.Children.AddContainer(t);
 
                     t = new TextBlock();
                     t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4bottom + "; ";
@@ -396,7 +396,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
                     delta = delta + 13;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t); */
+                    canvas.Children.AddContainer(t); */
                     // break;
                         }
             } 
@@ -415,7 +415,7 @@ namespace VisualPacker.Views
               myLine.StrokeThickness = 1;
               Canvas.SetLeft(myLine,0);
               Canvas.SetTop(myLine, canvas.Height-point.Z/scale);
-              canvas.Children.Add(myLine);
+              canvas.Children.AddContainer(myLine);
 
              //рисуем вертикальную ось
               myLine = new Line();
@@ -429,7 +429,7 @@ namespace VisualPacker.Views
               myLine.StrokeThickness = 1;
               Canvas.SetLeft(myLine, point.Y/scale);
               Canvas.SetTop(myLine, 20);
-              canvas.Children.Add(myLine); */
+              canvas.Children.AddContainer(myLine); */
 
             b.Child = canvas;
                 doc.Blocks.Add(b);
@@ -583,7 +583,7 @@ namespace VisualPacker.Views
                             Canvas.SetLeft(t, d.FirstPoint.Y / scale + 2);
                             delta = delta + 22;
                             Canvas.SetTop(t, canvas.Height - d.Height / scale - d.FirstPoint.Z / scale + delta);
-                            canvas.Children.Add(t);
+                            canvas.Children.AddContainer(t);
                         }
                     } */
 
@@ -593,7 +593,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
                     delta = delta + 22;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t);
+                    canvas.Children.AddContainer(t);
 
                     t = new TextBlock();
                     t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
@@ -601,7 +601,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
                     delta = delta + 13;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t);
+                    canvas.Children.AddContainer(t);
 
                     t = new TextBlock();
                     t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4bottom + "; ";
@@ -609,7 +609,7 @@ namespace VisualPacker.Views
                     Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
                     delta = delta + 13;
                     Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.Add(t); */
+                    canvas.Children.AddContainer(t); */
                     // break;
                 }
             }
@@ -627,14 +627,14 @@ namespace VisualPacker.Views
               currentRow.Cells.Add(new TableCell(b));
               currentRow.Cells[1].ColumnSpan = 1;
 
-              /*tab.RowGroups[1].Rows.Add(new TableRow());
+              /*tab.RowGroups[1].Rows.AddContainer(new TableRow());
               currentRow = tab.RowGroups[1].Rows[i - 1];
               currentRow.Background = Brushes.White;
               currentRow.FontSize = 14;
               currentRow.FontWeight = System.Windows.FontWeights.Normal;
-              currentRow.Cells.Add(new TableCell(new Paragraph(new Run(t2.Name))));
+              currentRow.Cells.AddContainer(new TableCell(new Paragraph(new Run(t2.Name))));
               currentRow.Cells[0].ColumnSpan = 1;
-              currentRow.Cells.Add(new TableCell(b));
+              currentRow.Cells.AddContainer(new TableCell(b));
               currentRow.Cells[1].ColumnSpan = 1;*/
         }
            
@@ -682,7 +682,7 @@ namespace VisualPacker.Views
                    table1.RowGroups.Add(new TableRowGroup());
                    table1.RowGroups.Add(new TableRowGroup());
 
-                   // Add the first (title) row.
+                   // AddContainer the first (title) row.
                    table1.RowGroups[0].Rows.Add(new TableRow());
                    TableRow currentRow = table1.RowGroups[0].Rows[0];
                    currentRow.Background = Brushes.Silver;
@@ -731,7 +731,7 @@ namespace VisualPacker.Views
                 }
                 foreach (RowBlock r in rBlocks)
                 {
-                    r.SetFirstPoint(new Point3D(0, 0, 0));
+                    r.SetFirstPointForVerticalBlock(new Point3D(0, 0, 0));
                     i = i + 1;
                     AddHeader(doc, "Шаг " + i + ":");
                     AddCanvas2(doc, r, r.MaxLength, r.Height);

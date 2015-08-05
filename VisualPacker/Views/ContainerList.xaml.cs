@@ -133,7 +133,7 @@ namespace VisualPacker.Views
              //Добавляем заголовок таблицы
              table1.RowGroups.Add(new TableRowGroup());
 
-             // Add the first (title) row.
+             // AddContainer the first (title) row.
              table1.RowGroups[0].Rows.Add(new TableRow());
              TableRow currentRow = table1.RowGroups[0].Rows[0];
              currentRow.Background = Brushes.Silver;

@@ -166,7 +166,6 @@ namespace VisualPacker.Models
 
         public bool AreSame(Container c)
         {
-            //if ((length <= c.length || length > 0.8 * c.length) & (width <= c.width || width >0.8* c.width)) return true;
             if ((Length <= c.Length & Length >= 0.7 * c.Length) & (Width <= c.Width & Width >= 0.7 * c.Width)) return true;
             return false;
         }
@@ -201,16 +200,8 @@ namespace VisualPacker.Models
             tempList.Add(this);
         }
 
-/*public bool ExistsContainer(string lpn)
-{
-    if (this.Name == lpn)  {
-        return true; }
-    else { return false; }
-}*/
-
         public bool AreEqual(Container c)
         {
-            //if ((length <= c.length || length > 0.8 * c.length) & (width <= c.width || width >0.8* c.width)) return true;
             if (Length == c.Length & Width == c.Width & Height == c.Height) return true;
             return false;
         }

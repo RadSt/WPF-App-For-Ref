@@ -53,9 +53,9 @@ namespace VisualPacker.Models
 
         public bool ContainsVerticalBlock(VerticalBlock vBlock, List<VerticalBlock> blocks)
         {
-            foreach (VerticalBlock v in Blocks)
+            foreach (VerticalBlock verticalBlock in Blocks)
             {
-                if (vBlock.Blocks[0].Name == v.Blocks[0].Name)
+                if (vBlock.Blocks[0].Name == verticalBlock.Blocks[0].Name)
                 {
                     return true;
                 }
@@ -63,47 +63,47 @@ namespace VisualPacker.Models
             return false;
         }
 
-        public bool Add(VerticalBlock c, int mLength)
+        public bool Add(VerticalBlock verticalBlock, int mLength)
         {
             MaxLength = mLength;
-            if (((Length + c.Length) <= MaxLength))
+            if (((Length + verticalBlock.Length) <= MaxLength))
             {
-                Blocks.Add(c);
-                Length = Length + c.Length;
+                Blocks.Add(verticalBlock);
+                Length = Length + verticalBlock.Length;
 
-                Width = Math.Max(Width, c.Width);
-                Height = Math.Max(Height, c.Height);
-                MinHeight = MinHeight == 0 ? c.Height : Math.Max(MinHeight, c.Height);
-                Mass = Mass + c.Mass;
-                RealVolume = RealVolume + c.RealVolume;
-                Count = Count + c.Count;
-                Order = c.Order;
+                Width = Math.Max(Width, verticalBlock.Width);
+                Height = Math.Max(Height, verticalBlock.Height);
+                MinHeight = MinHeight == 0 ? verticalBlock.Height : Math.Max(MinHeight, verticalBlock.Height);
+                Mass = Mass + verticalBlock.Mass;
+                RealVolume = RealVolume + verticalBlock.RealVolume;
+                Count = Count + verticalBlock.Count;
+                Order = verticalBlock.Order;
                 return true;
             }
-            if (c.Length <= Width & (Length + c.Width) <= MaxLength)
+            if (verticalBlock.Length <= Width & (Length + verticalBlock.Width) <= MaxLength)
             {
-                c.RotateH();
-                Blocks.Add(c);
-                Length = Length + c.Length;
+                verticalBlock.RotateH();
+                Blocks.Add(verticalBlock);
+                Length = Length + verticalBlock.Length;
 
-                Width = Math.Max(Width, c.Width);
-                Height = Math.Max(Height, c.Height);
-                Mass = Mass + c.Mass;
-                RealVolume = RealVolume + c.RealVolume;
-                Count = Count + c.Count;
-                Order = c.Order;
+                Width = Math.Max(Width, verticalBlock.Width);
+                Height = Math.Max(Height, verticalBlock.Height);
+                Mass = Mass + verticalBlock.Mass;
+                RealVolume = RealVolume + verticalBlock.RealVolume;
+                Count = Count + verticalBlock.Count;
+                Order = verticalBlock.Order;
                 return true;
             }
             return false;
         }
 
-        public void SetFirstPoint(Point3D point)
+        public void SetFirstPointForVerticalBlock(Point3D point)
         {
             FirstPoint = point;
             Point3D tempPoint = point;
             foreach (VerticalBlock v in Blocks)
             {
-                v.SetFirstPoint(tempPoint);
+                v.SetFirstPointVerticalBlock(tempPoint);
                 tempPoint.Y = tempPoint.Y + v.Length;
             }
         }

@@ -39,17 +39,17 @@ namespace VisualPacker.Models
             area = 0;
         }
 
-        public bool Add(Container c)
+        public bool AddContainer(Container container)
         {
-            if (0.9*Length*Width >= (area + c.Area) & (Order == c.Order | Blocks.Count == 0))
+            if (0.9*Length*Width >= (area + container.Area) & (Order == container.Order | Blocks.Count == 0))
             {
-                Blocks.Add(c);
+                Blocks.Add(container);
                 Count = Count + 1;
-                area = area + c.Area;
-                Mass = Mass + c.Mass;
-                heightContainers = Math.Max(heightContainers, c.Height);
-                Order = c.Order;
-                Price = Price + c.Price;
+                area = area + container.Area;
+                Mass = Mass + container.Mass;
+                heightContainers = Math.Max(heightContainers, container.Height);
+                Order = container.Order;
+                Price = Price + container.Price;
                 return true;
             }
             return false;

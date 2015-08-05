@@ -44,7 +44,7 @@ namespace VisualPacker.Views
 
             foreach (Vehicle v in selectedVehicles)
             {
-                //v.SetFirstPoint(tempPoint);
+                //v.SetFirstPointForVerticalBlock(tempPoint);
                 Drawing.DrawVehicle2(mainViewport, v);
                 //tempPoint.Y = tempPoint.Y + 1000 + v.Width;
 

@@ -39,21 +39,16 @@ namespace VisualPacker.Models
               Only4Bottom = Only4Bottom,
               FirstPoint = new Point3D(FirstPoint.X, FirstPoint.Y, FirstPoint.Z)
           };
-          foreach (Object o in Blocks)
+          foreach (Object obj in Blocks)
           {
-              if (o is VerticalBlock)
+              if (obj is VerticalBlock)
               {
-                  VerticalBlock vBlock = (VerticalBlock)o;
+                  VerticalBlock vBlock = (VerticalBlock)obj;
                   verticalBlock.Blocks.Add(vBlock.Clone() as VerticalBlock);
               }
-              else if (o is RowBlock)
+              else if (obj is Container)
               {
-                  RowBlock rBlock = (RowBlock)o;
-                  MessageBox.Show("Ошибка. Клонирование рядов не выполнено");
-              }
-              else if (o is Container)
-              {
-                  Container cont = (Container)o;
+                  Container cont = (Container)obj;
                   verticalBlock.Blocks.Add(cont.Clone() as Container);
               }
           }
@@ -123,39 +118,39 @@ namespace VisualPacker.Models
            return false;
        }
 
-       public void SetFirstPoint(Point3D point)
+       public void SetFirstPointVerticalBlock(Point3D point)
         {
             FirstPoint = point;
             Point3D tempPoint = point;
-            foreach (Object Data in Blocks)
+            foreach (Object data in Blocks)
             {
-                if (Data is VerticalBlock)
+                if (data is VerticalBlock)
                 {
-                    VerticalBlock v = (VerticalBlock)Data;
-                       v.SetFirstPoint(tempPoint);
+                    VerticalBlock v = (VerticalBlock)data;
+                       v.SetFirstPointVerticalBlock(tempPoint);
                         tempPoint.Z = tempPoint.Z + v.Height;
                 }
-                else if (Data is RowBlock)
+                else if (data is RowBlock)
                 {
-                    RowBlock r = (RowBlock)Data;
-                    r.SetFirstPoint(tempPoint);
+                    RowBlock r = (RowBlock)data;
+                    r.SetFirstPointForVerticalBlock(tempPoint);
                     tempPoint.Z = tempPoint.Z + r.Height;
                 }
-                else if (Data is HorizontalBlock)
+                else if (data is HorizontalBlock)
                 {
-                    HorizontalBlock h = (HorizontalBlock)Data;
+                    HorizontalBlock h = (HorizontalBlock)data;
                     h.FirstPoint=tempPoint;
                     tempPoint.Z = tempPoint.Z + h.Height;
                 }
-                else if (Data is Container)
+                else if (data is Container)
                 {
-                    Container c = (Container)Data;
+                    Container c = (Container)data;
                     c.FirstPoint = tempPoint;
                     tempPoint.Z = tempPoint.Z + c.Height;
                 }
                 else
                 {
-                    MessageBox.Show("В процедуру рисования SetFirstPoint класса VerticalBlock передан неверный тип данных:" + Data.GetType());
+                    MessageBox.Show("В процедуру рисования SetFirstPointForVerticalBlock класса VerticalBlock передан неверный тип данных:" + data.GetType());
                 }
             }
         }
@@ -164,31 +159,31 @@ namespace VisualPacker.Models
             int temp = Length;
             Length = Width;
             Width = temp;
-            foreach (Object Data in Blocks)
+            foreach (Object data in Blocks)
             {
-                if (Data is VerticalBlock)
+                if (data is VerticalBlock)
                 {
-                    VerticalBlock c = (VerticalBlock)Data;
+                    VerticalBlock c = (VerticalBlock)data;
                     c.RotateH();
                 }
-                else if (Data is RowBlock)
+                else if (data is RowBlock)
                 {
-                    RowBlock c = (RowBlock)Data;
+                    RowBlock c = (RowBlock)data;
                     // ничего не делаем
                 }
-                else if (Data is HorizontalBlock)
+                else if (data is HorizontalBlock)
                 {
-                    HorizontalBlock c = (HorizontalBlock)Data;
+                    HorizontalBlock c = (HorizontalBlock)data;
                     c.RotateH();
                 }
-                else if (Data is Container)
+                else if (data is Container)
                 {
-                    Container c = (Container)Data;
+                    Container c = (Container)data;
                     c.RotateH();
                 }
                 else
                 {
-                    MessageBox.Show("В процедуру поворота вертикального блока передан неверный тип данных:" + Data.GetType());
+                    MessageBox.Show("В процедуру поворота вертикального блока передан неверный тип данных:" + data.GetType());
                 }
                
             
@@ -201,34 +196,35 @@ namespace VisualPacker.Models
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
             fromTempListToContList.ToContainerList(tempList, Blocks);
         }
-           public void  ToContainerListIncludeVerticalPallet(List<Container> tempList)
+
+        public void  ToContainerListIncludeVerticalPallet(List<Container> tempList)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
-           foreach (Object Data in Blocks)
+           foreach (Object data in Blocks)
            {   
-                if (Data is VerticalBlock)
+                if (data is VerticalBlock)
                 {   
-                   VerticalBlock v=(VerticalBlock)Data;
+                   VerticalBlock v=(VerticalBlock)data;
                        v.ToContainerList(tempList);
                 }
-                else if (Data is RowBlock)
+                else if (data is RowBlock)
                 {
-                   RowBlock r =(RowBlock)Data;
+                   RowBlock r =(RowBlock)data;
                    fromTempListToContList.ToContainerList(tempList, r.Blocks); 
                 }
-                else if (Data is HorizontalBlock)
+                else if (data is HorizontalBlock)
                 {
-                    HorizontalBlock c = (HorizontalBlock)Data;
+                    HorizontalBlock c = (HorizontalBlock)data;
                     c.ToContainerList(tempList);
                 }
-                else if (Data is Container)
+                else if (data is Container)
                 {
-                    Container c=(Container)Data;
+                    Container c=(Container)data;
                     c.ToContainerList(tempList);
                 }
                 else
                 {
-                    MessageBox.Show("В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" + Data.GetType());
+                    MessageBox.Show("В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" + data.GetType());
                 }
            }
         }

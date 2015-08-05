@@ -90,12 +90,6 @@ namespace VisualPacker.Models
                 DoorCenterDistance = DoorCenterDistance,
                 Roof = Roof
             };
-            /*copy_vehicle.Front_axle_distance = this.Front_axle_distance;
-            copy_vehicle.Front_axle_max_tonnage = this.Front_axle_max_tonnage;
-            copy_vehicle.Front_axle_empty_tonnage = this.Front_axle_empty_tonnage;
-            copy_vehicle.Back_axle_distance = this.Back_axle_distance;
-            copy_vehicle.Back_axle_max_tonnage = this.Back_axle_max_tonnage;
-            copy_vehicle.Back_axle_empty_tonnage = this.Back_axle_empty_tonnage;*/
             return vehicle;
         }
 
@@ -109,13 +103,11 @@ namespace VisualPacker.Models
             //присваиваем начальные координаты для груза
             FirstPoint = point;
             Point3D tempPoint = point;
-            //int mY = 0;
-
             foreach (RowBlock r in Blocks)
             {
                 Point3D pointM = Calculation.CalculateMassCenterRow(r);
                 //if () {r.Blocks.Reverse();}
-                r.SetFirstPoint(tempPoint);
+                r.SetFirstPointForVerticalBlock(tempPoint);
                 tempPoint.X = tempPoint.X + r.Width;
             }
         }
@@ -139,11 +131,7 @@ namespace VisualPacker.Models
             List<int> orderList = new List<int>();
             foreach (Container c in containers)
             {
-                if (orderList.Contains(c.Order))
-                {
-                    //ничего не делаем
-                }
-                else
+                if (!orderList.Contains(c.Order))
                 {
                     orderList.Add(c.Order);
                 }
@@ -157,16 +145,11 @@ namespace VisualPacker.Models
             List<int> orderList = new List<int>();
             foreach (RowBlock r in rowBlocks)
             {
-                if (orderList.Contains(r.Order))
-                {
-                    //ничего не делаем
-                }
-                else
+                if (!orderList.Contains(r.Order))
                 {
                     orderList.Add(r.Order);
                 }
             }
-
             return orderList;
         }
 
@@ -176,16 +159,11 @@ namespace VisualPacker.Models
 
             foreach (RowBlock r in rBlocks)
             {
-                if (orderList.Contains(r.Order))
-                {
-                    //ничего не делаем
-                }
-                else
+                if (!orderList.Contains(r.Order))
                 {
                     orderList.Add(r.Order);
                 }
             }
-
             return orderList;
         }
 
@@ -346,8 +324,6 @@ namespace VisualPacker.Models
                 MessageBox.Show("Расхождение количества вертикальных блоков");
             }
             //выбираем самый плотный ряд 
-            //ReportWindow winReport = new ReportWindow(rBlocks);
-            //winReport.ShowDialog();
 
             if (rBlocks.Any())
             {
@@ -559,7 +535,6 @@ namespace VisualPacker.Models
             {
                 MaxHeight = MaxHeight - 100;
             }
-
             MaxHeight = Math.Min(Height - 350, MaxHeight + 100);
             tempList = DownloadContainersToVehicle(containers, maxTonnage);
             return tempList;
@@ -577,7 +552,7 @@ namespace VisualPacker.Models
 
         private bool NotEmpty(List<Container> tempList)
         {
-            if (tempList.Count() > 0)
+            if (tempList.Any())
             {
                 return true;
             }
@@ -613,8 +588,7 @@ namespace VisualPacker.Models
             //получаем список заказов
             //List<Container> tempSmall2 = new List<Container>();
             List<int> orderList = DistinctOrders(containerList);
-            orderList.OrderBy(o => o);
-            foreach (int order in orderList)
+            foreach (int order in orderList.OrderBy(o => o))
             {
                 List<Container> tempList = containerList.Where(c => c.Order == order).ToList();
 
@@ -723,7 +697,7 @@ namespace VisualPacker.Models
             List<Container> tempRama =
                 tempList.Where(s => s.Length > 1500 & s.Width > 6000).OrderBy(s => s.Width).ToList();
             tempList = tempList.Where(s => s.Length <= 1500 | s.Width <= 6000).ToList();
-            if (tempRama.Count() == 0)
+            if (!tempRama.Any())
             {
                 return tempList;
             }
@@ -843,9 +817,7 @@ namespace VisualPacker.Models
 
         private void LoadSmallContainersBySquare(List<Container> tempList, List<int> orderList)
         {
-            List<Container> tempSmall2 = new List<Container>();
-            orderList.OrderBy(o => o);
-            foreach (int order in orderList)
+            foreach (int order in orderList.OrderBy(o => o))
             {
                 //////////////////////////////////////////////////////////
                 int orderLength = 0;
@@ -909,35 +881,7 @@ namespace VisualPacker.Models
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
             List<Container> tempList = new List<Container>();
-            foreach (Object Data in Blocks)
-            {
-                if (Data is VerticalBlock)
-                {
-                    VerticalBlock v = (VerticalBlock) Data;
-                    v.ToContainerList(tempList);
-                }
-                else if (Data is RowBlock)
-                {
-                    RowBlock r = (RowBlock) Data;
-                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
-                }
-                else if (Data is HorizontalBlock)
-                {
-                    HorizontalBlock c = (HorizontalBlock) Data;
-                    c.ToContainerList(tempList);
-                }
-                else if (Data is Container)
-                {
-                    Container c = (Container) Data;
-                    c.ToContainerList(tempList);
-                }
-                else
-                {
-                    MessageBox.Show(
-                        "В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" +
-                        Data.GetType());
-                }
-            }
+            fromTempListToContList.ToContainerList(tempList, Blocks);
             tempList.AddRange(SmallBlocks);
             return tempList;
         }
