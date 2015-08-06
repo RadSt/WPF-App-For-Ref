@@ -6,7 +6,7 @@ using _3DTools;
 
 namespace VisualPacker.ViewModels
 {
-    static class Drawing
+    static class Drawing3D
     {
         public static void DrawLine(Viewport3D mainViewport, Point3D p1, Point3D p2)
         {

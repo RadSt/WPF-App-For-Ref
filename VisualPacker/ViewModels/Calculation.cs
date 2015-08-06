@@ -12,32 +12,6 @@ namespace VisualPacker.ViewModels
 {
     internal static class Calculation
     {
-        public static Point3D CalculateMassCenterRow(RowBlock rBlock)
-        {
-            double nLength = 0;
-            double nWidth = 0;
-            double nHeight = 0;
-
-            var massCenterPoint = new Point3D(0, 0, 0);
-            if (rBlock.Mass == 0)
-            {
-                return massCenterPoint;
-            }
-            foreach (var v in rBlock.Blocks)
-            {
-                foreach (var c in v.Blocks)
-                {
-                    nLength = nLength + c.Mass*(c.FirstPoint.Y + c.Length/2);
-                    nWidth = nWidth + c.Mass*(c.FirstPoint.X + c.Width/2);
-                    nHeight = nHeight + c.Mass*(c.FirstPoint.Z + c.Height/2);
-                }
-            }
-            massCenterPoint.Y = nLength/rBlock.Mass;
-            massCenterPoint.X = nWidth/rBlock.Mass;
-            massCenterPoint.Z = nHeight/rBlock.Mass;
-            return massCenterPoint;
-        }
-
         public static List<Container> ListToContainerList(List<Container> blocks)
         {
             var tempList = new List<Container>();
@@ -46,22 +20,22 @@ namespace VisualPacker.ViewModels
             {
                 if (Data is VerticalBlock)
                 {
-                    var v = (VerticalBlock) Data;
+                    var v = (VerticalBlock)Data;
                     v.ToContainerList(tempList);
                 }
                 else if (Data is RowBlock)
                 {
-                    var r = (RowBlock) Data;
+                    var r = (RowBlock)Data;
                     fromTempListToContList.ToContainerList(tempList, r.Blocks);
                 }
                 else if (Data is HorizontalBlock)
                 {
-                    var c = (HorizontalBlock) Data;
+                    var c = (HorizontalBlock)Data;
                     c.ToContainerList(tempList);
                 }
                 else if (Data is Container)
                 {
-                    var c = (Container) Data;
+                    var c = (Container)Data;
                     c.ToContainerList(tempList);
                 }
                 else
@@ -114,20 +88,15 @@ namespace VisualPacker.ViewModels
             ObservableCollection<Vehicle> selectedVehicles, TextBox textBox, int maxTonnage)
         {
             int tempMaxTonnage;
-            var widthBetweenVehicles = 1000;
-            var tempPoint = new Point3D(0, 0, 0);
             textBox.Clear();
             textBox.AppendText("Протокол расчета схемы загрузки:\n");
 
             var tempList = RotateContainers(containers);
 
-            foreach (var v in selectedVehicles)
+            foreach (Vehicle v in selectedVehicles)
             {
                 tempMaxTonnage = maxTonnage == 0 ? v.Tonnage : maxTonnage;
                 tempList = v.DownloadContainers(tempList, tempMaxTonnage);
-                v.SetFirstPoint(tempPoint);
-                //tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;
-                tempPoint.Z = tempPoint.Z - widthBetweenVehicles - v.Width;
                 PutCargoInfoInTextBox(v, textBox);
                 CheckOverweight(v, textBox, tempMaxTonnage);
             }

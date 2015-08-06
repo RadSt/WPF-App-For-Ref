@@ -105,8 +105,6 @@ namespace VisualPacker.Models
             Point3D tempPoint = point;
             foreach (RowBlock r in Blocks)
             {
-                Point3D pointM = Calculation.CalculateMassCenterRow(r);
-                //if () {r.Blocks.Reverse();}
                 r.SetFirstPointForVerticalBlock(tempPoint);
                 tempPoint.X = tempPoint.X + r.Width;
             }
@@ -863,7 +861,7 @@ namespace VisualPacker.Models
             double nHeight = 0;
             foreach (RowBlock r in Blocks)
             {
-                Point3D pointRow = Calculation.CalculateMassCenterRow(r);
+                Point3D pointRow = CalculateMassCenterRow(r);
                 nLength = nLength + r.Mass*pointRow.Y;
                 nWidth = nWidth + r.Mass*pointRow.X;
                 nHeight = nHeight + r.Mass*pointRow.Z;
@@ -872,6 +870,32 @@ namespace VisualPacker.Models
             point.X = nWidth/Mass;
             point.Z = nHeight/Mass;
             return point;
+        }
+
+        private  Point3D CalculateMassCenterRow(RowBlock rBlock)
+        {
+            double nLength = 0;
+            double nWidth = 0;
+            double nHeight = 0;
+
+            var massCenterPoint = new Point3D(0, 0, 0);
+            if (rBlock.Mass == 0)
+            {
+                return massCenterPoint;
+            }
+            foreach (var v in rBlock.Blocks)
+            {
+                foreach (var c in v.Blocks)
+                {
+                    nLength = nLength + c.Mass * (c.FirstPoint.Y + c.Length / 2);
+                    nWidth = nWidth + c.Mass * (c.FirstPoint.X + c.Width / 2);
+                    nHeight = nHeight + c.Mass * (c.FirstPoint.Z + c.Height / 2);
+                }
+            }
+            massCenterPoint.Y = nLength / rBlock.Mass;
+            massCenterPoint.X = nWidth / rBlock.Mass;
+            massCenterPoint.Z = nHeight / rBlock.Mass;
+            return massCenterPoint;
         }
 
         public List<Container> VehicleToContainerList()
