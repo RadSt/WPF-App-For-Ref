@@ -17,22 +17,19 @@ using Path = System.IO.Path;
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for view3d.xaml
+    /// Interaction logic for View3D.xaml
     /// </summary>
-    public partial class view3d : Window
+    public partial class View3D
 
     {
-        public view3d(ObservableCollection<Vehicle> Data)
+        public View3D(ObservableCollection<Vehicle> data)
         {
             InitializeComponent();
-            DrawScene(mainViewport, Data);
-            
-
+            DrawScene(MainViewport, data);
         }
 
         public static void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
         {
-            Point3D tempPoint = new Point3D(0, 0, 0);
            
             PerspectiveCamera cam = new PerspectiveCamera(new Point3D(9000, 5000, 24000),
             new Vector3D(-1, -2, -10), new Vector3D(0, -1, 0), 50000);
@@ -84,19 +81,19 @@ namespace VisualPacker.Views
             printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
             if (printDialog.ShowDialog() == true)
             {
-                printDialog.PrintVisual(mainViewport
+                printDialog.PrintVisual(MainViewport
                 , "Печать");
             }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
+            saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
         }
 
         private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
         {
-            saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
+            saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
         }
     }
 }

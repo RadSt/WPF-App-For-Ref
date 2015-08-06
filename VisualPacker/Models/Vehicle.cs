@@ -529,13 +529,12 @@ namespace VisualPacker.Models
         public List<Container> DownloadContainers(List<Container> containers, int maxTonnage)
         {
             MaxHeight = Height - 350;
-            List<Container> tempList = new List<Container>();
             while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > minHeighCont)
             {
                 MaxHeight = MaxHeight - 100;
             }
             MaxHeight = Math.Min(Height - 350, MaxHeight + 100);
-            tempList = DownloadContainersToVehicle(containers, maxTonnage);
+            List<Container> tempList = DownloadContainersToVehicle(containers, maxTonnage);
             return tempList;
         }
 
@@ -563,7 +562,6 @@ namespace VisualPacker.Models
             ClearVehicle();
             MaxLength = Length;
             //делим тары на вертикальные блоки 
-            List<VerticalBlock> vBlocks = new List<VerticalBlock>();
             //разные заказы обрабатываем отдельно т.к. их нужно будет выгружать из машины в разное время
 
             //Негабаритный товар отсекаем 

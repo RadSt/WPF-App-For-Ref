@@ -126,7 +126,8 @@ namespace VisualPacker.ViewModels
                 tempMaxTonnage = maxTonnage == 0 ? v.Tonnage : maxTonnage;
                 tempList = v.DownloadContainers(tempList, tempMaxTonnage);
                 v.SetFirstPoint(tempPoint);
-                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;
+                //tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;
+                tempPoint.Z = tempPoint.Z - widthBetweenVehicles - v.Width;
                 PutCargoInfoInTextBox(v, textBox);
                 CheckOverweight(v, textBox, tempMaxTonnage);
             }
