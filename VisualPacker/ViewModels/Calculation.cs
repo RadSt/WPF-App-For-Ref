@@ -50,14 +50,14 @@ namespace VisualPacker.ViewModels
 
             var tempList = RotateContainers(containers);
 
-            foreach (var v in selectedVehicles)
+            foreach (var vehicle in selectedVehicles)
             {
-                tempMaxTonnage = maxTonnage == 0 ? v.Tonnage : maxTonnage;
-                tempList = v.DownloadContainers(tempList, tempMaxTonnage);
-                v.SetFirstPoint(tempPoint);
-                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + v.Width;
-                PutCargoInfoInTextBox(v, textBox);
-                CheckOverweight(v, textBox, tempMaxTonnage);
+                tempMaxTonnage = maxTonnage == 0 ? vehicle.Tonnage : maxTonnage;
+                tempList = vehicle.DownloadContainers(tempList, tempMaxTonnage);
+                SetFirstPoint(tempPoint,vehicle);
+                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + vehicle.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + v.Width;
+                PutCargoInfoInTextBox(vehicle, textBox);
+                CheckOverweight(vehicle, textBox, tempMaxTonnage);
             }
             PutWasteContainersInfoInTextBox(tempList, textBox);
             CheckErrors(tempList, textBox, selectedVehicles, containers);
@@ -65,6 +65,17 @@ namespace VisualPacker.ViewModels
             return tempList;
         }
 
+        private void SetFirstPoint(Point3D point, Vehicle vehicle)
+        {
+            //присваиваем начальные координаты для груза
+            vehicle.FirstPoint = point;
+            Point3D tempPoint = point;
+            foreach (RowBlock r in vehicle.Blocks)
+            {
+                r.SetFirstPointForVerticalBlock(tempPoint);
+                tempPoint.X = tempPoint.X + r.Width;
+            }
+        }
         private List<Container> RotateContainers(List<Container> tempList)
         {
             //поворачиваем контейнеры у которых длинна меньше ширины

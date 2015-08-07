@@ -99,29 +99,7 @@ namespace VisualPacker.Models
             return Blocks.Any();
         }
 
-        public void SetFirstPoint(Point3D point)
-        {
-            //присваиваем начальные координаты для груза
-            FirstPoint = point;
-            Point3D tempPoint = point;
-            foreach (RowBlock r in Blocks)
-            {
-                Point3D pointM = calculation.CalculateMassCenterRow(r);
-                //if () {r.Blocks.Reverse();}
-                r.SetFirstPointForVerticalBlock(tempPoint);
-                tempPoint.X = tempPoint.X + r.Width;
-            }
-        }
-
-        public double Volume()
-        {
-            double l = Length/1000;
-            double w = Width/1000;
-            double h = Height/1000;
-            return (l*w*h);
-        }
-
-        public List<int> DistinctOrders(List<Container> containers)
+        private List<int> DistinctOrders(List<Container> containers)
         {
             List<int> orderList = new List<int>();
             foreach (Container c in containers)
@@ -132,33 +110,6 @@ namespace VisualPacker.Models
                 }
             }
 
-            return orderList;
-        }
-
-        public List<int> DistinctOrders(List<RowBlock> rowBlocks)
-        {
-            List<int> orderList = new List<int>();
-            foreach (RowBlock r in rowBlocks)
-            {
-                if (!orderList.Contains(r.Order))
-                {
-                    orderList.Add(r.Order);
-                }
-            }
-            return orderList;
-        }
-
-        public List<int> DistinctOrdersInRow(List<RowBlock> rBlocks)
-        {
-            List<int> orderList = new List<int>();
-
-            foreach (RowBlock r in rBlocks)
-            {
-                if (!orderList.Contains(r.Order))
-                {
-                    orderList.Add(r.Order);
-                }
-            }
             return orderList;
         }
 
@@ -189,7 +140,7 @@ namespace VisualPacker.Models
             return tempList.Count();
         }
 
-        public void CreateRows(List<VerticalBlock> vBlocks, int sameWidth, List<RowBlock> rBlocks)
+        private void CreateRows(List<VerticalBlock> vBlocks, int sameWidth, List<RowBlock> rBlocks)
         {
             List<VerticalBlock> sameBlock =
                 vBlocks.Where(s => s.IsSuitableWidth(sameWidth)).OrderByDescending(s => s.Width).ToList();
@@ -226,17 +177,17 @@ namespace VisualPacker.Models
             }
         }
 
-        public List<Container> CreateRow3(List<Container> containers, int minHeight, int maxHeight, int maxWidth,
+        private List<Container> CreateRow3(List<Container> containers, int minHeight, int maxHeight, int maxWidth,
             int show, int maxTonnage)
         {
             //первым делом создаем вертикальные блоки нужной высоты (не меньше minHeight;  
-            List<VerticalBlock> vBlocks = new List<VerticalBlock>();
-            List<Container> tempList = containers.OrderByDescending(c => c.Length).ToList();
-            List<Container> smallContainers = new List<Container>();
-            List<VerticalBlock> lowBlocks = new List<VerticalBlock>();
+            var vBlocks = new List<VerticalBlock>();
+            var tempList = containers.OrderByDescending(c => c.Length).ToList();
+            var smallContainers = new List<Container>();
+            var lowBlocks = new List<VerticalBlock>();
             RowBlock result;
             //поворачиваем контейнеры которые должны стоять вдоль борта
-            foreach (Container c in tempList)
+            foreach (var c in tempList)
             {
                 if ((c.Length > c.Width & c.DirLength == "x") | c.Length > maxWidth)
                 {
@@ -251,9 +202,9 @@ namespace VisualPacker.Models
 
             while (tempList.Any())
             {
-                Container firstCont = tempList[0];
-                int check4 = tempList.Count();
-                List<Container> sameCont1 =
+                var firstCont = tempList[0];
+                var check4 = tempList.Count();
+                var sameCont1 =
                     tempList.Where(s => s.AreSame01(firstCont))
                         .OrderByDescending(s => s.Mass)
                         .ThenBy(s => s.Color)
@@ -263,8 +214,8 @@ namespace VisualPacker.Models
                 {
                     MessageBox.Show("неправильная фильтрация контейнеров");
                 }
-                VerticalBlock vBlock = new VerticalBlock();
-                foreach (Container c in sameCont1)
+                var vBlock = new VerticalBlock();
+                foreach (var c in sameCont1)
                 {
                     if (c.Height < Height & c.Height >= maxHeight & vBlock.Count == 0)
                     {
@@ -302,18 +253,18 @@ namespace VisualPacker.Models
             {
                 MessageBox.Show("Расхождение количества контейнеров 3");
             }
-            //LoadScheme win = new LoadScheme(VBlocks);
+            //LoadSchemeCalculation win = new LoadSchemeCalculation(VBlocks);
             //win.ShowDialog();
             //формируем ряды
-            List<RowBlock> rBlocks = new List<RowBlock>();
-            int sameWidth = 100;
-            int sh = vBlocks.Count();
+            var rBlocks = new List<RowBlock>();
+            var sameWidth = 100;
+            var sh = vBlocks.Count();
             while (sameWidth < MaxLength)
             {
                 CreateRows(vBlocks, sameWidth, rBlocks);
                 sameWidth = sameWidth + 100;
             }
-            int sh2 = VerticalBlocksDistinctCount(vBlocks);
+            var sh2 = VerticalBlocksDistinctCount(vBlocks);
             if (sh != sh2)
             {
                 MessageBox.Show("Расхождение количества вертикальных блоков");
@@ -346,14 +297,14 @@ namespace VisualPacker.Models
             //оставшиеся низкие блоки выгружаем в общий список
             vBlocks.AddRange(lowBlocks);
             //неиспользованные вертикальные ряды выгружаем в список контейнеров
-            foreach (VerticalBlock v in vBlocks)
+            foreach (var v in vBlocks)
             {
                 v.ToContainerList(tempList);
             }
             //возвращаем маленькие контейнеры в общий список
             tempList.AddRange(smallContainers);
             //Поворачиваем контейнеры обратно;
-            foreach (Container c in tempList.Where(c => c.Length < c.Width))
+            foreach (var c in tempList.Where(c => c.Length < c.Width))
             {
                 c.RotateH();
             }
@@ -361,7 +312,7 @@ namespace VisualPacker.Models
         } //CreateRow3
 
 
-        public List<VerticalBlock> AddExtraBlock(RowBlock rBlock, List<VerticalBlock> vBlocks)
+        private List<VerticalBlock> AddExtraBlock(RowBlock rBlock, List<VerticalBlock> vBlocks)
         {
             int length = rBlock.MaxLength - rBlock.Length;
 
@@ -395,7 +346,7 @@ namespace VisualPacker.Models
             return tempBlocks;
         }
 
-        public List<Container> CreateVerticalPalletsLevel2(List<Container> containers, int maxHeight)
+        private List<Container> CreateVerticalPalletsLevel2(List<Container> containers, int maxHeight)
         {
             FromTempListToContList fromTempListToContList=new FromTempListToContList();
             List<Container> t1 = fromTempListToContList.ToContainerList(containers);
@@ -458,7 +409,7 @@ namespace VisualPacker.Models
             return tempList;
         }
 
-        public List<Container> CreateVerticalPalletsLevel3(List<Container> containers, int length, int width, int height,
+        private List<Container> CreateVerticalPalletsLevel3(List<Container> containers, int length, int width, int height,
             int maxHeight, string prefix)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();

@@ -14,18 +14,19 @@ using VisualPacker.ViewModels;
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for LoadScheme.xaml
+    /// Interaction logic for LoadSchemeCalculation.xaml
     /// </summary>
     /// 
     
     public partial class LoadScheme
     {
+        LoadSchemeCalculation loadSchemeCalculation = new LoadSchemeCalculation();
         public ObservableCollection<Vehicle> vehicles;
         public List<VerticalBlock> vBlocks;
         public List<RowBlock> rBlocks;
         public List<Container> containers;
         public int scale = 6;
-        //public LoadScheme(ObservableCollection<Vehicle> Data)
+        //public LoadSchemeCalculation(ObservableCollection<Vehicle> Data)
         public LoadScheme(Object Data)
         {
             InitializeComponent();
@@ -691,7 +692,7 @@ namespace VisualPacker.Views
                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Контейнеры"))));
                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Схема загрузки ряда"))));
                    //получаем список заказов
-                   List<int> orderList = v.DistinctOrdersInRow(v.Blocks);
+                   List<int> orderList = loadSchemeCalculation.DistinctOrdersInRow(v.Blocks);
                    orderList.OrderBy(o => o);
                    foreach (int order in orderList)
                    {

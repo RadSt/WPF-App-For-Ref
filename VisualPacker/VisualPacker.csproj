@@ -84,7 +84,7 @@
     <Compile Include="Models\FromTempListToContList.cs" />
     <Compile Include="ViewModels\Calculation2D.cs" />
     <Compile Include="ViewModels\Calculation3D.cs" />
-    <Compile Include="ViewModels\LoadScheme.cs" />
+    <Compile Include="ViewModels\LoadSchemeCalculation.cs" />
     <Compile Include="Views\aboutWindow.xaml.cs">
       <DependentUpon>aboutWindow.xaml</DependentUpon>
     </Compile>

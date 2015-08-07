@@ -26,39 +26,6 @@ namespace VisualPacker.Views
         ObservableCollection<Container> containers = new ObservableCollection<Container>();
         Calculation calculation =new Calculation();
         List<Container> wasteContainers = new List<Container>();
-        [STAThread]
-        public static void CreateResult(List<RowBlock> rowBlocks,Vehicle vehicle)
-        {
-            TextBlock txt = new TextBlock();
-            List<String> notIncluded=new List<String>();
-            double volume = 0;
-            double weight = 0;
-            foreach (RowBlock r in rowBlocks)
-            {
-                foreach (VerticalBlock v in r.Blocks)
-                {
-                    foreach (Container c in v.Blocks)
-                    {
-                        if (r.Included)
-                        {
-                            volume = volume + c.Volume;
-                            weight = weight + c.Mass;
-                        }
-                        else
-                        {
-                            notIncluded.Add(c.Name);
-                        }
-                    }
-                  
-                }
-              
-            }
-            double volUsage=100*volume/(vehicle.Volume());
-            String notIncludedString;
-            if (notIncluded.Count==0)  notIncludedString="Все контейнеры вмещаются в машину.";
-            else notIncludedString="Не поместились следующие контейнеры"+notIncluded;
-            //MessageBox.Show("Заполнение машины - "+volUsage.ToString()+"%. Вес груза - "+weight.ToString()+" кг. " + notIncludedString);
-        }
         public MainWindow()
         {
             InitializeComponent();
