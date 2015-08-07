@@ -10,16 +10,16 @@ using VisualPacker.ViewModels.Helpers;
 
 namespace VisualPacker.ViewModels
 {
-    internal static class Calculation
+    public class Calculation
     {
-        public static List<Container> ListToContainerListIncludeVerticalPallet(List<Container> blocks)
+        public List<Container> ListToContainerListIncludeVerticalPallet(List<Container> blocks)
         {
             FromTempListToContList fromTempListToContList = new FromTempListToContList();
             List<Container> tempList = fromTempListToContList.ToContainerList(blocks);
             return tempList;
         }
 
-        public static List<Container> CalculateLoadScheme(List<Container> containers,
+        public List<Container> CalculateLoadScheme(List<Container> containers,
             ObservableCollection<Vehicle> selectedVehicles, TextBox textBox, int maxTonnage)
         {
             int tempMaxTonnage;
@@ -41,7 +41,7 @@ namespace VisualPacker.ViewModels
             return tempList;
         }
 
-        private static List<Container> RotateContainers(List<Container> tempList)
+        private List<Container> RotateContainers(List<Container> tempList)
         {
             //поворачиваем контейнеры у которых длинна меньше ширины
             foreach (var c in tempList)
@@ -54,14 +54,14 @@ namespace VisualPacker.ViewModels
             return tempList;
         }
 
-        private static void PutCargoInfoInTextBox(Vehicle v, TextBox textBox)
+        private void PutCargoInfoInTextBox(Vehicle v, TextBox textBox)
         {
             textBox.AppendText("Загрузка автомобиля " + v.Name + " :\n");
             textBox.AppendText("  количество контейнеров - " + v.Count + " :\n");
             textBox.AppendText("  вес груза - " + v.Mass + " :\n");
         }
 
-        private static void CheckOverweight(Vehicle v, TextBox textBox, int MaxTonnage)
+        private void CheckOverweight(Vehicle v, TextBox textBox, int MaxTonnage)
         {
             var p = v.GetMassCenter();
             var maxTonnage = MaxTonnage*(v.EmptyTonnage*v.Length + 2*p.X*v.Mass)/(v.Length*(v.EmptyTonnage + v.Mass));
@@ -79,7 +79,7 @@ namespace VisualPacker.ViewModels
             }
         }
 
-        private static void PutWasteContainersInfoInTextBox(List<Container> tempList, TextBox textBox)
+        private void PutWasteContainersInfoInTextBox(List<Container> tempList, TextBox textBox)
         {
             if (tempList.Count > 0)
             {
@@ -95,14 +95,14 @@ namespace VisualPacker.ViewModels
             }
         }
 
-        private static void CheckErrors(List<Container> tempList, TextBox textBox,
+        private void CheckErrors(List<Container> tempList, TextBox textBox,
             ObservableCollection<Vehicle> selectedVehicles, List<Container> containers)
         {
             CheckIfPriorityContainerInWasteList(tempList, textBox);
             CheckContainerCount(containers, tempList, textBox, selectedVehicles);
         }
 
-        private static void CheckIfPriorityContainerInWasteList(List<Container> tempList, TextBox textBox)
+        private void CheckIfPriorityContainerInWasteList(List<Container> tempList, TextBox textBox)
         {
             var priorityError = 0;
             foreach (var t in tempList)
@@ -118,7 +118,7 @@ namespace VisualPacker.ViewModels
             }
         }
 
-        private static void CheckContainerCount(List<Container> containers, List<Container> tempList, TextBox textBox,
+        private void CheckContainerCount(List<Container> containers, List<Container> tempList, TextBox textBox,
             ObservableCollection<Vehicle> selectedVehicles)
         {
             var contCount = XmlHelper.ContainersCount(tempList);
@@ -137,7 +137,7 @@ namespace VisualPacker.ViewModels
             }
         }
 
-        private static void PutContainerVarianceInTextBox(List<Container> newList, List<Container> containers,
+        private void PutContainerVarianceInTextBox(List<Container> newList, List<Container> containers,
             TextBox textBox)
         {
             foreach (var c in containers)

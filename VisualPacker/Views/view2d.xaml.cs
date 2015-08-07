@@ -313,8 +313,9 @@ namespace VisualPacker.Views
         }
         public void AddDescription(FlowDocument doc, Vehicle vehicle)
         {
+            Calculation calculation=new Calculation();
             List<Container> tempList = vehicle.VehicleToContainerList();
-            tempList = Calculation.ListToContainerListIncludeVerticalPallet(tempList);
+            tempList = calculation.ListToContainerListIncludeVerticalPallet(tempList);
             //tempList.AddRange(v.smallBlocks);
             List<string> shipmentList = DistinctShipmentID(tempList);
             foreach (string order in shipmentList)

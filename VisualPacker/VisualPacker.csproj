@@ -82,7 +82,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\FromTempListToContList.cs" />
+    <Compile Include="ViewModels\CalculationFor2DScheme.cs" />
     <Compile Include="ViewModels\CalculationFor3DScheme.cs" />
+    <Compile Include="ViewModels\CalculationForLoadScheme.cs" />
     <Compile Include="Views\aboutWindow.xaml.cs">
       <DependentUpon>aboutWindow.xaml</DependentUpon>
     </Compile>
@@ -101,8 +103,8 @@
     <Compile Include="Views\PreferenceWindow.xaml.cs">
       <DependentUpon>PreferenceWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportWindow.xaml.cs">
-      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    <Compile Include="Views\LoadScheme.xaml.cs">
+      <DependentUpon>LoadScheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\RowBlock.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -140,7 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ReportWindow.xaml">
+    <Page Include="Views\LoadScheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

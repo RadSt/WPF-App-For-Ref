@@ -24,6 +24,7 @@ namespace VisualPacker.Views
         ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
         ObservableCollection<Vehicle> selectedVehicles = new ObservableCollection<Vehicle>();
         ObservableCollection<Container> containers = new ObservableCollection<Container>();
+        Calculation calculation=new Calculation();
         List<Container> wasteContainers = new List<Container>();
         [STAThread]
         public static void CreateResult(List<RowBlock> rowBlocks,Vehicle vehicle)
@@ -52,7 +53,6 @@ namespace VisualPacker.Views
                 }
               
             }
-            double volUsage=100*volume/(vehicle.Volume());
             String notIncludedString;
             if (notIncluded.Count==0)  notIncludedString="Все контейнеры вмещаются в машину.";
             else notIncludedString="Не поместились следующие контейнеры"+notIncluded;
@@ -114,7 +114,7 @@ namespace VisualPacker.Views
         }
         private void report_Click(object sender, RoutedEventArgs e)
         {
-            ReportWindow winReport = new ReportWindow(selectedVehicles);
+            LoadScheme winReport = new LoadScheme(selectedVehicles);
             
             winReport.Show(); 
         }
@@ -162,7 +162,7 @@ namespace VisualPacker.Views
             else if (selectedVehicles.Count == 0) MessageBox.Show("Не выбран автомобиль.");
             else
             {
-              List<Container> wasteContainersList = Calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
+                List<Container> wasteContainersList = calculation.CalculateLoadScheme(containers.Where(s => s.IsChecked).ToList(), selectedVehicles, textBox, MaxTonnage);
               UpdateCheckProperty(wasteContainersList);
             }
             dataGrid1.ItemsSource = null;

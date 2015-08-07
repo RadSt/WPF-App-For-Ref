@@ -20,15 +20,15 @@ namespace VisualPacker.Views
     /// Interaction logic for View3D.xaml
     /// </summary>
     public partial class View3D
-
     {
+       CalculationFor3DScheme calculationFor3DScheme=new CalculationFor3DScheme();
         public View3D(ObservableCollection<Vehicle> data)
         {
             InitializeComponent();
             DrawScene(MainViewport, data);
         }
 
-        public static void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
+        public void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
         {
             var tempPoint = new Point3D(0, 0, 0);
             const int widthBetweenVehicles = 1000;
@@ -43,7 +43,7 @@ namespace VisualPacker.Views
 
             foreach (Vehicle vehicle in selectedVehicles)
             {
-                vehicle.SetFirstPoint(tempPoint);
+                calculationFor3DScheme.SetFirstPoint(tempPoint, vehicle);
                 tempPoint.Z = tempPoint.Z - widthBetweenVehicles - vehicle.Width;
                 //v.SetFirstPointForVerticalBlock(tempPoint);
                 Drawing3D.DrawVehicle3D(mainViewport, vehicle);
@@ -52,6 +52,30 @@ namespace VisualPacker.Views
             }
             
         }
+        
+        public void print_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.PrintQueue = LocalPrintServer.GetDefaultPrintQueue();
+            printDialog.PrintTicket = printDialog.PrintQueue.DefaultPrintTicket;
+            printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(MainViewport
+                , "Печать");
+            }
+        }
+
+        //private void Save_Click(object sender, RoutedEventArgs e)
+        //{
+        //    saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
+        //}
+
+        private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
+        }
+
         private void saveToFile(Viewport3D v, int width, int height)
         {
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData") == false)
@@ -76,27 +100,8 @@ namespace VisualPacker.Views
 
             using (var stm = File.Create(destination)) { png.Save(stm); }
         }
-        public void print_Click(object sender, RoutedEventArgs e)
-        {
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.PrintQueue = LocalPrintServer.GetDefaultPrintQueue();
-            printDialog.PrintTicket = printDialog.PrintQueue.DefaultPrintTicket;
-            printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintVisual(MainViewport
-                , "Печать");
-            }
-        }
 
-        //private void Save_Click(object sender, RoutedEventArgs e)
-        //{
-        //    saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
-        //}
 
-        private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
-        {
-            saveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
-        }
+
     }
 }

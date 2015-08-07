@@ -11,7 +11,7 @@ namespace VisualPacker.Models
     public class Vehicle : ICloneable
     {
         private List<Container> wasteList = new List<Container>();
-        const int minHeighCont=800;
+        const int MinHeighCont=800;
         public Vehicle()
         {
             Length = 6000;
@@ -93,38 +93,12 @@ namespace VisualPacker.Models
             return vehicle;
         }
 
-        public bool NotEmpty()
+        private bool NotEmpty()
         {
             return Blocks.Any();
         }
 
-        public void SetFirstPoint(Point3D point)
-        {
-            //присваиваем начальные координаты для груза
-            FirstPoint = point;
-            Point3D tempPoint = point;
-            foreach (RowBlock r in Blocks)
-            {
-                r.SetFirstPointForVerticalBlock(tempPoint);
-                tempPoint.X = tempPoint.X + r.Width;
-            }
-        }
-
-        public int GetArea()
-        {
-            int area = Length*Width;
-            return area;
-        }
-
-        public double Volume()
-        {
-            double l = Length/1000;
-            double w = Width/1000;
-            double h = Height/1000;
-            return (l*w*h);
-        }
-
-        public List<int> DistinctOrders(List<Container> containers)
+        private List<int> DistinctOrders(List<Container> containers)
         {
             List<int> orderList = new List<int>();
             foreach (Container c in containers)
@@ -138,18 +112,6 @@ namespace VisualPacker.Models
             return orderList;
         }
 
-        public List<int> DistinctOrders(List<RowBlock> rowBlocks)
-        {
-            List<int> orderList = new List<int>();
-            foreach (RowBlock r in rowBlocks)
-            {
-                if (!orderList.Contains(r.Order))
-                {
-                    orderList.Add(r.Order);
-                }
-            }
-            return orderList;
-        }
 
         public List<int> DistinctOrdersInRow(List<RowBlock> rBlocks)
         {
@@ -305,7 +267,7 @@ namespace VisualPacker.Models
             {
                 MessageBox.Show("Расхождение количества контейнеров 3");
             }
-            //ReportWindow win = new ReportWindow(VBlocks);
+            //LoadScheme win = new LoadScheme(VBlocks);
             //win.ShowDialog();
             //формируем ряды
             List<RowBlock> rBlocks = new List<RowBlock>();
@@ -529,7 +491,7 @@ namespace VisualPacker.Models
         public List<Container> DownloadContainers(List<Container> containers, int maxTonnage)
         {
             MaxHeight = Height - 350;
-            while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > minHeighCont)
+            while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > MinHeighCont)
             {
                 MaxHeight = MaxHeight - 100;
             }
@@ -559,6 +521,7 @@ namespace VisualPacker.Models
 
         private List<Container> DownloadContainersToVehicle(List<Container> containers, int maxTonnage)
         {
+            Calculation calculation = new Calculation();
             ClearVehicle();
             MaxLength = Length;
             //делим тары на вертикальные блоки 
@@ -641,7 +604,7 @@ namespace VisualPacker.Models
                 /////////////////////////////////////
                 wasteList.AddRange(tempList);
             }
-            wasteList = Calculation.ListToContainerListIncludeVerticalPallet(wasteList);
+            wasteList = calculation.ListToContainerListIncludeVerticalPallet(wasteList);
             wasteList = AddOnTopRow(wasteList);
 
             LoadSmallContainersBySquare(tempSmall, orderList);

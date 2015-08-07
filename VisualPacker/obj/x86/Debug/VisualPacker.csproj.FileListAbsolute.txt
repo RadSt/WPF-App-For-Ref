@@ -164,7 +164,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\ContainerList
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\InputDialog.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\MainWindow.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\PreferenceWindow.baml
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\ReportWindow.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Resources\StringResources.ru-RU.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Resources\StringResources.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\view2d.baml
@@ -175,7 +174,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\ContainerList
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\InputDialog.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\MainWindow.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\PreferenceWindow.g.cs
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\ReportWindow.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\view2d.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\view3d.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\App.g.cs
@@ -184,3 +182,5 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.g.reso
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\LoadScheme.baml
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\LoadScheme.g.cs
