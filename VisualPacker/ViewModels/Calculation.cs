@@ -12,75 +12,10 @@ namespace VisualPacker.ViewModels
 {
     internal static class Calculation
     {
-        public static List<Container> ListToContainerList(List<Container> blocks)
-        {
-            var tempList = new List<Container>();
-            var fromTempListToContList = new FromTempListToContList();
-            foreach (Object Data in blocks)
-            {
-                if (Data is VerticalBlock)
-                {
-                    var v = (VerticalBlock)Data;
-                    v.ToContainerList(tempList);
-                }
-                else if (Data is RowBlock)
-                {
-                    var r = (RowBlock)Data;
-                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
-                }
-                else if (Data is HorizontalBlock)
-                {
-                    var c = (HorizontalBlock)Data;
-                    c.ToContainerList(tempList);
-                }
-                else if (Data is Container)
-                {
-                    var c = (Container)Data;
-                    c.ToContainerList(tempList);
-                }
-                else
-                {
-                    MessageBox.Show(
-                        "В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" +
-                        Data.GetType());
-                }
-            }
-            return tempList;
-        }
-
         public static List<Container> ListToContainerListIncludeVerticalPallet(List<Container> blocks)
         {
-            var fromTempListToContList = new FromTempListToContList();
-            var tempList = new List<Container>();
-            foreach (Object Data in blocks)
-            {
-                if (Data is VerticalBlock)
-                {
-                    var v = (VerticalBlock) Data;
-                    v.ToContainerListIncludeVerticalPallet(tempList);
-                }
-                else if (Data is RowBlock)
-                {
-                    var r = (RowBlock) Data;
-                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
-                }
-                else if (Data is HorizontalBlock)
-                {
-                    var c = (HorizontalBlock) Data;
-                    c.ToContainerList(tempList);
-                }
-                else if (Data is Container)
-                {
-                    var c = (Container) Data;
-                    c.ToContainerList(tempList);
-                }
-                else
-                {
-                    MessageBox.Show(
-                        "В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" +
-                        Data.GetType());
-                }
-            }
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
+            List<Container> tempList = fromTempListToContList.ToContainerList(blocks);
             return tempList;
         }
 

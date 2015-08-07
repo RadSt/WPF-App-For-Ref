@@ -400,7 +400,8 @@ namespace VisualPacker.Models
 
         public List<Container> CreateVerticalPalletsLevel2(List<Container> containers, int maxHeight)
         {
-            List<Container> t1 = Calculation.ListToContainerList(containers);
+            FromTempListToContList fromTempListToContList=new FromTempListToContList();
+            List<Container> t1 = fromTempListToContList.ToContainerList(containers);
             //используется для контроля потери контейнеров
             //контейнеры которые штабелируются в два яруса и ставятся только на пол
             List<Container> tempOnly4Bottom =
@@ -447,7 +448,7 @@ namespace VisualPacker.Models
                     tempList.Add(vBlock.Blocks[0]);
                 }
             }
-            List<Container> t2 = Calculation.ListToContainerList(tempList);
+            List<Container> t2 = fromTempListToContList.ToContainerList(tempList);
             //используется для контроля потери контейнеров
             if (t1.Count() > t2.Count())
             {
@@ -463,7 +464,8 @@ namespace VisualPacker.Models
         public List<Container> CreateVerticalPalletsLevel3(List<Container> containers, int length, int width, int height,
             int maxHeight, string prefix)
         {
-            List<Container> t1 = Calculation.ListToContainerList(containers);
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
+            List<Container> t1 = fromTempListToContList.ToContainerList(containers);
             //используется для контроля потери контейнеров
 
             List<Container> only4Bottom =
@@ -514,7 +516,7 @@ namespace VisualPacker.Models
             tempList.AddRange(vBlocks);
             tempList.AddRange(tempList2);
 
-            List<Container> t2 = Calculation.ListToContainerList(tempList);
+            List<Container> t2 = fromTempListToContList.ToContainerList(tempList);
             //используется для контроля потери контейнеров
             if (t1.Count() != t2.Count())
             {
