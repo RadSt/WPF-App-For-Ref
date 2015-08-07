@@ -9,47 +9,76 @@ namespace VisualPacker.Models
     {
         public void ToContainerList<T>(List<Container> tempList, List<T> blocks)
         {
-            GetValue(blocks, tempList);
+            foreach (Object data in blocks)
+            {
+                if (data is VerticalBlock)
+                {
+                    VerticalBlock verticalBlock = (VerticalBlock)data;
+                    if (verticalBlock.Kind == "VerticalPallet")
+                    {
+                        tempList.Add(verticalBlock);
+                    }
+                    else
+                    {
+                        verticalBlock.ToContainerList(tempList);
+                    }
+                }
+                else if (data is RowBlock)
+                {
+                    RowBlock rowBlock = (RowBlock)data;
+                    ToContainerList(tempList, rowBlock.Blocks);
+                }
+                else if (data is HorizontalBlock)
+                {
+                    HorizontalBlock horizontalBlock = (HorizontalBlock)data;
+                    horizontalBlock.ToContainerList(tempList);
+                }
+                else if (data is Container)
+                {
+                    Container container = (Container)data;
+                    container.ToContainerList(tempList);
+                }
+                else
+                {
+                    MessageBox.Show("В процедуру выгрузки контейнеров класса RowBlock передан неверный тип данных:" + data.GetType());
+                }
+            }
         }
 
         public List<Container> ToContainerList<T>(List<T> blocks)
         {
             var tempList = new List<Container>();
-            GetValue(blocks, tempList);
-            return tempList;
-        }
-
-        private void GetValue<T>(List<T> blocks, List<Container> tempList)
-        {
-            foreach (Object data in blocks)
+            var fromTempListToContList = new FromTempListToContList();
+            foreach (Object Data in blocks)
             {
-                if (data is VerticalBlock)
+                if (Data is VerticalBlock)
                 {
-                    var v = (VerticalBlock) data;
+                    var v = (VerticalBlock)Data;
                     v.ToContainerList(tempList);
                 }
-                else if (data is RowBlock)
+                else if (Data is RowBlock)
                 {
-                    var r = (RowBlock) data;
-                    ToContainerList(tempList, r.Blocks);
+                    var r = (RowBlock)Data;
+                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
                 }
-                else if (data is HorizontalBlock)
+                else if (Data is HorizontalBlock)
                 {
-                    var c = (HorizontalBlock) data;
+                    var c = (HorizontalBlock)Data;
                     c.ToContainerList(tempList);
                 }
-                else if (data is Container)
+                else if (Data is Container)
                 {
-                    var c = (Container) data;
+                    var c = (Container)Data;
                     c.ToContainerList(tempList);
                 }
                 else
                 {
                     MessageBox.Show(
                         "В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" +
-                        data.GetType());
+                        Data.GetType());
                 }
             }
+            return tempList;
         }
     }
 }

@@ -82,16 +82,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\FromTempListToContList.cs" />
-    <Compile Include="ViewModels\CalculationFor2DScheme.cs" />
-    <Compile Include="ViewModels\CalculationFor3DScheme.cs" />
-    <Compile Include="ViewModels\CalculationForLoadScheme.cs" />
+    <Compile Include="ViewModels\Calculation2D.cs" />
+    <Compile Include="ViewModels\Calculation3D.cs" />
+    <Compile Include="ViewModels\LoadScheme.cs" />
     <Compile Include="Views\aboutWindow.xaml.cs">
       <DependentUpon>aboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContainerList.xaml.cs">
       <DependentUpon>ContainerList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Drawing3D.cs" />
+    <Compile Include="ViewModels\Drawing.cs" />
     <Compile Include="Models\HorizontalBlock.cs" />
     <Compile Include="Views\InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>

@@ -28,6 +28,7 @@ namespace VisualPacker.Views
     /// </summary>
     public partial class View2D
     {
+        Calculation calculation=new Calculation();
         public ObservableCollection<Vehicle> Vehicles;
         public List<VerticalBlock> VBlocks;
         public List<RowBlock> RBlocks;
@@ -313,9 +314,9 @@ namespace VisualPacker.Views
         }
         public void AddDescription(FlowDocument doc, Vehicle vehicle)
         {
-            Calculation calculation=new Calculation();
+            FromTempListToContList fromTempListToContList = new FromTempListToContList();
             List<Container> tempList = vehicle.VehicleToContainerList();
-            tempList = calculation.ListToContainerListIncludeVerticalPallet(tempList);
+            tempList = fromTempListToContList.ToContainerList(tempList);
             //tempList.AddRange(v.smallBlocks);
             List<string> shipmentList = DistinctShipmentID(tempList);
             foreach (string order in shipmentList)

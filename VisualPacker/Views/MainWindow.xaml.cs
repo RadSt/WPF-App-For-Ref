@@ -24,7 +24,7 @@ namespace VisualPacker.Views
         ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
         ObservableCollection<Vehicle> selectedVehicles = new ObservableCollection<Vehicle>();
         ObservableCollection<Container> containers = new ObservableCollection<Container>();
-        Calculation calculation=new Calculation();
+        Calculation calculation =new Calculation();
         List<Container> wasteContainers = new List<Container>();
         [STAThread]
         public static void CreateResult(List<RowBlock> rowBlocks,Vehicle vehicle)
@@ -53,6 +53,7 @@ namespace VisualPacker.Views
                 }
               
             }
+            double volUsage=100*volume/(vehicle.Volume());
             String notIncludedString;
             if (notIncluded.Count==0)  notIncludedString="Все контейнеры вмещаются в машину.";
             else notIncludedString="Не поместились следующие контейнеры"+notIncluded;
@@ -126,9 +127,9 @@ namespace VisualPacker.Views
 
         private void Button_view3d_Click(object sender, RoutedEventArgs e)
         {
-            View3D winView3D = new View3D(selectedVehicles);
+            view3d winView3d = new view3d(selectedVehicles);
 
-            winView3D.Show();
+            winView3d.Show();
         }
 
         private void about_programm_Click(object sender, RoutedEventArgs e)

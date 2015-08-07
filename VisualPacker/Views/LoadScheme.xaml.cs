@@ -179,7 +179,7 @@ namespace VisualPacker.Views
                          Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 41);
                          canvas.Children.Add(t);
 
-                         t = new TextBlock();
+                       t = new TextBlock();
                          t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4Bottom + "; ";
                          t.FontSize = 10;
                          Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);

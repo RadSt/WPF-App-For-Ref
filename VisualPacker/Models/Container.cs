@@ -9,7 +9,18 @@ namespace VisualPacker.Models
         private int priority; //приоритет загрузки
 
         private String color; //Цвет предмета при отображении на схеме укладки (в HTML формате) 
-
+        public Container()
+        {
+            Count = 1;
+            DirLength = "a";
+            DirWidth = "a";
+            DirHeight = "a";
+            priority = 1;
+            Order = 0;
+            PressLength = 10000;
+            PressWidth = 10000;
+            PressHeight = 10000;
+        }
         //параметры контейнера
         public int Length { get; set; }  //длина
         public int Width { get; set; }  //ширина
@@ -101,18 +112,7 @@ namespace VisualPacker.Models
         public int Only4Bottom { get; set; }
         public Point3D FirstPoint { get; set; } //положение левого нижнего угла
 
-        public Container()
-        {
-            Count = 1;
-            DirLength = "a";
-            DirWidth = "a";
-            DirHeight = "a";
-            priority = 1;
-            Order = 0;
-            PressLength = 10000;
-            PressWidth = 10000;
-            PressHeight = 10000;
-        }
+
 
         public virtual int Priority { get { return priority; }  set { priority = value; } } 
 
@@ -164,11 +164,6 @@ namespace VisualPacker.Models
             get { return Length + "x" + Width + "x" + Height; }
         }
 
-        public bool AreSame(Container container)
-        {
-            if ((Length <= container.Length & Length >= 0.7 * container.Length) & (Width <= container.Width & Width >= 0.7 * container.Width)) return true;
-            return false;
-        }
 
         public bool AreSame01(Container container)
         {
@@ -198,12 +193,6 @@ namespace VisualPacker.Models
         public virtual void ToContainerList(List<Container> tempList)
         {
             tempList.Add(this);
-        }
-
-        public bool AreEqual(Container c)
-        {
-            if (Length == c.Length & Width == c.Width & Height == c.Height) return true;
-            return false;
         }
 
         public virtual void RotateH()

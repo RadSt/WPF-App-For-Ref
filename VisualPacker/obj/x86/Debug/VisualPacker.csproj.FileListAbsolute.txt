@@ -181,6 +181,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker_Markup
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.g.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.Properties.Resources.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csproj.GenerateResource.Cache
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\LoadScheme.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\Views\LoadScheme.g.cs
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Debug\VisualPacker.csprojResolveAssemblyReference.cache

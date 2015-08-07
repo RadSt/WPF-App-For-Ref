@@ -12,26 +12,50 @@ namespace VisualPacker.ViewModels
 {
     public class Calculation
     {
-        public List<Container> ListToContainerListIncludeVerticalPallet(List<Container> blocks)
+        FromTempListToContList fromTempListToContList=new FromTempListToContList();
+        public Point3D CalculateMassCenterRow(RowBlock rBlock)
         {
-            FromTempListToContList fromTempListToContList = new FromTempListToContList();
-            List<Container> tempList = fromTempListToContList.ToContainerList(blocks);
-            return tempList;
+            double nLength = 0;
+            double nWidth = 0;
+            double nHeight = 0;
+
+            var massCenterPoint = new Point3D(0, 0, 0);
+            if (rBlock.Mass == 0)
+            {
+                return massCenterPoint;
+            }
+            foreach (var v in rBlock.Blocks)
+            {
+                foreach (var c in v.Blocks)
+                {
+                    nLength = nLength + c.Mass*(c.FirstPoint.Y + c.Length/2);
+                    nWidth = nWidth + c.Mass*(c.FirstPoint.X + c.Width/2);
+                    nHeight = nHeight + c.Mass*(c.FirstPoint.Z + c.Height/2);
+                }
+            }
+            massCenterPoint.Y = nLength/rBlock.Mass;
+            massCenterPoint.X = nWidth/rBlock.Mass;
+            massCenterPoint.Z = nHeight/rBlock.Mass;
+            return massCenterPoint;
         }
 
         public List<Container> CalculateLoadScheme(List<Container> containers,
             ObservableCollection<Vehicle> selectedVehicles, TextBox textBox, int maxTonnage)
         {
             int tempMaxTonnage;
+            var widthBetweenVehicles = 1000;
+            var tempPoint = new Point3D(0, 0, 0);
             textBox.Clear();
             textBox.AppendText("Протокол расчета схемы загрузки:\n");
 
             var tempList = RotateContainers(containers);
 
-            foreach (Vehicle v in selectedVehicles)
+            foreach (var v in selectedVehicles)
             {
                 tempMaxTonnage = maxTonnage == 0 ? v.Tonnage : maxTonnage;
                 tempList = v.DownloadContainers(tempList, tempMaxTonnage);
+                v.SetFirstPoint(tempPoint);
+                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + v.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + v.Width;
                 PutCargoInfoInTextBox(v, textBox);
                 CheckOverweight(v, textBox, tempMaxTonnage);
             }
@@ -123,7 +147,7 @@ namespace VisualPacker.ViewModels
         {
             var contCount = XmlHelper.ContainersCount(tempList);
 
-            var newList = ListToContainerListIncludeVerticalPallet(tempList);
+            var newList = fromTempListToContList.ToContainerList(tempList);
             foreach (var v in selectedVehicles)
             {
                 contCount = contCount + v.Count;

@@ -1,13 +1,13 @@
-﻿<Window x:Class="VisualPacker.Views.View3D"
+﻿<Window x:Class="VisualPacker.Views.view3d"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Схема загрузки 3D" Height="800" Width="1200" Closing="WindowClosing">
-    <StackPanel Margin="0,0,0,1">
+        Title="Схема загрузки 3D" Height="410" Width="800" Closing="WindowClosing">
+    <StackPanel Margin="0,0,0,-3">
         <Menu>
-            <MenuItem Name="Print" Header="Печать" Click="print_Click" />
+            <MenuItem Name="Print" Header="Печать" Click="print_Click" /> 
         </Menu>
-        <Viewport3D Name="MainViewport" HorizontalAlignment="Left" MinHeight="350"  Width="1187" Height="739" Margin="5,5,0,5" ClipToBounds="false"></Viewport3D>
-
+        <Viewport3D Name="mainViewport" HorizontalAlignment="Left" MinHeight="350"  Width="778" Height="304" Margin="5"></Viewport3D>
+        
     </StackPanel>
-
+    
 </Window>

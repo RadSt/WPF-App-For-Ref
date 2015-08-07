@@ -11,6 +11,7 @@ namespace VisualPacker.Models
     public class Vehicle : ICloneable
     {
         private List<Container> wasteList = new List<Container>();
+        Calculation calculation=new Calculation();
         const int MinHeighCont=800;
         public Vehicle()
         {
@@ -98,7 +99,29 @@ namespace VisualPacker.Models
             return Blocks.Any();
         }
 
-        private List<int> DistinctOrders(List<Container> containers)
+        public void SetFirstPoint(Point3D point)
+        {
+            //присваиваем начальные координаты для груза
+            FirstPoint = point;
+            Point3D tempPoint = point;
+            foreach (RowBlock r in Blocks)
+            {
+                Point3D pointM = calculation.CalculateMassCenterRow(r);
+                //if () {r.Blocks.Reverse();}
+                r.SetFirstPointForVerticalBlock(tempPoint);
+                tempPoint.X = tempPoint.X + r.Width;
+            }
+        }
+
+        public double Volume()
+        {
+            double l = Length/1000;
+            double w = Width/1000;
+            double h = Height/1000;
+            return (l*w*h);
+        }
+
+        public List<int> DistinctOrders(List<Container> containers)
         {
             List<int> orderList = new List<int>();
             foreach (Container c in containers)
@@ -112,6 +135,18 @@ namespace VisualPacker.Models
             return orderList;
         }
 
+        public List<int> DistinctOrders(List<RowBlock> rowBlocks)
+        {
+            List<int> orderList = new List<int>();
+            foreach (RowBlock r in rowBlocks)
+            {
+                if (!orderList.Contains(r.Order))
+                {
+                    orderList.Add(r.Order);
+                }
+            }
+            return orderList;
+        }
 
         public List<int> DistinctOrdersInRow(List<RowBlock> rBlocks)
         {
@@ -491,12 +526,13 @@ namespace VisualPacker.Models
         public List<Container> DownloadContainers(List<Container> containers, int maxTonnage)
         {
             MaxHeight = Height - 350;
+            List<Container> tempList = new List<Container>();
             while (CannotDownloadAll(containers, maxTonnage) == false & MaxHeight > MinHeighCont)
             {
                 MaxHeight = MaxHeight - 100;
             }
             MaxHeight = Math.Min(Height - 350, MaxHeight + 100);
-            List<Container> tempList = DownloadContainersToVehicle(containers, maxTonnage);
+            tempList = DownloadContainersToVehicle(containers, maxTonnage);
             return tempList;
         }
 
@@ -521,10 +557,11 @@ namespace VisualPacker.Models
 
         private List<Container> DownloadContainersToVehicle(List<Container> containers, int maxTonnage)
         {
-            Calculation calculation = new Calculation();
             ClearVehicle();
             MaxLength = Length;
             //делим тары на вертикальные блоки 
+            List<VerticalBlock> vBlocks = new List<VerticalBlock>();
+            FromTempListToContList fromTempListToContList=new FromTempListToContList();
             //разные заказы обрабатываем отдельно т.к. их нужно будет выгружать из машины в разное время
 
             //Негабаритный товар отсекаем 
@@ -604,7 +641,7 @@ namespace VisualPacker.Models
                 /////////////////////////////////////
                 wasteList.AddRange(tempList);
             }
-            wasteList = calculation.ListToContainerListIncludeVerticalPallet(wasteList);
+            wasteList = fromTempListToContList.ToContainerList(wasteList);
             wasteList = AddOnTopRow(wasteList);
 
             LoadSmallContainersBySquare(tempSmall, orderList);
@@ -826,7 +863,7 @@ namespace VisualPacker.Models
             double nHeight = 0;
             foreach (RowBlock r in Blocks)
             {
-                Point3D pointRow = CalculateMassCenterRow(r);
+                Point3D pointRow = calculation.CalculateMassCenterRow(r);
                 nLength = nLength + r.Mass*pointRow.Y;
                 nWidth = nWidth + r.Mass*pointRow.X;
                 nHeight = nHeight + r.Mass*pointRow.Z;
@@ -835,32 +872,6 @@ namespace VisualPacker.Models
             point.X = nWidth/Mass;
             point.Z = nHeight/Mass;
             return point;
-        }
-
-        private  Point3D CalculateMassCenterRow(RowBlock rBlock)
-        {
-            double nLength = 0;
-            double nWidth = 0;
-            double nHeight = 0;
-
-            var massCenterPoint = new Point3D(0, 0, 0);
-            if (rBlock.Mass == 0)
-            {
-                return massCenterPoint;
-            }
-            foreach (var v in rBlock.Blocks)
-            {
-                foreach (var c in v.Blocks)
-                {
-                    nLength = nLength + c.Mass * (c.FirstPoint.Y + c.Length / 2);
-                    nWidth = nWidth + c.Mass * (c.FirstPoint.X + c.Width / 2);
-                    nHeight = nHeight + c.Mass * (c.FirstPoint.Z + c.Height / 2);
-                }
-            }
-            massCenterPoint.Y = nLength / rBlock.Mass;
-            massCenterPoint.X = nWidth / rBlock.Mass;
-            massCenterPoint.Z = nHeight / rBlock.Mass;
-            return massCenterPoint;
         }
 
         public List<Container> VehicleToContainerList()
