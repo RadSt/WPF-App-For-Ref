@@ -55,14 +55,25 @@ namespace VisualPacker.ViewModels
                 tempMaxTonnage = maxTonnage == 0 ? vehicle.Tonnage : maxTonnage;
                 tempList = vehicle.DownloadContainers(tempList, tempMaxTonnage);
                 SetFirstPoint(tempPoint,vehicle);
-                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + vehicle.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + v.Width;
+                tempPoint.Y = tempPoint.Y + widthBetweenVehicles + vehicle.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + vehicle.Width;
                 PutCargoInfoInTextBox(vehicle, textBox);
                 CheckOverweight(vehicle, textBox, tempMaxTonnage);
+                VehicleAxisMass vehicleAxisMass = new VehicleAxisMass(vehicle, vehicle.Mass);
+                PutVehAxisMassInfoInTextBox(vehicleAxisMass.AxisMassCalculate(), textBox);
             }
             PutWasteContainersInfoInTextBox(tempList, textBox);
             CheckErrors(tempList, textBox, selectedVehicles, containers);
 
             return tempList;
+        }
+
+        private void PutVehAxisMassInfoInTextBox(List<double> axisMassList,TextBox textBox)
+        {
+            foreach (var axisMass in axisMassList)
+            {
+                textBox.AppendText("Нагрузка на ось " + axisMassList.IndexOf(axisMass) + " " + axisMass + " :\n");
+            }
+
         }
 
         private void SetFirstPoint(Point3D point, Vehicle vehicle)
@@ -96,19 +107,19 @@ namespace VisualPacker.ViewModels
             textBox.AppendText("  вес груза - " + v.Mass + " :\n");
         }
 
-        private void CheckOverweight(Vehicle v, TextBox textBox, int MaxTonnage)
+        private void CheckOverweight(Vehicle vehicle, TextBox textBox, int MaxTonnage)
         {
-            var p = v.GetMassCenter();
-            var maxTonnage = MaxTonnage*(v.EmptyTonnage*v.Length + 2*p.X*v.Mass)/(v.Length*(v.EmptyTonnage + v.Mass));
-            if (v.Mass > maxTonnage & p.X < v.Length/2)
+            var p = vehicle.GetMassCenter();
+            var maxTonnage = MaxTonnage*(vehicle.EmptyTonnage*vehicle.Length + 2*p.X*vehicle.Mass)/(vehicle.Length*(vehicle.EmptyTonnage + vehicle.Mass));
+            if (vehicle.Mass > maxTonnage & p.X < vehicle.Length/2)
             {
                 textBox.AppendText("Превышение нагрузки на переднюю ось \n");
             }
-            if (v.Mass > maxTonnage & p.X > v.Length/2)
+            if (vehicle.Mass > maxTonnage & p.X > vehicle.Length/2)
             {
                 textBox.AppendText("Превышение нагрузки на заднюю ось \n");
             }
-            if (v.Mass > maxTonnage & p.X == v.Length/2)
+            if (vehicle.Mass > maxTonnage & p.X == vehicle.Length/2)
             {
                 textBox.AppendText("Превышение нагрузки на все оси \n");
             }

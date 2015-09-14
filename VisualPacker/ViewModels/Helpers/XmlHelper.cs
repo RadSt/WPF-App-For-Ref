@@ -238,6 +238,9 @@ namespace VisualPacker.ViewModels.Helpers
                         case "EmptyTrailerTonnage":
                             vehicle.EmptyTrailerTonnage = int.Parse(d.Value.Replace(".00000", ""));
                             break;
+                        case "TrailerAxisQuantity":
+                            vehicle.TrailerAxisQuantity = int.Parse(d.Value.Replace(".00000", ""));
+                            break;
                     }
                 }
                 vehicles.Add(vehicle);

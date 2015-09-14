@@ -6,9 +6,9 @@ namespace VisualPacker.ViewModels
     public class VehicleAxisMass
     {
         private Vehicle vehicle;
-        private int cargoTonnage;
+        private double cargoTonnage;
         private List<double> axisMassMeanList = new List<double>();
-        public VehicleAxisMass(Vehicle vehicle, int cargoTonnage)
+        public VehicleAxisMass(Vehicle vehicle, double cargoTonnage)
         {
             this.vehicle = vehicle;
             this.cargoTonnage = cargoTonnage;
@@ -25,8 +25,11 @@ namespace VisualPacker.ViewModels
         private void CargoAvtoMassCalculate()
         {
             double cargoAvtoMass = (((vehicle.EmptyTrailerTonnage + cargoTonnage) * 0.25) + vehicle.EmptyAvtoTonnage) / Vehicle.AvtoAxisQuantity;
-            axisMassMeanList[0] = CargoAvtoMassFirstAxisCalculate(cargoAvtoMass);
-            axisMassMeanList[1] = CargoAvtoMassSecondAxisCalculate(cargoAvtoMass, axisMassMeanList[0]);
+            double cargoAvtoMassFirstAxis = CargoAvtoMassFirstAxisCalculate(cargoAvtoMass);
+            double cargoAvtoMassSecondAxis = CargoAvtoMassSecondAxisCalculate(cargoAvtoMass, cargoAvtoMassFirstAxis);
+
+            axisMassMeanList.Add(cargoAvtoMassFirstAxis);
+            axisMassMeanList.Add(cargoAvtoMassSecondAxis);
         }
         private double CargoAvtoMassFirstAxisCalculate(double cargoAvtoMass)
         {
