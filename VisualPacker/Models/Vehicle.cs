@@ -76,6 +76,10 @@ namespace VisualPacker.Models
         public Point3D FirstPoint { get; set; } //положение левого нижнего угла
         public int EmptyAvtoTonnage { get; set; }
         public int EmptyTrailerTonnage { get; set; }
+        public int TrailerAxisQuantity { get; set; }
+
+        public const int AvtoAxisQuantity = 2;
+        
         public object Clone()
         {
             Vehicle vehicle = new Vehicle
