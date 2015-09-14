@@ -33,7 +33,7 @@ namespace VisualPacker.Views
         public List<VerticalBlock> VBlocks;
         public List<RowBlock> RBlocks;
         public List<Container> Containers;
-        public int Scale = 13;
+        public int Scale = 13; //масштаб
         public enum Direction { Up, Front };
 
         public View2D(Object data)
@@ -212,7 +212,7 @@ namespace VisualPacker.Views
             double length = vehicle.Length / Scale;
             double height = 0.3 * vehicle.Height / Scale;
             //создаем объект для рисования
-            BlockUIContainer b = new BlockUIContainer();
+            BlockUIContainer blockUiContainer = new BlockUIContainer();
             Canvas canvas = new Canvas();
             canvas.Width = length;
             canvas.Height = height;
@@ -224,22 +224,21 @@ namespace VisualPacker.Views
             //Рисуем  заднее колесо
             DrawVeel(canvas, height, length - height - 50);
             //DrawAxelTonnage(canvas, v.Back_axle_current_tonnage, length - height - 50);
-            b.Child = canvas;
-            doc.Blocks.Add(b);
+            blockUiContainer.Child = canvas;
+            doc.Blocks.Add(blockUiContainer);
         }
         public void DrawVeel(Canvas canvas, double diameter, double firstPointX)
         {
-            Ellipse r = new Ellipse();
-            r.Width = diameter;
-            r.Height = diameter;
-            Brush brush = new SolidColorBrush();
-            brush = Brushes.White;
-            r.Stroke = new SolidColorBrush(Colors.Black);
-            r.StrokeThickness = 2;
-            r.Fill = brush;
-            Canvas.SetLeft(r, firstPointX);
-            Canvas.SetTop(r, 0);
-            canvas.Children.Add(r);
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = diameter;
+            ellipse.Height = diameter;
+            Brush brush = Brushes.White;
+            ellipse.Stroke = new SolidColorBrush(Colors.Black);
+            ellipse.StrokeThickness = 2;
+            ellipse.Fill = brush;
+            Canvas.SetLeft(ellipse, firstPointX);
+            Canvas.SetTop(ellipse, 0);
+            canvas.Children.Add(ellipse);
         }
         public void DrawMassCenter(Vehicle vehicle, Canvas canvas, Direction dir)
         {
@@ -266,15 +265,6 @@ namespace VisualPacker.Views
             Canvas.SetLeft(ellipse, point3D.X / Scale - circleDiameter / 2);
             Canvas.SetTop(ellipse, height);
             canvas.Children.Add(ellipse);
-        }
-        public void DrawAxelTonnage(Canvas canvas, double tonnage, double firstPointX)
-        {
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = Math.Round(tonnage / 1000, 1) + " тонн";
-            textBlock.FontSize = 12;
-            Canvas.SetLeft(textBlock, firstPointX + 2);
-            Canvas.SetTop(textBlock, 20);
-            canvas.Children.Add(textBlock);
         }
 
         public void DrawViewFront(FlowDocument doc, Vehicle vehicle)
@@ -333,11 +323,7 @@ namespace VisualPacker.Views
             {
                 string Shipment = c.ShipmentId;
                 shipmentList.Contains(Shipment);
-                if (shipmentList.Contains(Shipment))
-                {
-                    //ничего не делаем
-                }
-                else
+                if (!shipmentList.Contains(Shipment))
                 {
                     shipmentList.Add(Shipment);
                 }
