@@ -1,223 +1,206 @@
 <?xml version="1.0" encoding="windows-1251"?>
-
 <!-- Файл содержит список ТС, предназначенных для укладки в них указанного набора ящиков. -->
-
-
 <dapl object="vehicle" version="1.3">
-	
-<vehicles val="1">
-<!-- Обязательным атрибутом тега vehicle должен быть kind, который опеределяет вид ТС: -->
-<!-- - container - контейнер -->
-<!-- - lorry - 2-х осный грузовик или прицеп -->
-<!-- - freight_car - вагон -->
-<!-- Разные виды ТС содержат разный набор параметров -->
-	  
-<!-- Пример описания вагона --><vehicle val="2" kind="freight_car">
-<!-- Название ТС - не более 1000 симовлов -->
-<name>Вагон 120</name>
-	 <!-- Длина -->
-<length>15720</length><!-- Ширина --><width>2770</width>
-<!-- Высота -->
-<height>2800</height>
-<!-- Грузоподъемность ТС (если не ограниченно, значение не указывается) -->
-<tonnage>68000</tonnage>
-<fullTonnage>92000</fullTonnage>
-<!-- Положение двери на боковой стенке вагона (вагон грузится от двери к краям). -->
-<door>
-<!-- Ширина двери. -->
-<width>2000</width>
-<!-- Высота двери. -->
- <height>2300</height>
-		<!-- Смещение двери относительно центра вагона. -->
- <center_distance>2000</center_distance>
- </door>
-<!-- Высота скругленного свода (крыши) вагона в центре. -->
- <roof>200</roof>
- </vehicle>
-
-<vehicle val="3" kind="freight_car">
-<name>Вагон 122</name>
- <length>13800</length>
- <width>2760</width>
-  <height>2790</height>
- <tonnage>68000</tonnage>
-<fullTonnage>92000</fullTonnage><door>
-<width>3802</width>
- <height>2343</height>
-	<center_distance>2000</center_distance>
-</door>
-<roof>200</roof>
- </vehicle>
-
-<vehicle val="4" kind="freight_car">
-<name>Вагон 138</name>
- <length>15720</length>
- <width>2770</width>
-<height>2790</height>
- <tonnage>67000</tonnage>
-<fullTonnage>94000</fullTonnage><door>
-<width>3809</width>
- <height>2343</height>
-	<center_distance>2000</center_distance>
-</door><roof>200</roof>
-</vehicle>
-
-<vehicle val="5" kind="freight_car">
-<name>Вагон 150</name>
- <length>17500</length>
- <width>2750</width>
-  <height>3100</height>
- <tonnage>68000</tonnage><fullTonnage>92000</fullTonnage><door>
-<width>3900</width>
- <height>2862</height>
-	<center_distance>2000</center_distance>
-      </door>
-	 <roof>200</roof>
-    </vehicle>
-
-<vehicle val="5" kind="freight_car">
-<name>Вагон 158</name>
- <length>17680</length>
- <width>2760</width>
-  <height>2790</height>
- <tonnage>66700</tonnage>
-<fullTonnage>93000</fullTonnage><door>
-<width>3973</width>
- <height>2717</height>
-	<center_distance>2000</center_distance>
-      </door>
-	 <roof>200</roof>
-    </vehicle>
-
-<vehicle val="6" kind="lorry">
-	<name>Еврофура</name>
-	
- <length>13600</length>
-  <width>2450</width>
-  <height>2450</height> <tonnage>20000</tonnage> 
-
-<fullTonnage>26700</fullTonnage></vehicle>
- 
-
-<vehicle val="7" kind="lorry">
-	<name>КАМАЗ 4308</name>
-	
-<length>5100</length>
- <width> 2320</width>
- <height>1975</height> 
-<tonnage>5730</tonnage>
-
-<fullTonnage>11750</fullTonnage></vehicle>
-
-	
-	
-<vehicle val="8" kind="lorry">
-	<name>КАМАЗ 5320</name>
-	<length>5200</length>
- <width> 2320</width>
-   <height>1975</height>
- <tonnage>8860</tonnage><fullTonnage>15080</fullTonnage>
-  </vehicle>
-	
-
-<vehicle val="9" kind="lorry">
-	<name>КАМАЗ 53212</name>
-	<length>6100</length>
- <width> 2320</width>
-   <height>1975</height>
- <tonnage>10000</tonnage>
-<fullTonnage>18000</fullTonnage></vehicle>
-	
-
-<vehicle val="10" kind="lorry">
-	<name>КАМАЗ 54115</name>
- <length>13600</length>
-  <width>2450</width>
-  <height>2450</height>
-<tonnage>20100</tonnage>
-<fullTonnage>27750</fullTonnage>	</vehicle>
- 
-
-<vehicle val="11" kind="lorry">
-<name>КАМАЗ 5460</name>
-	
- <length>13600</length>
-   <width>2450</width>
-  <height>2450</height>
-	<tonnage>20000</tonnage><fullTonnage>26700</fullTonnage>
-  </vehicle>
-
-
-<vehicle val="12" kind="lorry">
-<name>КАМАЗ 5490</name>
-	
- <length>13600</length>
-   <width>2450</width>
-  <height>2450</height>
-	<tonnage>20000</tonnage>
-<fullTonnage>26700</fullTonnage> </vehicle>
-
-
-<vehicle val="13" kind="lorry">
-	<name>КАМАЗ 65117</name>
-<length>7800</length>
- <width> 2420</width>
-<height>2400</height>
-<tonnage>14000</tonnage><fullTonnage>24000</fullTonnage>
-</vehicle>
-	
-
-
-<vehicle val="14" kind="lorry">
-	<name>ГАЗЕЛЬ</name>
- <length>3000</length>
-<width> 1900</width>
-<height>1500</height>
-<tonnage>1500</tonnage>
-<fullTonnage>3500</fullTonnage></vehicle>
- 
-
-<vehicle val="15" kind="lorry">
-	 <name>Валдай</name>
-	<length>3500</length>
- <width> 2176</width>
-  <height>1480</height>
- <tonnage>4000</tonnage>
-<fullTonnage>7400</fullTonnage> </vehicle>
-  
-
-<vehicle val="16" kind="lorry">
-	 <name>Прицеп КАМА 9423</name>
- <length>13610</length>
- <width> 2440</width>
- <height>2400</height>
- <tonnage>13500</tonnage><fullTonnage>18000</fullTonnage>
-</vehicle>
-
-	  
-<vehicle val="17" kind="lorry">
-	 <name>Прицеп СЗАП 93282</name><length>13460</length><width> 2480</width>
-<height>2400</height>
-	<tonnage>13500</tonnage><fullTonnage>18000</fullTonnage>
-	</vehicle>
-	  
-
-<vehicle val="18" kind="container"> <name>Контейнер 20 футовый</name>
-<length>5905</length>
- <width>2350</width>
- <height>2381</height>
- <tonnage>22000</tonnage>
- <fullTonnage>24000</fullTonnage></vehicle>
-
-
-<vehicle val="19" kind="container">
-<name>Контейнер 40 футовый</name>
- <length>12192</length>
-  <width>2438</width>
-   <height>2591</height>
- <tonnage>26600</tonnage>
-  <fullTonnage>3800</fullTonnage> </vehicle>
-	
-</vehicles>
+	<vehicles val="1">
+		<!-- Обязательным атрибутом тега vehicle должен быть kind, который опеределяет вид ТС: -->
+		<!-- - container - контейнер -->
+		<!-- - lorry - 2-х осный грузовик или прицеп -->
+		<!-- - freight_car - вагон -->
+		<!-- Разные виды ТС содержат разный набор параметров -->
+		<!-- Пример описания вагона -->
+		<vehicle val="2" kind="freight_car">
+			<!-- Название ТС - не более 1000 симовлов -->
+			<name>Вагон 120</name>
+			<!-- Длина -->
+			<length>15720</length>
+			<!-- Ширина -->
+			<width>2770</width>
+			<!-- Высота -->
+			<height>2800</height>
+			<!-- Грузоподъемность ТС (если не ограниченно, значение не указывается) -->
+			<tonnage>68000</tonnage>
+			<fullTonnage>92000</fullTonnage>
+			<!-- Положение двери на боковой стенке вагона (вагон грузится от двери к краям). -->
+			<door>
+				<!-- Ширина двери. -->
+				<width>2000</width>
+				<!-- Высота двери. -->
+				<height>2300</height>
+				<!-- Смещение двери относительно центра вагона. -->
+				<center_distance>2000</center_distance>
+			</door>
+			<!-- Высота скругленного свода (крыши) вагона в центре. -->
+			<roof>200</roof>
+		</vehicle>
+		<vehicle val="3" kind="freight_car">
+			<name>Вагон 122</name>
+			<length>13800</length>
+			<width>2760</width>
+			<height>2790</height>
+			<tonnage>68000</tonnage>
+			<fullTonnage>92000</fullTonnage>
+			<door>
+				<width>3802</width>
+				<height>2343</height>
+				<center_distance>2000</center_distance>
+			</door>
+			<roof>200</roof>
+		</vehicle>
+		<vehicle val="4" kind="freight_car">
+			<name>Вагон 138</name>
+			<length>15720</length>
+			<width>2770</width>
+			<height>2790</height>
+			<tonnage>67000</tonnage>
+			<fullTonnage>94000</fullTonnage>
+			<door>
+				<width>3809</width>
+				<height>2343</height>
+				<center_distance>2000</center_distance>
+			</door>
+			<roof>200</roof>
+		</vehicle>
+		<vehicle val="5" kind="freight_car">
+			<name>Вагон 150</name>
+			<length>17500</length>
+			<width>2750</width>
+			<height>3100</height>
+			<tonnage>68000</tonnage>
+			<fullTonnage>92000</fullTonnage>
+			<door>
+				<width>3900</width>
+				<height>2862</height>
+				<center_distance>2000</center_distance>
+			</door>
+			<roof>200</roof>
+		</vehicle>
+		<vehicle val="5" kind="freight_car">
+			<name>Вагон 158</name>
+			<length>17680</length>
+			<width>2760</width>
+			<height>2790</height>
+			<tonnage>66700</tonnage>
+			<fullTonnage>93000</fullTonnage>
+			<door>
+				<width>3973</width>
+				<height>2717</height>
+				<center_distance>2000</center_distance>
+			</door>
+			<roof>200</roof>
+		</vehicle>
+		<vehicle val="6" kind="lorry">
+			<name>Еврофура</name>
+			<length>13600</length>
+			<width>2450</width>
+			<height>2450</height>
+			<tonnage>20000</tonnage>
+			<fullTonnage>26700</fullTonnage>
+		</vehicle>
+		<vehicle val="7" kind="lorry">
+			<name>КАМАЗ 4308</name>
+			<length>5100</length>
+			<width> 2320</width>
+			<height>1975</height>
+			<tonnage>5730</tonnage>
+			<fullTonnage>11750</fullTonnage>
+		</vehicle>
+		<vehicle val="8" kind="lorry">
+			<name>КАМАЗ 5320</name>
+			<length>5200</length>
+			<width> 2320</width>
+			<height>1975</height>
+			<tonnage>8860</tonnage>
+			<fullTonnage>15080</fullTonnage>
+		</vehicle>
+		<vehicle val="9" kind="lorry">
+			<name>КАМАЗ 53212</name>
+			<length>6100</length>
+			<width> 2320</width>
+			<height>1975</height>
+			<tonnage>10000</tonnage>
+			<fullTonnage>18000</fullTonnage>
+		</vehicle>
+		<vehicle val="10" kind="lorry">
+			<name>КАМАЗ 54115</name>
+			<length>13600</length>
+			<width>2450</width>
+			<height>2450</height>
+			<tonnage>20100</tonnage>
+			<fullTonnage>27750</fullTonnage>
+		</vehicle>
+		<vehicle val="11" kind="lorry">
+			<name>КАМАЗ 5460</name>
+			<length>13600</length>
+			<width>2450</width>
+			<height>2450</height>
+			<tonnage>20000</tonnage>
+			<fullTonnage>26700</fullTonnage>
+		</vehicle>
+		<vehicle val="12" kind="lorry">
+			<name>КАМАЗ 5490</name>
+			<length>13600</length>
+			<width>2450</width>
+			<height>2450</height>
+			<tonnage>20000</tonnage>
+			<fullTonnage>26700</fullTonnage>
+			<emptyAvtoTonnage>7900</emptyAvtoTonnage>
+			<emptyTrailerTonnage>6250</emptyTrailerTonnage>
+		</vehicle>
+		<vehicle val="13" kind="lorry">
+			<name>КАМАЗ 65117</name>
+			<length>7800</length>
+			<width> 2420</width>
+			<height>2400</height>
+			<tonnage>14000</tonnage>
+			<fullTonnage>24000</fullTonnage>
+		</vehicle>
+		<vehicle val="14" kind="lorry">
+			<name>ГАЗЕЛЬ</name>
+			<length>3000</length>
+			<width> 1900</width>
+			<height>1500</height>
+			<tonnage>1500</tonnage>
+			<fullTonnage>3500</fullTonnage>
+		</vehicle>
+		<vehicle val="15" kind="lorry">
+			<name>Валдай</name>
+			<length>3500</length>
+			<width> 2176</width>
+			<height>1480</height>
+			<tonnage>4000</tonnage>
+			<fullTonnage>7400</fullTonnage>
+		</vehicle>
+		<vehicle val="16" kind="lorry">
+			<name>Прицеп КАМА 9423</name>
+			<length>13610</length>
+			<width> 2440</width>
+			<height>2400</height>
+			<tonnage>13500</tonnage>
+			<fullTonnage>18000</fullTonnage>
+		</vehicle>
+		<vehicle val="17" kind="lorry">
+			<name>Прицеп СЗАП 93282</name>
+			<length>13460</length>
+			<width> 2480</width>
+			<height>2400</height>
+			<tonnage>13500</tonnage>
+			<fullTonnage>18000</fullTonnage>
+		</vehicle>
+		<vehicle val="18" kind="container">
+			<name>Контейнер 20 футовый</name>
+			<length>5905</length>
+			<width>2350</width>
+			<height>2381</height>
+			<tonnage>22000</tonnage>
+			<fullTonnage>24000</fullTonnage>
+		</vehicle>
+		<vehicle val="19" kind="container">
+			<name>Контейнер 40 футовый</name>
+			<length>12192</length>
+			<width>2438</width>
+			<height>2591</height>
+			<tonnage>26600</tonnage>
+			<fullTonnage>3800</fullTonnage>
+		</vehicle>
+	</vehicles>
 </dapl>
- 	  

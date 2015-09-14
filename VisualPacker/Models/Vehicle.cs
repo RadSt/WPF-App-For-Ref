@@ -74,7 +74,8 @@ namespace VisualPacker.Models
         public int DoorCenterDistance { get; set; } // Смещение двери относительно центра вагона. -->
         public int Roof { get; set; } // Высота скругленного свода (крыши) вагона в центре. -->
         public Point3D FirstPoint { get; set; } //положение левого нижнего угла
-
+        public int EmptyAvtoTonnage { get; set; }
+        public int EmptyTrailerTonnage { get; set; }
         public object Clone()
         {
             Vehicle vehicle = new Vehicle

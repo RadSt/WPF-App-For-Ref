@@ -220,28 +220,6 @@ namespace VisualPacker.ViewModels.Helpers
                         case "fullTonnage":
                             vehicle.FullTonnage = int.Parse(d.Value.Replace(".00000", ""));
                             break;
-                        
-                        /*case "axle_front":
-                            IEnumerable<XElement> af = d.Elements();
-                            foreach (XElement p in af)
-                            {
-                                if (p.Name.ToString() == "front_distance") vehicle.Front_axle_distance = int.Parse(p.Value.Replace(".00000", ","));
-
-                                if (p.Name.ToString() == "max_tonnage") vehicle.Front_axle_max_tonnage = int.Parse(p.Value.Replace(".00000", ","));
-                                if (p.Name.ToString() == "empty_tonnage") vehicle.Front_axle_empty_tonnage = int.Parse(p.Value.Replace(".00000", ","));
-
-                            }
-                            break;
-                        case "axle_back":
-                            IEnumerable<XElement> ab = d.Elements();
-                            foreach (XElement p in ab)
-                            {
-                                if (p.Name.ToString() == "back_distance") vehicle.Front_axle_distance = int.Parse(p.Value.Replace(".00000", ","));
-
-                                if (p.Name.ToString() == "max_tonnage") vehicle.Front_axle_max_tonnage = int.Parse(p.Value.Replace(".00000", ","));
-                                if (p.Name.ToString() == "empty_tonnage") vehicle.Front_axle_empty_tonnage = int.Parse(p.Value.Replace(".00000", ","));
-                            }
-                            break;*/
                         case "door":
                             IEnumerable<XElement> door = d.Elements();
                             foreach (XElement p in door)
@@ -253,6 +231,12 @@ namespace VisualPacker.ViewModels.Helpers
                             break;
                         case "roof":
                             vehicle.Roof = int.Parse(d.Value.Replace(".00000", ""));
+                            break;
+                        case "EmptyAvtoTonnage":
+                            vehicle.EmptyAvtoTonnage = int.Parse(d.Value.Replace(".00000", ""));
+                            break;
+                        case "EmptyTrailerTonnage":
+                            vehicle.EmptyTrailerTonnage = int.Parse(d.Value.Replace(".00000", ""));
                             break;
                     }
                 }
