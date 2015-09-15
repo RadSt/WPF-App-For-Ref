@@ -11,18 +11,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using VisualPacker.Models;
-using Drawing = VisualPacker.ViewModels.Drawing;
+using VisualPacker.ViewModels;
 using Path = System.IO.Path;
 
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for view3d.xaml
+    /// Interaction logic for View3D.xaml
     /// </summary>
-    public partial class view3d : Window
+    public partial class View3D
 
     {
-        public view3d(ObservableCollection<Vehicle> Data)
+        public View3D(ObservableCollection<Vehicle> Data)
         {
             InitializeComponent();
             DrawScene(mainViewport, Data);
@@ -32,8 +32,7 @@ namespace VisualPacker.Views
 
         public static void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
         {
-            Point3D tempPoint = new Point3D(0, 0, 0);
-           
+            Calculation3D calculation3D=new Calculation3D();
             PerspectiveCamera cam = new PerspectiveCamera(new Point3D(9000, 5000, 24000),
             new Vector3D(-1, -2, -10), new Vector3D(0, -1, 0), 50000);
             mainViewport.Camera = cam;
@@ -46,7 +45,7 @@ namespace VisualPacker.Views
             foreach (Vehicle v in selectedVehicles)
             {
                 //v.SetFirstPointForVerticalBlock(tempPoint);
-                Drawing.DrawVehicle3D(mainViewport, v);
+                calculation3D.DrawVehicle3D(mainViewport, v);
                 //tempPoint.Y = tempPoint.Y + 1000 + v.Width;
 
             }

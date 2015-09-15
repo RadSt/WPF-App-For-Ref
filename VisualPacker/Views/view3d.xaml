@@ -1,4 +1,4 @@
-﻿<Window x:Class="VisualPacker.Views.view3d"
+﻿<Window x:Class="VisualPacker.Views.View3D"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Схема загрузки 3D" Height="410" Width="800" Closing="WindowClosing">

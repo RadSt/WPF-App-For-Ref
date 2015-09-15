@@ -92,7 +92,6 @@
     <Compile Include="Views\ContainerList.xaml.cs">
       <DependentUpon>ContainerList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Drawing.cs" />
     <Compile Include="Models\HorizontalBlock.cs" />
     <Compile Include="Views\InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>

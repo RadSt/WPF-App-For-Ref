@@ -69,9 +69,9 @@ namespace VisualPacker.ViewModels
 
         private void PutVehAxisMassInfoInTextBox(List<double> axisMassList,TextBox textBox)
         {
-            foreach (var axisMass in axisMassList)
+            for (int i=0; i<axisMassList.Count;i++)
             {
-                textBox.AppendText("Нагрузка на ось " + axisMassList.IndexOf(axisMass) + " " + axisMass + " :\n");
+                textBox.AppendText(String.Format("Нагрузка на ось{0} - {1:0.000} \n", (i + 1), axisMassList[i]));
             }
 
         }

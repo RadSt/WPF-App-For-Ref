@@ -94,7 +94,7 @@ namespace VisualPacker.Views
 
         private void Button_view3d_Click(object sender, RoutedEventArgs e)
         {
-            view3d winView3d = new view3d(selectedVehicles);
+            View3D winView3d = new View3D(selectedVehicles);
 
             winView3d.Show();
         }
