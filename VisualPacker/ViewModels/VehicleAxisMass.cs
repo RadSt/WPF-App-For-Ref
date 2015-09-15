@@ -16,7 +16,7 @@ namespace VisualPacker.ViewModels
         public List<double> AxisMassCalculate()
         {
             CargoAvtoMassCalculate();
-            for (int a = Vehicle.AvtoAxisQuantity; a < vehicle.TrailerAxisQuantity; a++)
+            for (int a = Vehicle.AvtoAxisQuantity; a < Vehicle.AvtoAxisQuantity+vehicle.TrailerAxisQuantity; a++)
             {
                 axisMassMeanList.Add(CargoTrailerAxiisMassCalculate());
             }
@@ -24,18 +24,18 @@ namespace VisualPacker.ViewModels
         }
         private void CargoAvtoMassCalculate()
         {
-            double cargoAvtoMass = (((vehicle.EmptyTrailerTonnage + cargoTonnage) * 0.25) + vehicle.EmptyAvtoTonnage) / Vehicle.AvtoAxisQuantity;
-            double cargoAvtoMassFirstAxis = CargoAvtoMassFirstAxisCalculate(cargoAvtoMass);
-            double cargoAvtoMassSecondAxis = CargoAvtoMassSecondAxisCalculate(cargoAvtoMass, cargoAvtoMassFirstAxis);
+            double cargoAvtoMass = (((vehicle.EmptyTrailerTonnage + cargoTonnage)*0.25) + vehicle.EmptyAvtoTonnage);
+            double cargoAvtoMassSecondAxis = CargoAvtoMassSecondAxisCalculate(cargoAvtoMass);
+            double cargoAvtoMassFirstAxis = CargoAvtoMassFirstAxisCalculate(cargoAvtoMass, cargoAvtoMassSecondAxis);
 
             axisMassMeanList.Add(cargoAvtoMassFirstAxis);
             axisMassMeanList.Add(cargoAvtoMassSecondAxis);
         }
-        private double CargoAvtoMassFirstAxisCalculate(double cargoAvtoMass)
+        private double CargoAvtoMassSecondAxisCalculate(double cargoAvtoMass)
         {
             return (cargoAvtoMass * 0.75) / Vehicle.AvtoAxisQuantity;
         }
-        private double CargoAvtoMassSecondAxisCalculate(double cargoAvtoMass, double cargoAvtoMassFirstAxis)
+        private double CargoAvtoMassFirstAxisCalculate(double cargoAvtoMass, double cargoAvtoMassFirstAxis)
         {
             return cargoAvtoMass-(cargoAvtoMassFirstAxis*2);
         }

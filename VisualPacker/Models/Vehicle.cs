@@ -94,7 +94,11 @@ namespace VisualPacker.Models
                 DoorWidth = DoorWidth,
                 DoorHeight = DoorHeight,
                 DoorCenterDistance = DoorCenterDistance,
-                Roof = Roof
+                Roof = Roof,
+                EmptyAvtoTonnage=EmptyAvtoTonnage,
+                EmptyTrailerTonnage = EmptyTrailerTonnage,
+                TrailerAxisQuantity = TrailerAxisQuantity
+
             };
             return vehicle;
         }

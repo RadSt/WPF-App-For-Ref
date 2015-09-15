@@ -143,8 +143,9 @@
 			<height>2450</height>
 			<tonnage>20000</tonnage>
 			<fullTonnage>26700</fullTonnage>
-			<emptyAvtoTonnage>7900</emptyAvtoTonnage>
-			<emptyTrailerTonnage>6250</emptyTrailerTonnage>
+			<EmptyAvtoTonnage>7900</EmptyAvtoTonnage>
+		     <EmptyTrailerTonnage>6250</EmptyTrailerTonnage>
+			<TrailerAxisQuantity>3</TrailerAxisQuantity>
 		</vehicle>
 		<vehicle val="13" kind="lorry">
 			<name> ¿Ã¿« 65117</name>
