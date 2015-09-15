@@ -6,7 +6,7 @@
         <Menu>
             <MenuItem Name="Print" Header="Печать" Click="print_Click" /> 
         </Menu>
-        <Viewport3D Name="mainViewport" HorizontalAlignment="Left" MinHeight="350"  Width="778" Height="304" Margin="5"></Viewport3D>
+        <Viewport3D Name="MainViewport" HorizontalAlignment="Left" MinHeight="350"  Width="778" Height="304" Margin="5"></Viewport3D>
         
     </StackPanel>
     

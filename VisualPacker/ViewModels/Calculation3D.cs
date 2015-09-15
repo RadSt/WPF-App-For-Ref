@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using VisualPacker.Models;
@@ -8,51 +9,31 @@ namespace VisualPacker.ViewModels
 {
     public class Calculation3D
     {
-        public void DrawVehicle3D(Viewport3D mainViewport, Vehicle v)
+        public void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
         {
+            PerspectiveCamera cam = new PerspectiveCamera(new Point3D(9000, 5000, 24000),
+            new Vector3D(-1, -2, -10), new Vector3D(0, -1, 0), 50000);
+            mainViewport.Camera = cam;
 
-            ScreenSpaceLines3D wireVehicle = new ScreenSpaceLines3D();
-            Color color = Colors.Red;
-            int width = 1;
+            // Create another ModelVisual3D for light.
+            ModelVisual3D modvis = new ModelVisual3D();
+            modvis.Content = new AmbientLight(Colors.White);
+            mainViewport.Children.Add(modvis);
 
-            Point3D p0 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y);
-            Point3D p1 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z, v.FirstPoint.Y);
-            Point3D p2 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z, v.FirstPoint.Y + v.Width);
-            Point3D p3 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y + v.Width);
-            Point3D p4 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z + v.Height, v.FirstPoint.Y);
-            Point3D p5 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z + v.Height, v.FirstPoint.Y);
-            Point3D p6 = new Point3D(v.FirstPoint.X + v.Length, v.FirstPoint.Z + v.Height, v.FirstPoint.Y + v.Width);
-            Point3D p7 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z + v.Height, v.FirstPoint.Y + v.Width);
+            foreach (Vehicle v in selectedVehicles)
+            {
+                DrawVehicle3D(mainViewport, v);
 
-            wireVehicle.Thickness = width;
-            wireVehicle.Color = color;
-            wireVehicle.Points.Add(p0);
-            wireVehicle.Points.Add(p1);
-            wireVehicle.Points.Add(p1);
-            wireVehicle.Points.Add(p2);
-            wireVehicle.Points.Add(p2);
-            wireVehicle.Points.Add(p3);
-            wireVehicle.Points.Add(p3);
-            wireVehicle.Points.Add(p0);
-            wireVehicle.Points.Add(p4);
-            wireVehicle.Points.Add(p5);
-            wireVehicle.Points.Add(p5);
-            wireVehicle.Points.Add(p6);
-            wireVehicle.Points.Add(p6);
-            wireVehicle.Points.Add(p7);
-            wireVehicle.Points.Add(p7);
-            wireVehicle.Points.Add(p4);
-            wireVehicle.Points.Add(p0);
-            wireVehicle.Points.Add(p4);
-            wireVehicle.Points.Add(p1);
-            wireVehicle.Points.Add(p5);
-            wireVehicle.Points.Add(p2);
-            wireVehicle.Points.Add(p6);
-            wireVehicle.Points.Add(p3);
-            wireVehicle.Points.Add(p7);
-            mainViewport.Children.Add(wireVehicle);
+            }
 
-            foreach (RowBlock rBlock in v.Blocks)
+        }
+
+        private void DrawVehicle3D(Viewport3D mainViewport, Vehicle vehicle)
+        {
+            var pointsArray = GetValue(vehicle);
+            mainViewport.Children.Add(AddVehiclePoints(mainViewport, pointsArray));
+
+            foreach (RowBlock rBlock in vehicle.Blocks)
             {
                 //MessageBox.Show("Печатаем rowBlocks");
                 foreach (VerticalBlock vBlock in rBlock.Blocks)
@@ -61,12 +42,8 @@ namespace VisualPacker.ViewModels
                     foreach (Container c in vBlock.Blocks)
                     {
                         // MessageBox.Show("Печатаем Container");
-                        // MessageBox.Show(c.FirstPoint.ToString()+" "+c.Length+" "+c.Width+" "+c.Height);
-
-
                         GeometryModel3D geomod = new GeometryModel3D();
-
-                        Brush brush = new SolidColorBrush();
+                        Brush brush;
                         if (c.Color == "" | c.Kind == "VerticalPallet")
                         {
 
@@ -75,29 +52,74 @@ namespace VisualPacker.ViewModels
                         else
                         {
                             brush = new BrushConverter().ConvertFromString(c.Color) as SolidColorBrush;
-                            //brush = new BrushConverter().ConvertFromString(c.Color) as SolidColorBrush;
                         }
                         geomod.Material = new DiffuseMaterial(brush);
                         DrawCube(c, geomod);
                         // Create ModelVisual3D for GeometryModel3D.
-                        ModelVisual3D modvis = new ModelVisual3D();
-                        modvis.Content = geomod;
+                        ModelVisual3D modvis = new ModelVisual3D {Content = geomod};
                         mainViewport.Children.Add(modvis);
                         ScreenSpaceLines3D wireCube = DrawWireCube(c);
                         mainViewport.Children.Add(wireCube);
-                        //break;
-
                     }
-                    //break;
                 }
-                //break;
             }
         }
+
+        private ScreenSpaceLines3D AddVehiclePoints(Viewport3D mainViewport, Point3D[] pointsArray)
+        {
+            ScreenSpaceLines3D wireVehicle=new ScreenSpaceLines3D();
+            Color color = Colors.Red;
+            const int width = 1;
+
+            wireVehicle.Thickness = width;
+            wireVehicle.Color = color;
+            wireVehicle.Points.Add(pointsArray[0]);
+            wireVehicle.Points.Add(pointsArray[1]);
+            wireVehicle.Points.Add(pointsArray[1]);
+            wireVehicle.Points.Add(pointsArray[2]);
+            wireVehicle.Points.Add(pointsArray[2]);
+            wireVehicle.Points.Add(pointsArray[3]);
+            wireVehicle.Points.Add(pointsArray[3]);
+            wireVehicle.Points.Add(pointsArray[0]);
+            wireVehicle.Points.Add(pointsArray[4]);
+            wireVehicle.Points.Add(pointsArray[5]);
+            wireVehicle.Points.Add(pointsArray[5]);
+            wireVehicle.Points.Add(pointsArray[6]);
+            wireVehicle.Points.Add(pointsArray[6]);
+            wireVehicle.Points.Add(pointsArray[7]);
+            wireVehicle.Points.Add(pointsArray[7]);
+            wireVehicle.Points.Add(pointsArray[4]);
+            wireVehicle.Points.Add(pointsArray[0]);
+            wireVehicle.Points.Add(pointsArray[4]);
+            wireVehicle.Points.Add(pointsArray[1]);
+            wireVehicle.Points.Add(pointsArray[5]);
+            wireVehicle.Points.Add(pointsArray[2]);
+            wireVehicle.Points.Add(pointsArray[6]);
+            wireVehicle.Points.Add(pointsArray[3]);
+            wireVehicle.Points.Add(pointsArray[7]);
+            return wireVehicle;
+        }
+
+        private Point3D[] GetValue(Vehicle vehicle)
+        {
+            Point3D[] pointsArray = new Point3D[8];
+
+            pointsArray[0] = new Point3D(vehicle.FirstPoint.X, vehicle.FirstPoint.Z, vehicle.FirstPoint.Y);
+            pointsArray[1] = new Point3D(vehicle.FirstPoint.X + vehicle.Length, vehicle.FirstPoint.Z, vehicle.FirstPoint.Y);
+            pointsArray[2] = new Point3D(vehicle.FirstPoint.X + vehicle.Length, vehicle.FirstPoint.Z, vehicle.FirstPoint.Y + vehicle.Width);
+            pointsArray[3] = new Point3D(vehicle.FirstPoint.X, vehicle.FirstPoint.Z, vehicle.FirstPoint.Y + vehicle.Width);
+            pointsArray[4] = new Point3D(vehicle.FirstPoint.X, vehicle.FirstPoint.Z + vehicle.Height, vehicle.FirstPoint.Y);
+            pointsArray[5] = new Point3D(vehicle.FirstPoint.X + vehicle.Length, vehicle.FirstPoint.Z + vehicle.Height, vehicle.FirstPoint.Y);
+            pointsArray[6] = new Point3D(vehicle.FirstPoint.X + vehicle.Length, vehicle.FirstPoint.Z + vehicle.Height, vehicle.FirstPoint.Y + vehicle.Width);
+            pointsArray[7] = new Point3D(vehicle.FirstPoint.X, vehicle.FirstPoint.Z + vehicle.Height, vehicle.FirstPoint.Y + vehicle.Width);
+            return pointsArray;
+        }
+
         private ScreenSpaceLines3D DrawWireCube(Container v)
         {
             ScreenSpaceLines3D wireCube = new ScreenSpaceLines3D();
             Color c = Colors.Black;
-            int width = 2;
+            const int width = 2;
             Point3D p0 = new Point3D(v.FirstPoint.X, v.FirstPoint.Z, v.FirstPoint.Y);
             Point3D p1 = new Point3D(v.FirstPoint.X + v.Width, v.FirstPoint.Z, v.FirstPoint.Y);
             Point3D p2 = new Point3D(v.FirstPoint.X + v.Width, v.FirstPoint.Z, v.FirstPoint.Y + v.Length);

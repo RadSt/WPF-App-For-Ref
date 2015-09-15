@@ -20,82 +20,52 @@ namespace VisualPacker.Views
     /// Interaction logic for View3D.xaml
     /// </summary>
     public partial class View3D
-
     {
-        public View3D(ObservableCollection<Vehicle> Data)
+        readonly Calculation3D calculation3D=new Calculation3D();
+        private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            SaveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
+        }
+        private void print_Click(object sender, RoutedEventArgs e)
+        {
+            Print3DView();
+        }
+        public View3D(ObservableCollection<Vehicle> data)
         {
             InitializeComponent();
-            DrawScene(mainViewport, Data);
-            
-
+            calculation3D.DrawScene(MainViewport, data);
         }
-
-        public static void DrawScene(Viewport3D mainViewport, ObservableCollection<Vehicle> selectedVehicles)
+        private void Print3DView()
         {
-            Calculation3D calculation3D=new Calculation3D();
-            PerspectiveCamera cam = new PerspectiveCamera(new Point3D(9000, 5000, 24000),
-            new Vector3D(-1, -2, -10), new Vector3D(0, -1, 0), 50000);
-            mainViewport.Camera = cam;
-
-            // Create another ModelVisual3D for light.
-            ModelVisual3D modvis = new ModelVisual3D();
-            modvis.Content = new AmbientLight(Colors.White);
-            mainViewport.Children.Add(modvis);
-
-            foreach (Vehicle v in selectedVehicles)
+            PrintDialog printDialog = new PrintDialog { PrintQueue = LocalPrintServer.GetDefaultPrintQueue() };
+            printDialog.PrintTicket = printDialog.PrintQueue.DefaultPrintTicket;
+            printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
+            if (printDialog.ShowDialog() == true)
             {
-                //v.SetFirstPointForVerticalBlock(tempPoint);
-                calculation3D.DrawVehicle3D(mainViewport, v);
-                //tempPoint.Y = tempPoint.Y + 1000 + v.Width;
-
+                printDialog.PrintVisual(MainViewport
+                    , "Печать");
             }
-            
         }
-        public  static void saveToFile(Viewport3D v, int width, int height)
+        private void SaveToFile(Viewport3D v, int width, int height)
         {
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData") == false)
             { Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData"); }
 
-            string destination=Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData\\" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + " "+
-                DateTime.Now.Hour+"-" + DateTime.Now.Minute+ "-" +DateTime.Now.Second+" "+Environment.UserName+" 3dView.png";
+            string destination = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData\\" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + " " +
+                DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + " " + Environment.UserName + " 3dView.png";
 
-            Rectangle vRect = new Rectangle();
-            vRect.Width = width;
-            vRect.Height = height;
-            vRect.Fill = Brushes.White;
+            Rectangle vRect = new Rectangle { Width = width, Height = height, Fill = Brushes.White };
             vRect.Arrange(new Rect(0, 0, vRect.Width, vRect.Height));
 
             var bmp = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32);
-            
+
             bmp.Render(vRect);
             bmp.Render(v);
 
             var png = new PngBitmapEncoder();
             png.Frames.Add(BitmapFrame.Create(bmp));
-            
-            using (var stm = File.Create(destination)) {png.Save(stm);}
-        }
-        public void print_Click(object sender, RoutedEventArgs e)
-        {
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.PrintQueue = LocalPrintServer.GetDefaultPrintQueue();
-            printDialog.PrintTicket = printDialog.PrintQueue.DefaultPrintTicket;
-            printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintVisual(mainViewport
-                , "Печать");
-            }
-        }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
-        }
-
-        private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
-        {
-            saveToFile(mainViewport, (int)mainViewport.Width, (int)mainViewport.Height);
+            using (var stm = File.Create(destination)) { png.Save(stm); }
         }
     }
 }
