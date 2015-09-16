@@ -32,9 +32,9 @@ namespace VisualPacker.Properties {
         [ApplicationScopedSetting()]
         [DebuggerNonUserCode()]
         [DefaultSettingValue("True")]
-        public bool PreferenceWindow_weightRestrictionCheckBoxEnabled {
+        public bool PreferenceWindowWeightRestrictionCheckBoxEnabled {
             get {
-                return ((bool)(this["PreferenceWindow_weightRestrictionCheckBoxEnabled"]));
+                return ((bool)(this["PreferenceWindowWeightRestrictionCheckBoxEnabled"]));
             }
         }
         

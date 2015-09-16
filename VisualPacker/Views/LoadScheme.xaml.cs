@@ -14,254 +14,254 @@ using VisualPacker.ViewModels;
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for LoadSchemeCalculation.xaml
+    ///     Interaction logic for LoadSchemeCalculation.xaml
     /// </summary>
-    /// 
-    
     public partial class LoadScheme
     {
-        LoadSchemeCalculation loadSchemeCalculation = new LoadSchemeCalculation();
-        public ObservableCollection<Vehicle> vehicles;
-        public List<VerticalBlock> vBlocks;
-        public List<RowBlock> rBlocks;
+        private readonly LoadSchemeCalculation loadSchemeCalculation = new LoadSchemeCalculation();
         public List<Container> containers;
+        public List<RowBlock> rBlocks;
         public int scale = 6;
-        //public LoadSchemeCalculation(ObservableCollection<Vehicle> Data)
-        public LoadScheme(Object Data)
+        public List<VerticalBlock> vBlocks;
+        public ObservableCollection<Vehicle> vehicles;
+        public LoadScheme(Object data)
         {
             InitializeComponent();
-           
-                if (Data is ObservableCollection<Vehicle>)
-                {   vehicles =(ObservableCollection<Vehicle>) Data;
-                ShowVehicles();}
-                else if (Data is List<VerticalBlock>)
-                { vBlocks=(List<VerticalBlock>)Data;
-                ShowVerticalBlocks();}
-                    else if (Data is List<RowBlock>)
-                { rBlocks=(List<RowBlock>)Data;
-                ShowRowBlocks();
-                }
-                else if (Data is List<Container>)
-                {
-                    containers = (List<Container>)Data;
-                    ShowContainers();
-                }
-                else { MessageBox.Show("В форму отчета передан неверный тип данных:" + Data.GetType()); }
-                //System.Collections.ObjectModel.ObservableCollection<Vehicle>
-           // MessageBox.Show(Data.GetType().ToString() );
 
-                
-        }
-        public void print_Click(object sender, RoutedEventArgs e)
-        {
-            PrintDialog printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
+            if (data is ObservableCollection<Vehicle>)
             {
-                FlowDocument doc = flowDocViewer.Document;
-                doc.PagePadding = new Thickness(20, 40, 20, 40);
-                doc.PageHeight = printDialog.PrintableAreaHeight;
-                doc.PageWidth = printDialog.PrintableAreaWidth-40;
-                doc.ColumnWidth = printDialog.PrintableAreaWidth - 40;
-                doc.ColumnGap = 0;
-                printDialog.PrintDocument(((IDocumentPaginatorSource)flowDocViewer.Document).DocumentPaginator
-                ,"Печать" );
+                vehicles = (ObservableCollection<Vehicle>) data;
+                ShowVehicles();
+            }
+            else if (data is List<VerticalBlock>)
+            {
+                vBlocks = (List<VerticalBlock>) data;
+                ShowVerticalBlocks();
+            }
+            else if (data is List<RowBlock>)
+            {
+                rBlocks = (List<RowBlock>) data;
+                ShowRowBlocks();
+            }
+            else if (data is List<Container>)
+            {
+                containers = (List<Container>) data;
+                ShowContainers();
+            }
+            else
+            {
+                MessageBox.Show("В форму отчета передан неверный тип данных:" + data.GetType());
             }
         }
-        public void AddMainHeader(FlowDocument doc, String text)
+        private void Print_Click(object sender, RoutedEventArgs e)
         {
-            Paragraph p = new Paragraph(new Run(text));
+            var printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                var doc = flowDocViewer.Document;
+                doc.PagePadding = new Thickness(20, 40, 20, 40);
+                doc.PageHeight = printDialog.PrintableAreaHeight;
+                doc.PageWidth = printDialog.PrintableAreaWidth - 40;
+                doc.ColumnWidth = printDialog.PrintableAreaWidth - 40;
+                doc.ColumnGap = 0;
+                printDialog.PrintDocument(((IDocumentPaginatorSource) flowDocViewer.Document).DocumentPaginator
+                    , "Печать");
+            }
+        }
+        private void AddMainHeader(FlowDocument doc, String text)
+        {
+            var p = new Paragraph(new Run(text));
             p.FontSize = 16;
             p.FontStyle = FontStyles.Italic;
             p.TextAlignment = TextAlignment.Center;
             doc.Blocks.Add(p);
         }
-        public void AddHeader(FlowDocument doc, String text)
+        private void AddHeader(FlowDocument doc, String text)
         {
-            Paragraph p = new Paragraph(new Run(text));
+            var p = new Paragraph(new Run(text));
             p.FontSize = 20;
             p.FontStyle = FontStyles.Italic;
             p.TextAlignment = TextAlignment.Left;
             doc.Blocks.Add(p);
         }
-        public void AddSmallContainers(Table tab, List<Container> tempList, int i, int i2)
+        private void AddSmallContainers(Table tab, List<Container> tempList, int i, int i2)
         {
-             //печатаем заголовок
-            int i3 = 1;
+            //печатаем заголовок
+            var i3 = 1;
+            tab.RowGroups[0].Rows.Add(new TableRow());
+            var currentRow = tab.RowGroups[0].Rows[i2 + i3];
+            currentRow.Background = Brushes.White;
+            currentRow.FontSize = 18;
+            currentRow.FontWeight = FontWeights.Normal;
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Шаг " + i + ": Загрузите следующие контейнеры:"))));
+            currentRow.Cells[0].ColumnSpan = 2;
+            foreach (var c in tempList)
+            {
+                i3++;
                 tab.RowGroups[0].Rows.Add(new TableRow());
-                TableRow currentRow = tab.RowGroups[0].Rows[i2+i3];
+                currentRow = tab.RowGroups[0].Rows[i2 + i3];
                 currentRow.Background = Brushes.White;
-                currentRow.FontSize = 18;
+                currentRow.FontSize = 14;
                 currentRow.FontWeight = FontWeights.Normal;
-                currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Шаг " + i + ": Загрузите следующие контейнеры:"))));
+                currentRow.Cells.Add(
+                new TableCell(new Paragraph(new Run(c.Name + ": " + c.Vgh + "; " + c.Mass + " кг."))));
                 currentRow.Cells[0].ColumnSpan = 2;
-                foreach (Container c in tempList)
-                {
-                    i3++;
-                    tab.RowGroups[0].Rows.Add(new TableRow());
-                    currentRow = tab.RowGroups[0].Rows[i2+i3];
-                    currentRow.Background = Brushes.White;
-                    currentRow.FontSize = 14;
-                    currentRow.FontWeight = FontWeights.Normal;
-                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run(c.Name + ": " + c.Vgh + "; " + c.Mass + " кг."))));
-                    currentRow.Cells[0].ColumnSpan = 2;
-                }            
+            }
         }
-        public void AddCanvas(FlowDocument doc, VerticalBlock vBlock, int cWidth,int cHeight)
-         {
-             //MessageBox.Show("Количество вертикальных блоков " + rowBlock.Blocks.Count.ToString());
-            BlockUIContainer b = new BlockUIContainer();
-            Canvas canvas = new Canvas();
-            canvas.Width = cWidth / scale;
-            canvas.Height = cHeight / scale + 20;
+        private void AddCanvas(FlowDocument doc, VerticalBlock vBlock, int cWidth, int cHeight)
+        {
+            //MessageBox.Show("Количество вертикальных блоков " + rowBlock.Blocks.Count.ToString());
+            var b = new BlockUIContainer();
+            var canvas = new Canvas();
+            canvas.Width = cWidth/scale;
+            canvas.Height = cHeight/scale + 20;
 
             //Рисуем рамку вокруг canvas
-            Rectangle r = new Rectangle();
-            r.Width = cWidth / scale;
-            r.Height = cHeight / scale;
+            var r = new Rectangle();
+            r.Width = cWidth/scale;
+            r.Height = cHeight/scale;
             Brush brush = new SolidColorBrush();
             brush = Brushes.White;
             r.Stroke = new SolidColorBrush(Colors.Red);
-            //r.Fill = new SolidColorBrush(Colors.Black);
             r.Fill = brush;
             Canvas.SetLeft(r, 0);
             Canvas.SetTop(r, 20);
             canvas.Children.Add(r);
 
             //пишем заголовок
-            TextBlock t = new TextBlock();
-            t.Text = "Количество контейнеров: " + vBlock.Count + " общий вес: " + vBlock.Mass ;
+            var t = new TextBlock();
+            t.Text = "Количество контейнеров: " + vBlock.Count + " общий вес: " + vBlock.Mass;
             t.FontSize = 14;
-            Canvas.SetLeft(t,20);
+            Canvas.SetLeft(t, 20);
             Canvas.SetTop(t, 2);
             canvas.Children.Add(t);
 
             vBlock.SetFirstPointVerticalBlock(new Point3D(0, 0, 0));
             //рисуем контейнеры
-                 foreach (Container c in vBlock.Blocks)
-                     {
-
-                         r = new Rectangle();
-                         r.Width = c.Length / scale;
-                         r.Height = c.Height / scale;
-                         brush = new SolidColorBrush();
-                         brush = Brushes.White;
-                          r.Stroke = new SolidColorBrush(Colors.Black);
-                          //r.Fill = new SolidColorBrush(Colors.Black);
-                         r.Fill = brush;
-                         Canvas.SetLeft(r, c.FirstPoint.Y / scale);
-                         Canvas.SetTop(r, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale);
-                         canvas.Children.Add(r);
-
-                         t = new TextBlock();
-                         t.Text = c.Name;
-                         t.FontSize = 10;
-                         Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                         Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 2);
-                         canvas.Children.Add(t);
-
-                         t = new TextBlock();
-                         t.Text = "Габ: "+c.Length+"x"+c.Width+"x"+c.Height+"мм.Вес:"+c.Mass;
-                         t.FontSize = 10;
-                         Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                         Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 15);
-                         canvas.Children.Add(t);
-
-                         t = new TextBlock();
-                         t.Text = "Цена: " + c.Price + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth + "; в: " + c.DirHeight+ "; ";
-                         t.FontSize = 10;
-                         Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                         Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 28);
-                         canvas.Children.Add(t);
-
-                         t = new TextBlock();
-                         t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
-                         t.FontSize = 10;
-                         Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                         Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 41);
-                         canvas.Children.Add(t);
-
-                       t = new TextBlock();
-                         t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4Bottom + "; ";
-                         t.FontSize = 10;
-                         Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                         Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 54);
-                         canvas.Children.Add(t);
-                        // break;
-                     }
-                     //break;
-                  b.Child = canvas;
-                  doc.Blocks.Add(b);
-        }
-        public void AddContainer(FlowDocument doc, Container c)
-        {
-             BlockUIContainer b = new BlockUIContainer();
-            Canvas canvas = new Canvas();
-            canvas.Width = c.Width / scale;
-            canvas.Height = c.Height / scale;
-
-                      
-               Rectangle r = new Rectangle();
-               r.Width = c.Length / scale;
-               r.Height = c.Height / scale;
-                Brush brush = new SolidColorBrush();
+            foreach (var c in vBlock.Blocks)
+            {
+                r = new Rectangle();
+                r.Width = c.Length/scale;
+                r.Height = c.Height/scale;
+                brush = new SolidColorBrush();
                 brush = Brushes.White;
                 r.Stroke = new SolidColorBrush(Colors.Black);
                 r.Fill = brush;
-                Canvas.SetLeft(r, c.FirstPoint.Y / scale);
-                Canvas.SetTop(r, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale);
+                Canvas.SetLeft(r, c.FirstPoint.Y/scale);
+                Canvas.SetTop(r, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale);
                 canvas.Children.Add(r);
 
-                TextBlock t = new TextBlock();
-                t.Text = c.Name+" ("+c.ContainerType+")";
+                t = new TextBlock();
+                t.Text = c.Name;
                 t.FontSize = 10;
-                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 2);
+                Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 2);
                 canvas.Children.Add(t);
 
                 t = new TextBlock();
                 t.Text = "Габ: " + c.Length + "x" + c.Width + "x" + c.Height + "мм.Вес:" + c.Mass;
                 t.FontSize = 10;
-                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 15);
+                Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 15);
                 canvas.Children.Add(t);
 
                 t = new TextBlock();
-                t.Text = "Цена: " + c.Price + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth + "; в: " + c.DirHeight + "; ";
+                t.Text = "Цена: " + c.Price + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth +
+                         "; в: " + c.DirHeight + "; ";
                 t.FontSize = 10;
-                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 28);
+                Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 28);
                 canvas.Children.Add(t);
 
                 t = new TextBlock();
-                t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
+                t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " +
+                         c.FragilityHeight + "; ";
                 t.FontSize = 10;
-                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 41);
+                Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 41);
                 canvas.Children.Add(t);
 
                 t = new TextBlock();
                 t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4Bottom + "; ";
                 t.FontSize = 10;
-                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 54);
+                Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 54);
                 canvas.Children.Add(t);
-                
+            }
             b.Child = canvas;
             doc.Blocks.Add(b);
         }
+        private void AddContainer(FlowDocument doc, Container c)
+        {
+            var b = new BlockUIContainer();
+            var canvas = new Canvas();
+            canvas.Width = c.Width/scale;
+            canvas.Height = c.Height/scale;
 
-        public void AddCanvas2(FlowDocument doc, RowBlock rowBlock, int cWidth, int cHeight)
+
+            var r = new Rectangle();
+            r.Width = c.Length/scale;
+            r.Height = c.Height/scale;
+            Brush brush = new SolidColorBrush();
+            brush = Brushes.White;
+            r.Stroke = new SolidColorBrush(Colors.Black);
+            r.Fill = brush;
+            Canvas.SetLeft(r, c.FirstPoint.Y/scale);
+            Canvas.SetTop(r, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale);
+            canvas.Children.Add(r);
+
+            var t = new TextBlock();
+            t.Text = c.Name + " (" + c.ContainerType + ")";
+            t.FontSize = 10;
+            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 2);
+            canvas.Children.Add(t);
+
+            t = new TextBlock();
+            t.Text = "Габ: " + c.Length + "x" + c.Width + "x" + c.Height + "мм.Вес:" + c.Mass;
+            t.FontSize = 10;
+            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 15);
+            canvas.Children.Add(t);
+
+            t = new TextBlock();
+            t.Text = "Цена: " + c.Price + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth + "; в: " +
+                     c.DirHeight + "; ";
+            t.FontSize = 10;
+            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 28);
+            canvas.Children.Add(t);
+
+            t = new TextBlock();
+            t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " +
+                     c.FragilityHeight + "; ";
+            t.FontSize = 10;
+            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 41);
+            canvas.Children.Add(t);
+
+            t = new TextBlock();
+            t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4Bottom + "; ";
+            t.FontSize = 10;
+            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 54);
+            canvas.Children.Add(t);
+
+            b.Child = canvas;
+            doc.Blocks.Add(b);
+        }
+        private void AddCanvas2(FlowDocument doc, RowBlock rowBlock, int cWidth, int cHeight)
         {
             //MessageBox.Show("Количество вертикальных блоков " + rowBlock.Blocks.Count.ToString());
-            BlockUIContainer b = new BlockUIContainer();
-            Canvas canvas = new Canvas();
-            canvas.Width = cWidth / scale;
-            canvas.Height = cHeight / scale + 20;
+            var b = new BlockUIContainer();
+            var canvas = new Canvas();
+            canvas.Width = cWidth/scale;
+            canvas.Height = cHeight/scale + 20;
 
             //Рисуем рамку вокруг canvas
-            Rectangle r = new Rectangle();
-            r.Width = cWidth / scale;
-            r.Height = cHeight / scale;
+            var r = new Rectangle();
+            r.Width = cWidth/scale;
+            r.Height = cHeight/scale;
             Brush brush = new SolidColorBrush();
             brush = Brushes.White;
             r.Stroke = new SolidColorBrush(Colors.Red);
@@ -272,182 +272,106 @@ namespace VisualPacker.Views
             canvas.Children.Add(r);
 
             //пишем заголовок
-            TextBlock t = new TextBlock();
-            t.Text = rowBlock.Name + "Количество контейнеров: " + rowBlock.Count + " общий вес: " + rowBlock.Mass + "; плотность загрузки - " + rowBlock.Fullness+"("+rowBlock.FullnessWidth+")";
+            var t = new TextBlock();
+            t.Text = rowBlock.Name + "Количество контейнеров: " + rowBlock.Count + " общий вес: " + rowBlock.Mass +
+                     "; плотность загрузки - " + rowBlock.Fullness + "(" + rowBlock.FullnessWidth + ")";
             t.FontSize = 14;
             Canvas.SetLeft(t, 20);
             Canvas.SetTop(t, 2);
             canvas.Children.Add(t);
 
             //рисуем контейнеры 
-            foreach (VerticalBlock v in rowBlock.Blocks)
+            foreach (var v in rowBlock.Blocks)
             {
                 //MessageBox.Show("Количество ящиков в вертикальном блоке " + v.Blocks.Count.ToString());             
                 //foreach (Container c in v.Blocks)
                 foreach (Object p in v.Blocks)
                 {
+                    var c = (Container) p;
 
-                    Container c = (Container)p;
+                    r = new Rectangle();
+                    r.Width = c.Length/scale;
+                    r.Height = c.Height/scale;
+                    brush = new SolidColorBrush();
+                    brush = Brushes.White;
 
-                        r = new Rectangle();
-                        r.Width = c.Length / scale;
-                        r.Height = c.Height / scale;
-                        brush = new SolidColorBrush();
-                        brush = Brushes.White;
+                    r.Stroke = new SolidColorBrush(Colors.Black);
+                    //r.Fill = new SolidColorBrush(Colors.Black);
+                    r.Fill = brush;
+                    Canvas.SetLeft(r, c.FirstPoint.Y/scale);
+                    Canvas.SetTop(r, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale);
+                    canvas.Children.Add(r);
 
-                        r.Stroke = new SolidColorBrush(Colors.Black);
-                        //r.Fill = new SolidColorBrush(Colors.Black);
-                        r.Fill = brush;
-                        Canvas.SetLeft(r, c.FirstPoint.Y / scale);
-                        Canvas.SetTop(r, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale);
-                        canvas.Children.Add(r);
-
-                        t = new TextBlock();
-                        t.Text = c.Name;
-                        t.FontSize = 20;
-                        Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                        int delta = 2;
-                        Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 2);
-                        canvas.Children.Add(t);
-
-                       
-
-                        t = new TextBlock();
-                        t.Text = "Габ: " + c.Length + "x" + c.Width + "x" + c.Height;
-                        t.FontSize = 18;
-                        Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-
-                        delta = delta + 22;
-                        Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                        canvas.Children.Add(t);
-
-                        t = new TextBlock();
-                        t.Text = "Вес:" + c.Mass;
-                        t.FontSize = 18;
-                        Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                        delta = delta + 22;
-                        Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                        canvas.Children.Add(t);
-                        if (p is VerticalBlock )
-                        { 
-                            VerticalBlock vB=(VerticalBlock)p;
-                            foreach (Container cont in vB.Blocks)
-                            {
-                                t = new TextBlock();
-                                t.Text = cont.Name;
-                                t.FontSize = 16;
-                                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                                 delta = delta+22;
-                                 Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                                canvas.Children.Add(t);
-                            }
+                    t = new TextBlock();
+                    t.Text = c.Name;
+                    t.FontSize = 20;
+                    Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                    var delta = 2;
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 2);
+                    canvas.Children.Add(t);
 
 
-                        }
-                        else if (p is HorizontalBlock)
-                        {
-                            HorizontalBlock vB=(HorizontalBlock)p;
-                            foreach (Container cont in vB.Blocks)
-                            {
-                                t = new TextBlock();
-                                t.Text = cont.Name;
-                                t.FontSize = 16;
-                                Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                                delta = delta+ 22;
-                                Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                                canvas.Children.Add(t);
-                            }
+                    t = new TextBlock();
+                    t.Text = "Габ: " + c.Length + "x" + c.Width + "x" + c.Height;
+                    t.FontSize = 18;
+                    Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
 
-                        }
+                    delta = delta + 22;
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
+                    canvas.Children.Add(t);
 
-
-                    /*if (c.Kind == "VerticalPallet")
+                    t = new TextBlock();
+                    t.Text = "Вес:" + c.Mass;
+                    t.FontSize = 18;
+                    Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                    delta = delta + 22;
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
+                    canvas.Children.Add(t);
+                    if (p is VerticalBlock)
                     {
-                        foreach (Container d in c.Blocks)
+                        var vB = (VerticalBlock) p;
+                        foreach (var cont in vB.Blocks)
                         {
                             t = new TextBlock();
-                            t.Text = d.Name;
-                            t.FontSize = 18;
-                            Canvas.SetLeft(t, d.FirstPoint.Y / scale + 2);
+                            t.Text = cont.Name;
+                            t.FontSize = 16;
+                            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
                             delta = delta + 22;
-                            Canvas.SetTop(t, canvas.Height - d.Height / scale - d.FirstPoint.Z / scale + delta);
-                            canvas.Children.AddContainer(t);
+                            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
+                            canvas.Children.Add(t);
                         }
-                    } */
-
-                    /*t = new TextBlock();
-                    t.Text = "Цена: " + c.Price.ToString() + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth + "; в: " + c.DirHeight + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                    delta = delta + 22;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t);
-
-                    t = new TextBlock();
-                    t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale+ 2);
-                    delta = delta + 13;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t);
-
-                    t = new TextBlock();
-                    t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4bottom + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                    delta = delta + 13;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t); */
-                    // break;
+                    }
+                    else if (p is HorizontalBlock)
+                    {
+                        var vB = (HorizontalBlock) p;
+                        foreach (var cont in vB.Blocks)
+                        {
+                            t = new TextBlock();
+                            t.Text = cont.Name;
+                            t.FontSize = 16;
+                            Canvas.SetLeft(t, c.FirstPoint.Y/scale + 2);
+                            delta = delta + 22;
+                            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
+                            canvas.Children.Add(t);
                         }
-            } 
-            //рассчитываем центр тяжести и рисуем оси центра тяжести
-            /*  Point3D point = Calculations.CalculateMassCenterRow(rowBlock);
-           //рисуем горизонтальную ось  
-          Line myLine = new Line();
-              myLine.Stroke = System.Windows.Media.Brushes.Green;
-
-              myLine.X1 = 0;
-              myLine.X2 = canvas.Width;
-              myLine.Y1 = 0;
-              myLine.Y2 = 0;
-              myLine.HorizontalAlignment = HorizontalAlignment.Left;
-              myLine.VerticalAlignment = VerticalAlignment.Center;
-              myLine.StrokeThickness = 1;
-              Canvas.SetLeft(myLine,0);
-              Canvas.SetTop(myLine, canvas.Height-point.Z/scale);
-              canvas.Children.AddContainer(myLine);
-
-             //рисуем вертикальную ось
-              myLine = new Line();
-              myLine.Stroke = System.Windows.Media.Brushes.Green;
-              myLine.X1 = 0;
-              myLine.X2 = 0;
-              myLine.Y1 = 0;
-              myLine.Y2 = canvas.Height;
-              myLine.HorizontalAlignment = HorizontalAlignment.Left;
-              myLine.VerticalAlignment = VerticalAlignment.Center;
-              myLine.StrokeThickness = 1;
-              Canvas.SetLeft(myLine, point.Y/scale);
-              Canvas.SetTop(myLine, 20);
-              canvas.Children.AddContainer(myLine); */
-
+                    }
+                }
+            }
             b.Child = canvas;
-                doc.Blocks.Add(b);
+            doc.Blocks.Add(b);
         }
-
-        public void AddRow(Table tab, RowBlock rowBlock, Vehicle currentVehicle,int i,int i2)
+        private void AddRow(Table tab, RowBlock rowBlock, Vehicle currentVehicle, int i, int i2)
         {
             //MessageBox.Show("Количество вертикальных блоков " + rowBlock.Blocks.Count.ToString());
-            BlockUIContainer b = new BlockUIContainer();
-            Canvas canvas = new Canvas();
-            canvas.Width = currentVehicle.Width / scale;
-            canvas.Height = currentVehicle.Height / scale + 20;
+            var b = new BlockUIContainer();
+            var canvas = new Canvas();
+            canvas.Width = currentVehicle.Width/scale;
+            canvas.Height = currentVehicle.Height/scale + 20;
 
             //Рисуем рамку вокруг canvas
-            Rectangle r = new Rectangle();
-            r.Width = currentVehicle.Width / scale;
-            r.Height = currentVehicle.Height / scale;
+            var r = new Rectangle();
+            r.Width = currentVehicle.Width/scale;
+            r.Height = currentVehicle.Height/scale;
             Brush brush = new SolidColorBrush();
             brush = Brushes.White;
             r.Stroke = new SolidColorBrush(Colors.Red);
@@ -459,96 +383,104 @@ namespace VisualPacker.Views
 
             //пишем заголовок
             tab.RowGroups[0].Rows.Add(new TableRow());
-            
-            TableRow currentRow = tab.RowGroups[0].Rows[i2-1];
+
+            var currentRow = tab.RowGroups[0].Rows[i2 - 1];
             currentRow.Background = Brushes.White;
             currentRow.FontSize = 18;
             currentRow.FontWeight = FontWeights.Normal;
-            
-            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Шаг "+i+": "+  rowBlock.Name + "контейнеров: " + rowBlock.Count + ", вес: " + rowBlock.Mass + ", плотность: " + rowBlock.Fullness + "(" + rowBlock.FullnessWidth + ")"))));
+
+            currentRow.Cells.Add(
+                new TableCell(
+                    new Paragraph(
+                        new Run("Шаг " + i + ": " + rowBlock.Name + "контейнеров: " + rowBlock.Count + ", вес: " +
+                                rowBlock.Mass + ", плотность: " + rowBlock.Fullness + "(" + rowBlock.FullnessWidth + ")"))));
             currentRow.Cells[0].ColumnSpan = 2;
             //пишем схему ряда
-            TextBlock t2 = new TextBlock();
+            var t2 = new TextBlock();
             t2.FontSize = 14;
 
-            TextBlock t = new TextBlock();
+            var t = new TextBlock();
             //рисуем контейнеры 
-            foreach (VerticalBlock v in rowBlock.Blocks)
+            foreach (var v in rowBlock.Blocks)
             {
                 //MessageBox.Show("Количество ящиков в вертикальном блоке " + v.Blocks.Count.ToString());             
                 //foreach (Container c in v.Blocks)
                 foreach (Object p in v.Blocks)
                 {
-                    Container c = (Container)p;
+                    var c = (Container) p;
                     r = new Rectangle();
-                    r.Width = c.Length / scale;
-                    r.Height = c.Height / scale;
+                    r.Width = c.Length/scale;
+                    r.Height = c.Height/scale;
                     brush = new SolidColorBrush();
                     brush = Brushes.White;
-                    
+
                     r.Stroke = new SolidColorBrush(Colors.Black);
                     r.Fill = brush;
-                    Canvas.SetLeft(r, (c.FirstPoint.Y-currentVehicle.FirstPoint.Y) / scale);
-                    Canvas.SetTop(r, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale);
+                    Canvas.SetLeft(r, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale);
+                    Canvas.SetTop(r, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale);
                     canvas.Children.Add(r);
 
                     t = new TextBlock();
                     t.Text = c.Name;
-                    if (c.Kind == "VerticalPallet") { t.FontSize = 14; }
-                    else {t.FontSize = 20; }
+                    if (c.Kind == "VerticalPallet")
+                    {
+                        t.FontSize = 14;
+                    }
+                    else
+                    {
+                        t.FontSize = 20;
+                    }
 
-                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale + 2);
-                    int delta = 2;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + 2);
+                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale + 2);
+                    var delta = 2;
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + 2);
                     canvas.Children.Add(t);
 
                     t = new TextBlock();
                     t.Text = "Габ: " + c.Vgh;
                     t.FontSize = 14;
-                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale + 2);
+                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale + 2);
 
                     delta = delta + 22;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
                     canvas.Children.Add(t);
 
                     t = new TextBlock();
                     t.Text = "Вес:" + c.Mass;
                     t.FontSize = 14;
-                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale + 2);
+                    Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale + 2);
                     delta = delta + 22;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
+                    Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
                     canvas.Children.Add(t);
                     if (p is VerticalBlock)
                     {
                         t2.Text = t2.Text + "\n" + c.Name + "\n";
                         t2.Text = t2.Text + "  Габариты:" + c.Vgh + "\n";
-                        t2.Text = t2.Text + "  Вес:" + c.Mass + "\n"; 
-                        VerticalBlock vB = (VerticalBlock)p;
-                        foreach (Container cont in vB.Blocks)
+                        t2.Text = t2.Text + "  Вес:" + c.Mass + "\n";
+                        var vB = (VerticalBlock) p;
+                        foreach (var cont in vB.Blocks)
                         {
-                            t2.Text = t2.Text + "  * "+cont.Name + " ("+ cont.ContainerType+")"+" \n";
-                           // t2.Text = t2.Text + "  Тип:" + cont.ContainerType + "\n";
+                            t2.Text = t2.Text + "  * " + cont.Name + " (" + cont.ContainerType + ")" + " \n";
+                            // t2.Text = t2.Text + "  Тип:" + cont.ContainerType + "\n";
                             //t2.Text = t2.Text + "  Габариты:" + cont.Vgh + "\n";
                             //t2.Text = t2.Text + "  Вес:"+ cont.Mass.ToString() + "\n"; 
 
                             t = new TextBlock();
                             t.Text = cont.Name;
                             t.FontSize = 16;
-                            Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale + 2);
+                            Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale + 2);
                             delta = delta + 22;
-                            Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
+                            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
                             canvas.Children.Add(t);
                         }
-
-
                     }
                     else if (p is HorizontalBlock)
                     {
                         t2.Text = t2.Text + "\n" + c.Name + " \n";
                         t2.Text = t2.Text + "  Габариты:" + c.Vgh + "\n";
                         t2.Text = t2.Text + "  Вес:" + c.Mass + "\n";
-                        HorizontalBlock vB = (HorizontalBlock)p;
-                        foreach (Container cont in vB.Blocks)
+                        var vB = (HorizontalBlock) p;
+                        foreach (var cont in vB.Blocks)
                         {
                             t2.Text = t2.Text + "  * " + cont.Name + " (" + cont.ContainerType + ")" + " \n";
                             //t2.Text = t2.Text + "  Тип:" + cont.ContainerType + "\n";
@@ -558,12 +490,11 @@ namespace VisualPacker.Views
                             t = new TextBlock();
                             t.Text = cont.Name;
                             t.FontSize = 16;
-                            Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y) / scale + 2);
+                            Canvas.SetLeft(t, (c.FirstPoint.Y - currentVehicle.FirstPoint.Y)/scale + 2);
                             delta = delta + 22;
-                            Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
+                            Canvas.SetTop(t, canvas.Height - c.Height/scale - c.FirstPoint.Z/scale + delta);
                             canvas.Children.Add(t);
                         }
-
                     }
                     else
                     {
@@ -572,214 +503,152 @@ namespace VisualPacker.Views
                         t2.Text = t2.Text + "  Габариты:" + c.Vgh + "\n";
                         t2.Text = t2.Text + "  Вес:" + c.Mass + "\n";
                     }
-
-
-                    /*if (c.Kind == "VerticalPallet")
-                    {
-                        foreach (Container d in c.Blocks)
-                        {
-                            t = new TextBlock();
-                            t.Text = d.Name;
-                            t.FontSize = 18;
-                            Canvas.SetLeft(t, d.FirstPoint.Y / scale + 2);
-                            delta = delta + 22;
-                            Canvas.SetTop(t, canvas.Height - d.Height / scale - d.FirstPoint.Z / scale + delta);
-                            canvas.Children.AddContainer(t);
-                        }
-                    } */
-
-                    /*t = new TextBlock();
-                    t.Text = "Цена: " + c.Price.ToString() + "; Направление загрузки д: " + c.DirLength + "; ш: " + c.DirWidth + "; в: " + c.DirHeight + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                    delta = delta + 22;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t);
-
-                    t = new TextBlock();
-                    t.Text = "Порядок загрузки + " + c.Order + "; Допуст.давление: " + c.PressHeight + "; Хрупкость: " + c.FragilityHeight + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                    delta = delta + 13;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t);
-
-                    t = new TextBlock();
-                    t.Text = "Уровень: " + c.Level + "; Количество: " + c.Quantity + "; На пол: " + c.Only4bottom + "; ";
-                    t.FontSize = 10;
-                    Canvas.SetLeft(t, c.FirstPoint.Y / scale + 2);
-                    delta = delta + 13;
-                    Canvas.SetTop(t, canvas.Height - c.Height / scale - c.FirstPoint.Z / scale + delta);
-                    canvas.Children.AddContainer(t); */
-                    // break;
                 }
             }
-           
+
             b.Child = canvas;
 
             tab.RowGroups[0].Rows.Add(new TableRow());
-           
+
             currentRow = tab.RowGroups[0].Rows[i2];
             currentRow.Background = Brushes.White;
             currentRow.FontSize = 14;
             currentRow.FontWeight = FontWeights.Normal;
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run(t2.Text))));
-            currentRow.Cells[0].ColumnSpan=1;
-              currentRow.Cells.Add(new TableCell(b));
-              currentRow.Cells[1].ColumnSpan = 1;
-
-              /*tab.RowGroups[1].Rows.AddContainer(new TableRow());
-              currentRow = tab.RowGroups[1].Rows[i - 1];
-              currentRow.Background = Brushes.White;
-              currentRow.FontSize = 14;
-              currentRow.FontWeight = System.Windows.FontWeights.Normal;
-              currentRow.Cells.AddContainer(new TableCell(new Paragraph(new Run(t2.Name))));
-              currentRow.Cells[0].ColumnSpan = 1;
-              currentRow.Cells.AddContainer(new TableCell(b));
-              currentRow.Cells[1].ColumnSpan = 1;*/
+            currentRow.Cells[0].ColumnSpan = 1;
+            currentRow.Cells.Add(new TableCell(b));
+            currentRow.Cells[1].ColumnSpan = 1;
         }
-           
-        
-       
-        public void ShowVehicles()
+        private void ShowVehicles()
         {
-           FlowDocument doc = new FlowDocument();
-           foreach (Vehicle v in vehicles)
-           {
-               AddMainHeader(doc, "Схема загрузки автомобиля " + v.Name + " (" + v.Count + " контейнеров; общий вес груза " + v.Mass + " кг.)");
-               
-               if (v.Blocks.Count == 0)
-               {
-                   AddHeader(doc, "Автомобиль загружать не нужно");
-               }
-               else
-               {   int i = 0;
-                   int i2 = 0;
-                   Table table1 = new Table();
-                   // ...and add it to the FlowDocument Blocks collection.
-                   doc.Blocks.Add(table1);
-                   // Set some global formatting properties for the table.
-                   table1.CellSpacing = 10;
-                   table1.Background = Brushes.White;
+            var doc = new FlowDocument();
+            foreach (var v in vehicles)
+            {
+                AddMainHeader(doc,
+                    "Схема загрузки автомобиля " + v.Name + " (" + v.Count + " контейнеров; общий вес груза " + v.Mass +
+                    " кг.)");
 
-                   // Create 6 columns and add them to the table's Columns collection.
-                   int numberOfColumns = 2;
-                   for (int x = 0; x < numberOfColumns; x++)
-                   {
-                       table1.Columns.Add(new TableColumn());
+                if (v.Blocks.Count == 0)
+                {
+                    AddHeader(doc, "Автомобиль загружать не нужно");
+                }
+                else
+                {
+                    var i = 0;
+                    var i2 = 0;
+                    var table1 = new Table();
+                    // ...and add it to the FlowDocument Blocks collection.
+                    doc.Blocks.Add(table1);
+                    // Set some global formatting properties for the table.
+                    table1.CellSpacing = 10;
+                    table1.Background = Brushes.White;
 
-                       // Set alternating background colors for the middle colums.
-                       if (x % 2 == 0)
-                           table1.Columns[x].Background = Brushes.Beige;
-                       else
-                           table1.Columns[x].Background = Brushes.LightSteelBlue;
-                   }
+                    // Create 6 columns and add them to the table's Columns collection.
+                    const int numberOfColumns = 2;
+                    for (var x = 0; x < numberOfColumns; x++)
+                    {
+                        table1.Columns.Add(new TableColumn());
 
-                   table1.Columns[0].Width = new GridLength(300);
+                        // Set alternating background colors for the middle colums.
+                        table1.Columns[x].Background = x%2 == 0 ? Brushes.Beige : Brushes.LightSteelBlue;
+                    }
+
+                    table1.Columns[0].Width = new GridLength(300);
 
 
+                    //Добавляем заголовок таблицы
+                    table1.RowGroups.Add(new TableRowGroup());
+                    table1.RowGroups.Add(new TableRowGroup());
 
-                   //Добавляем заголовок таблицы
-                   table1.RowGroups.Add(new TableRowGroup());
-                   table1.RowGroups.Add(new TableRowGroup());
-
-                   // AddContainer the first (title) row.
-                   table1.RowGroups[0].Rows.Add(new TableRow());
-                   TableRow currentRow = table1.RowGroups[0].Rows[0];
-                   currentRow.Background = Brushes.Silver;
-                   currentRow.FontSize = 14;
-                   currentRow.FontWeight = FontWeights.Bold;
-                   currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Контейнеры"))));
-                   currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Схема загрузки ряда"))));
-                   //получаем список заказов
-                   List<int> orderList = loadSchemeCalculation.DistinctOrdersInRow(v.Blocks);
-                   orderList.OrderBy(o => o);
-                   foreach (int order in orderList)
-                   {
-                       foreach (RowBlock r in v.Blocks)
-                       {
-
-                           //AddHeader(table1, "Шаг " + i.ToString() + ":");
-
-                           if (r.Order == order)
-                           {
-                               i++;
-                               i2 = i2 + 2;
-                               AddRow(table1, r, v, i, i2);
-                           }
-                       }
-                       List<Container> tempList = v.SmallBlocks.Where(c => c.Order == order).ToList();
-                       if (tempList.Count() > 0)
-                       {
-                           i++;
-                           AddSmallContainers(table1, tempList, i, i2);
-                           i2 = i2 + 1 + tempList.Count();
-                       }
-                   }
-               }
-           }
+                    // AddContainer the first (title) row.
+                    table1.RowGroups[0].Rows.Add(new TableRow());
+                    var currentRow = table1.RowGroups[0].Rows[0];
+                    currentRow.Background = Brushes.Silver;
+                    currentRow.FontSize = 14;
+                    currentRow.FontWeight = FontWeights.Bold;
+                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Контейнеры"))));
+                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Схема загрузки ряда"))));
+                    //получаем список заказов
+                    var orderList = loadSchemeCalculation.DistinctOrdersInRow(v.Blocks);
+                    orderList.OrderBy(o => o);
+                    foreach (var order in orderList)
+                    {
+                        foreach (var r in v.Blocks)
+                        {
+                            if (r.Order == order)
+                            {
+                                i++;
+                                i2 = i2 + 2;
+                                AddRow(table1, r, v, i, i2);
+                            }
+                        }
+                        var tempList = v.SmallBlocks.Where(c => c.Order == order).ToList();
+                        if (tempList.Any())
+                        {
+                            i++;
+                            AddSmallContainers(table1, tempList, i, i2);
+                            i2 = i2 + 1 + tempList.Count();
+                        }
+                    }
+                }
+            }
             flowDocViewer.Document = doc;
         }
-        public void ShowRowBlocks()
+        private void ShowRowBlocks()
         {
-            FlowDocument doc = new FlowDocument();
-            
-                AddMainHeader(doc, "Список рядов " +  "(" + rBlocks.Count() + " рядов)");
-                int i = 0;
-                if (rBlocks.Count() == 0)
-                {
-                    AddHeader(doc, "Нет рядов для отображения");
-                }
-                foreach (RowBlock r in rBlocks)
-                {
-                    r.SetFirstPointForVerticalBlock(new Point3D(0, 0, 0));
-                    i = i + 1;
-                    AddHeader(doc, "Шаг " + i + ":");
-                    AddCanvas2(doc, r, r.MaxLength, r.Height);
-                    //break;
-                }
-            
+            var doc = new FlowDocument();
+
+            AddMainHeader(doc, "Список рядов " + "(" + rBlocks.Count() + " рядов)");
+            var i = 0;
+            if (!rBlocks.Any())
+            {
+                AddHeader(doc, "Нет рядов для отображения");
+            }
+            foreach (var r in rBlocks)
+            {
+                r.SetFirstPointForVerticalBlock(new Point3D(0, 0, 0));
+                i = i + 1;
+                AddHeader(doc, "Шаг " + i + ":");
+                AddCanvas2(doc, r, r.MaxLength, r.Height);
+            }
+
             flowDocViewer.Document = doc;
         }
-        public void ShowVerticalBlocks()
+        private void ShowVerticalBlocks()
         {
-            FlowDocument doc = new FlowDocument();
-           
-                AddMainHeader(doc, "Вертикальные блоки " + "(" + vBlocks.Count() + " блоков");
-                int i = 0;
-                if (vBlocks.Count() == 0)
-                {
-                    AddHeader(doc, "Нет вертикальныx блоков");
-                }
-                foreach (VerticalBlock v in vBlocks)
-                {
-                    i = i + 1;
-                    AddHeader(doc, "Шаг " + i + ":");
-                    AddCanvas(doc, v, v.Length, v.Height);
-                    //break;
-                }
-            
+            var doc = new FlowDocument();
+
+            AddMainHeader(doc, "Вертикальные блоки " + "(" + vBlocks.Count() + " блоков");
+            var i = 0;
+            if (!vBlocks.Any())
+            {
+                AddHeader(doc, "Нет вертикальныx блоков");
+            }
+            foreach (var v in vBlocks)
+            {
+                i = i + 1;
+                AddHeader(doc, "Шаг " + i + ":");
+                AddCanvas(doc, v, v.Length, v.Height);
+            }
+
             flowDocViewer.Document = doc;
         }
-        public void ShowContainers()
+        private void ShowContainers()
         {
-            FlowDocument doc = new FlowDocument();
+            var doc = new FlowDocument();
 
             AddMainHeader(doc, "Контейнеры " + "(" + containers.Count() + "ед.");
-            int i = 0;
-            if (containers.Count() == 0)
+            var i = 0;
+            if (!containers.Any())
             {
                 AddHeader(doc, "Нет контейнеров для отображения");
             }
-            foreach (Container c in containers)
+            foreach (var c in containers)
             {
                 i = i + 1;
-                AddContainer(doc,c);
-                //break;
+                AddContainer(doc, c);
             }
-
             flowDocViewer.Document = doc;
         }
-
-       }
+    }
 }

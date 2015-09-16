@@ -15,7 +15,7 @@
             </TabItem.Header>
             <InlineUIContainer>
                 <StackPanel Height="219" Width="519">
-                    <CheckBox Name="weightRestriction_CheckBox" Content="{DynamicResource useSeasonWeightLimitation}"/>
+                    <CheckBox Name="weightRestrictionCheckBox" Content="{DynamicResource useSeasonWeightLimitation}"/>
                     <Grid Height="31" >
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -30,10 +30,10 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource firstDateOfWeightRestriction}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
                         <DatePicker Name="datePicker1" IsDropDownOpen="False" SelectedDateFormat="Short"
-                    SelectedDateChanged="calendar_SelectedDatesChanged" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                    Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
                         <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource lastDateOfWeightRestriction}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
                         <DatePicker Name="datePicker2" IsDropDownOpen="false" SelectedDateFormat="Short"
-                    SelectedDateChanged="calendar_SelectedDatesChanged" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                   Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
 
                     </Grid>
                 </StackPanel>

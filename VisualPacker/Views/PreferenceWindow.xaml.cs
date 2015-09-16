@@ -8,7 +8,7 @@ namespace VisualPacker.Views
     /// <summary>
     /// Interaction logic for PreferenceWindow.xaml
     /// </summary>
-    public partial class PreferenceWindow : Window
+    public partial class PreferenceWindow
     {
         public PreferenceWindow()
         {
@@ -34,29 +34,15 @@ namespace VisualPacker.Views
                                       UriKind.Relative);
                     break;
             }
-            this.Resources.MergedDictionaries.Add(dict);
+            Resources.MergedDictionaries.Add(dict); //:TODO дублирование кода
         }
         private void LoadSavedSettings()
         {
-            this.weightRestriction_CheckBox.IsChecked = Settings.Default.PreferenceWindow_weightRestrictionCheckBoxEnabled;
-            //this.datePicker1 = (Date) Properties.Settings.Default.PreferenceWindow_FirstDateOfWeightRestriction;
+            weightRestrictionCheckBox.IsChecked = Settings.Default.PreferenceWindowWeightRestrictionCheckBoxEnabled;
         }
-        private void calendar_SelectedDatesChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Window_Closed(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.PreferenceWindow_weightRestrictionCheckBoxEnabled = this.weightRestriction_CheckBox.IsChecked;
             Settings.Default.Save();
-
         }
-       
     }
 }

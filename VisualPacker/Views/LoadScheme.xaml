@@ -4,7 +4,7 @@
         Title="Схема загрузки" Height="600" Width="931" >
     <StackPanel>
         <Menu>
-            <MenuItem Name="Print" Header="Печать" Click="print_Click" >
+            <MenuItem Name="Print" Header="Печать" Click="Print_Click" >
 
             </MenuItem>
         </Menu>

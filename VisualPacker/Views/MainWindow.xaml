@@ -10,8 +10,8 @@
         <StackPanel>
         <Menu>
             <MenuItem Name="file" Header="{DynamicResource file}">
-                <MenuItem Name="preferences" Header="{DynamicResource preferences}" Click="preferences_Click" />
-                <MenuItem Name="exit" Header="{DynamicResource exit}" Click="exit_Click"/>
+                <MenuItem Name="preferences" Header="{DynamicResource preferences}" Click="Preferences_Click" />
+                <MenuItem Name="exit" Header="{DynamicResource exit}" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem Name="edit" Header="{DynamicResource edit}">
                 <MenuItem Name="selectAllContainers" Header="{DynamicResource selectAllContainers}" Click="selectAllContainers_Click" />
@@ -19,18 +19,18 @@
             </MenuItem>
 
             <MenuItem Name="Reports" Header="{DynamicResource reports}">
-                <MenuItem Name="loadScheme" Header="{DynamicResource loadScheme}" Click="report_Click"/>
-                <MenuItem Name="containerList" Header="{DynamicResource containerList}" Click="Button_ContainerList_Click"/>
-                <MenuItem Name="scheme3D" Header="{DynamicResource scheme3d}"   Click="Button_view3d_Click"/>
-                <MenuItem Name="scheme2D" Header="{DynamicResource scheme2d}"   Click="Button_view2d_Click"/>
+                <MenuItem Name="loadScheme" Header="{DynamicResource loadScheme}" Click="Report_Click"/>
+                <MenuItem Name="containerList" Header="{DynamicResource containerList}" Click="ButtonContainerList_Click"/>
+                <MenuItem Name="scheme3D" Header="{DynamicResource scheme3d}"   Click="ButtonView3D_Click"/>
+                <MenuItem Name="scheme2D" Header="{DynamicResource scheme2d}"   Click="ButtonView2D_Click"/>
             </MenuItem>
             <MenuItem Name="Help" Header="{DynamicResource help}">
-                <MenuItem Name="AboutVisualPacker" Header="{DynamicResource aboutVisualPacker}" Click="about_programm_Click"/>
+                <MenuItem Name="AboutVisualPacker" Header="{DynamicResource aboutVisualPacker}" Click="AboutProgramm_Click"/>
             </MenuItem>
         </Menu>
         <ToolBar Name="Toolbar1">
             <ToolBar.Items>
-                <Button Content="{DynamicResource run}" Click="Button_Calculate_Click" />
+                <Button Content="{DynamicResource run}" Click="ButtonCalculate_Click" />
                 
             </ToolBar.Items>
         </ToolBar>
@@ -63,7 +63,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBlock  Grid.Row="0" Text="{DynamicResource cargo}"/>
-                <dg:DataGrid Grid.Row="1" AutoGenerateColumns="False" MouseDoubleClick="CheckContainerOnMouseDoubleClick" Height="300"  HorizontalAlignment="Left"  x:Name="dataGrid1" VerticalAlignment="Top" Width="auto" IsReadOnly="false"  CanUserDeleteRows="True" CanUserAddRows="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True"  HorizontalScrollBarVisibility="Auto">
+                <dg:DataGrid Grid.Row="1" AutoGenerateColumns="False" Height="300"  HorizontalAlignment="Left"  x:Name="dataGrid1" VerticalAlignment="Top" Width="auto" IsReadOnly="false"  CanUserDeleteRows="True" CanUserAddRows="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True"  HorizontalScrollBarVisibility="Auto">
                     <dg:DataGrid.Columns>
                         <dg:DataGridCheckBoxColumn Header="   "   Binding="{Binding Path=IsChecked,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             

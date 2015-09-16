@@ -48,33 +48,33 @@ namespace VisualPacker.Models
         {
             var tempList = new List<Container>();
             var fromTempListToContList = new FromTempListToContList();
-            foreach (Object Data in blocks)
+            foreach (Object data in blocks)
             {
-                if (Data is VerticalBlock)
+                if (data is VerticalBlock)
                 {
-                    var v = (VerticalBlock)Data;
-                    v.ToContainerList(tempList);
+                    var verticalBlock = (VerticalBlock)data;
+                    verticalBlock.ToContainerList(tempList);
                 }
-                else if (Data is RowBlock)
+                else if (data is RowBlock)
                 {
-                    var r = (RowBlock)Data;
-                    fromTempListToContList.ToContainerList(tempList, r.Blocks);
+                    var rowBlock = (RowBlock)data;
+                    fromTempListToContList.ToContainerList(tempList, rowBlock.Blocks);
                 }
-                else if (Data is HorizontalBlock)
+                else if (data is HorizontalBlock)
                 {
-                    var c = (HorizontalBlock)Data;
-                    c.ToContainerList(tempList);
+                    var horizontalBlock = (HorizontalBlock)data;
+                    horizontalBlock.ToContainerList(tempList);
                 }
-                else if (Data is Container)
+                else if (data is Container)
                 {
-                    var c = (Container)Data;
-                    c.ToContainerList(tempList);
+                    var container = (Container)data;
+                    container.ToContainerList(tempList);
                 }
                 else
                 {
                     MessageBox.Show(
                         "В процедуру выгрузки контейнеров класса VerticalBlock передан неверный тип данных:" +
-                        Data.GetType());
+                        data.GetType());
                 }
             }
             return tempList;

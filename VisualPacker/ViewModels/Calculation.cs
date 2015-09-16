@@ -42,6 +42,7 @@ namespace VisualPacker.ViewModels
         public List<Container> CalculateLoadScheme(List<Container> containers,
             ObservableCollection<Vehicle> selectedVehicles, TextBox textBox, int maxTonnage)
         {
+            // BtnCalculate_click
             int tempMaxTonnage;
             var widthBetweenVehicles = 1000;
             var tempPoint = new Point3D(0, 0, 0);
@@ -163,7 +164,6 @@ namespace VisualPacker.ViewModels
                 textBox.AppendText("Ошибка.Один или несколько приоритетных контейнеров не загрузились.\n");
             }
         }
-
         private void CheckContainerCount(List<Container> containers, List<Container> tempList, TextBox textBox,
             ObservableCollection<Vehicle> selectedVehicles)
         {
@@ -182,7 +182,6 @@ namespace VisualPacker.ViewModels
                 PutContainerVarianceInTextBox(newList, containers, textBox);
             }
         }
-
         private void PutContainerVarianceInTextBox(List<Container> newList, List<Container> containers,
             TextBox textBox)
         {

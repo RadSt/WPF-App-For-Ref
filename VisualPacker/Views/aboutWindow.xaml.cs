@@ -5,11 +5,11 @@ using System.Windows;
 namespace VisualPacker.Views
 {
     /// <summary>
-    /// Interaction logic for aboutWindow.xaml
+    /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class aboutWindow : Window
+    public partial class AboutWindow
     {
-        public aboutWindow()
+        public AboutWindow()
         {
             InitializeComponent();
             SetLanguageDictionary();
@@ -33,7 +33,7 @@ namespace VisualPacker.Views
                                       UriKind.Relative);
                     break;
             }
-            this.Resources.MergedDictionaries.Add(dict);
+            Resources.MergedDictionaries.Add(dict);
         }
     }
 }

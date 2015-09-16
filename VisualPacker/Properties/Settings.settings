@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VisualPacker.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PreferenceWindow_weightRestrictionCheckBoxEnabled" Type="System.Boolean" Scope="Application">
+    <Setting Name="PreferenceWindowWeightRestrictionCheckBoxEnabled" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="PreferenceWindow_FirstDateOfWeightRestriction" Type="System.DateTime" Scope="Application">
