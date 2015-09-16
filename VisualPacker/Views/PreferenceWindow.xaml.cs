@@ -12,9 +12,9 @@ namespace VisualPacker.Views
     {
         public PreferenceWindow()
         {
-            InitializeComponent();
             SetLanguageDictionary();
             LoadSavedSettings();
+            InitializeComponent();
         }
         private void SetLanguageDictionary()
         {

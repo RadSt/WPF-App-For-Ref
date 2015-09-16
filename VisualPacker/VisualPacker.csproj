@@ -84,6 +84,7 @@
     <Compile Include="Models\FromTempListToContList.cs" />
     <Compile Include="ViewModels\Calculation2D.cs" />
     <Compile Include="ViewModels\Calculation3D.cs" />
+    <Compile Include="ViewModels\CalculationContainerList.cs" />
     <Compile Include="ViewModels\LoadSchemeCalculation.cs" />
     <Compile Include="ViewModels\MainWindowCalculation.cs" />
     <Compile Include="ViewModels\VehicleAxisMass.cs" />

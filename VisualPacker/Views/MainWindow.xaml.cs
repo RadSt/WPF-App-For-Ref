@@ -78,8 +78,7 @@ namespace VisualPacker.Views
         }
         private void SaveProtocolToFile()
         {
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData") ==
-                false)
+            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData") == false)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData");
             }
@@ -89,11 +88,10 @@ namespace VisualPacker.Views
                               DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + " " +
                               Environment.UserName + " protocol";
 
-            var file = new StreamWriter(new FileStream(destination + ".txt",
-                FileMode.Append));
-            file.WriteLine(textBox.Text);
-            file.Flush();
-            file.Close(); //:TODO Дублирование кода
+            var protocolFile = new StreamWriter(new FileStream(destination + ".txt", FileMode.Append));
+            protocolFile.WriteLine(textBox.Text);
+            protocolFile.Flush();
+            protocolFile.Close(); //:TODO Дублирование кода
         }
         private void SetLanguageDictionary()
         {
@@ -151,11 +149,7 @@ namespace VisualPacker.Views
         private void ButtonContainerList_Click(object sender, RoutedEventArgs e)
         {
             var winContainerList = new ContainerList
-            {
-                vehicles = selectedVehicles.ToList(),
-                containers = wasteContainers.ToList()
-            };
-            winContainerList.ShowContainers();
+            (wasteContainers.ToList(),selectedVehicles.ToList());
             winContainerList.Show();
         }
         private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
@@ -250,14 +244,14 @@ namespace VisualPacker.Views
             var reqString =
                 "http://localhost/ILSIntegrationServices/ShipmentContainerTransferResource/MoveContainers?containerId=" +
                 string.Join(",", list.ToArray()) + "&load=" + loadId;
-            var r = WebRequest.Create(reqString) as HttpWebRequest;
-            r.Method = "GET";
-            r.Accept = "application/json";
-            r.ContentType = "application/json";
-            r.Headers.Add("UserName:user199");
+            var request = WebRequest.Create(reqString) as HttpWebRequest;
+            request.Method = "GET";
+            request.Accept = "application/json";
+            request.ContentType = "application/json";
+            request.Headers.Add("UserName:user199");
             try
             {
-                var response = r.GetResponse() as HttpWebResponse;
+                var response = request.GetResponse() as HttpWebResponse;
                 var responseBody = "";
                 using (var rspStm = response.GetResponseStream())
                 {

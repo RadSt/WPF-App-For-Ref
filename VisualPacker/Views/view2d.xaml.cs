@@ -31,8 +31,8 @@ namespace VisualPacker.Views
         public View2D(Object data)
         {
             Calculation2D calculation2D = new Calculation2D();
-            InitializeComponent();
             FlowDocViewer.Document = calculation2D.ShowVehicles(data);
+            InitializeComponent();
         }
         private void print_Click(object sender, RoutedEventArgs e)
         {
