@@ -24,8 +24,9 @@ namespace VisualPacker.Views
         public View3D(ObservableCollection<Vehicle> data)
         {
             Calculation3D calculation3D = new Calculation3D();
-            calculation3D.DrawScene(MainViewport, data);
             InitializeComponent();
+            calculation3D.DrawScene(MainViewport, data);
+            
         }
         private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
         {

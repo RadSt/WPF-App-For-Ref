@@ -21,8 +21,9 @@ namespace VisualPacker.Views
         public LoadScheme(Object data)
         {
             LoadSchemeCalculation loadScheme=new LoadSchemeCalculation();
-            flowDocViewer.Document = loadScheme.RotateContainers(data);
             InitializeComponent();
+            flowDocViewer.Document = loadScheme.RotateContainers(data);
+            
         }
         private void Print_Click(object sender, RoutedEventArgs e)
         {

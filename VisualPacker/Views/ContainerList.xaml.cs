@@ -19,8 +19,9 @@ namespace VisualPacker.Views
         public ContainerList(List<Container> containers, List<Vehicle> vehicles)
         {
             CalculationContainerList calculationContainerList = new CalculationContainerList();
-            flowDocViewer.Document = calculationContainerList.ShowContainers(containers, vehicles);
             InitializeComponent();
+            flowDocViewer.Document = calculationContainerList.ShowContainers(containers, vehicles);
+            
         }
         private void print_Click(object sender, RoutedEventArgs e)
         {
