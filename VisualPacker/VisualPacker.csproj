@@ -87,7 +87,7 @@
     <Compile Include="ViewModels\CalculationContainerList.cs" />
     <Compile Include="ViewModels\TransferContAnotherGO.cs" />
     <Compile Include="ViewModels\LoadSchemeCalculation.cs" />
-    <Compile Include="ViewModels\MainWindowCalculation.cs" />
+    <Compile Include="ViewModels\CargoArrangment.cs" />
     <Compile Include="ViewModels\VehicleAxisMass.cs" />
     <Compile Include="Views\aboutWindow.xaml.cs">
       <DependentUpon>aboutWindow.xaml</DependentUpon>
