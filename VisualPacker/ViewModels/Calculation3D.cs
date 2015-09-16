@@ -25,7 +25,6 @@ namespace VisualPacker.ViewModels
                 DrawVehicle3D(mainViewport, v);
 
             }
-
         }
 
         private void DrawVehicle3D(Viewport3D mainViewport, Vehicle vehicle)

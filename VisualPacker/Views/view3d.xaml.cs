@@ -21,7 +21,12 @@ namespace VisualPacker.Views
     /// </summary>
     public partial class View3D
     {
-        readonly Calculation3D calculation3D=new Calculation3D();
+        public View3D(ObservableCollection<Vehicle> data)
+        {
+            Calculation3D calculation3D = new Calculation3D();
+            InitializeComponent();
+            calculation3D.DrawScene(MainViewport, data);
+        }
         private void WindowClosing(object sender, CancelEventArgs cancelEventArgs)
         {
             SaveToFile(MainViewport, (int)MainViewport.Width, (int)MainViewport.Height);
@@ -29,11 +34,6 @@ namespace VisualPacker.Views
         private void print_Click(object sender, RoutedEventArgs e)
         {
             Print3DView();
-        }
-        public View3D(ObservableCollection<Vehicle> data)
-        {
-            InitializeComponent();
-            calculation3D.DrawScene(MainViewport, data);
         }
         private void Print3DView()
         {
