@@ -61,10 +61,7 @@ namespace VisualPacker.Views
         }
         private void WriteLog(string logString)
         {
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs") == false)
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs");
-            }
+            CheckDirectoryToExist("\\logs");
 
             var logFile =
                 new StreamWriter(
@@ -78,11 +75,7 @@ namespace VisualPacker.Views
         }
         private void SaveProtocolToFile()
         {
-            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData") == false)
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData");
-            }
-
+            CheckDirectoryToExist("\\renderedData");
             var destination = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\renderedData\\" +
                               DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + " " +
                               DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + " " +
@@ -92,6 +85,13 @@ namespace VisualPacker.Views
             protocolFile.WriteLine(textBox.Text);
             protocolFile.Flush();
             protocolFile.Close(); //:TODO Дублирование кода
+        }
+        private void CheckDirectoryToExist(string dirName)
+        {
+            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + dirName) == false)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + dirName);
+            }
         }
         private void SetLanguageDictionary()
         {
@@ -224,6 +224,11 @@ namespace VisualPacker.Views
         }
         private void MenuMoveContainersToExistingLoad_Click(object sender, RoutedEventArgs e)
         {
+            TransferContainer();
+        }
+
+        private void TransferContainer()
+        {
             dataGrid1.CommitEdit();
             var list = new List<string>();
             foreach (var c in containers)
@@ -239,6 +244,7 @@ namespace VisualPacker.Views
             }
             WriteLog("Перенос контейнеров в существующее ГО");
         }
+
         private void SendRequestToService(List<string> list, string loadId)
         {
             var reqString =

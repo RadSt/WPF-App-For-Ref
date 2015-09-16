@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.IO.Packaging;
-using System.Linq;
 using System.Printing;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
 using System.Windows.Xps.Packaging;
 using System.Windows.Xps.Serialization;
 using PdfSharp.Xps;
-using VisualPacker.Models;
 using VisualPacker.ViewModels;
-using Container = VisualPacker.Models.Container;
-using Path = System.IO.Path;
 
 namespace VisualPacker.Views
 {

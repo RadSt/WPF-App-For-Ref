@@ -300,6 +300,13 @@ namespace VisualPacker.ViewModels
                     ".    Количество тар: " + tempList2.Count());
             }
             AddRow(doc, "Общий вес:" + vehicle.Mass + " кг.");
+
+            VehicleAxisMass vehicleAxisMass = new VehicleAxisMass(vehicle, vehicle.Mass);
+            var axisMassList=vehicleAxisMass.AxisMassCalculate();
+            for (int i = 0; i < axisMassList.Count; i++)
+            {
+                AddRow(doc, String.Format("Нагрузка на ось{0} - {1:0.000} \n", (i + 1), axisMassList[i]));
+            }
         }
 
         private List<string> DistinctShipmentID(List<Container> containers)

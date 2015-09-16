@@ -77,6 +77,7 @@ namespace VisualPacker.Models
         public int EmptyAvtoTonnage { get; set; }
         public int EmptyTrailerTonnage { get; set; }
         public int TrailerAxisQuantity { get; set; }
+        public List<double> AxisMassMeanList { get; set; }
 
         public const int AvtoAxisQuantity = 2;
         

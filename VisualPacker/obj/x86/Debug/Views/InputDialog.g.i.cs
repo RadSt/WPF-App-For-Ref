@@ -35,12 +35,12 @@ namespace VisualPacker.Views {
     
     
     /// <summary>
-    /// InputDialog
+    /// InputDia
     /// </summary>
-    public partial class InputDialog : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class InputDia : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 16 "..\..\..\..\Views\InputDialog.xaml"
+        #line 17 "..\..\..\..\Views\InputDialog.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txtAnswer;
         
@@ -48,7 +48,7 @@ namespace VisualPacker.Views {
         #line hidden
         
         
-        #line 19 "..\..\..\..\Views\InputDialog.xaml"
+        #line 20 "..\..\..\..\Views\InputDialog.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnDialogOk;
         
@@ -87,8 +87,8 @@ namespace VisualPacker.Views {
             {
             case 1:
             
-            #line 5 "..\..\..\..\Views\InputDialog.xaml"
-            ((VisualPacker.Views.InputDialog)(target)).ContentRendered += new System.EventHandler(this.WindowContentRendered);
+            #line 6 "..\..\..\..\Views\InputDialog.xaml"
+            ((VisualPacker.Views.InputDia)(target)).ContentRendered += new System.EventHandler(this.WindowContentRendered);
             
             #line default
             #line hidden
@@ -99,7 +99,7 @@ namespace VisualPacker.Views {
             case 3:
             this.btnDialogOk = ((System.Windows.Controls.Button)(target));
             
-            #line 19 "..\..\..\..\Views\InputDialog.xaml"
+            #line 20 "..\..\..\..\Views\InputDialog.xaml"
             this.btnDialogOk.Click += new System.Windows.RoutedEventHandler(this.btnDialogOk_Click);
             
             #line default
