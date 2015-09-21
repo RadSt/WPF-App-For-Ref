@@ -47,13 +47,14 @@ namespace VisualPacker.ViewModels
             var tempPoint = new Point3D(0, 0, 0);
             textBox.Clear();
             textBox.AppendText("Протокол расчета схемы загрузки:\n");
-
             var tempList = RotateContainers(containers);
 
             foreach (var vehicle in selectedVehicles)
             {
+                LocateContainers locateContainers = new LocateContainers(vehicle);
+
                 tempMaxTonnage = maxTonnage == 0 ? vehicle.Tonnage : maxTonnage;
-                tempList = vehicle.DownloadContainers(tempList, tempMaxTonnage);
+                tempList = locateContainers.DownloadContainers(tempList, tempMaxTonnage);
                 SetFirstPoint(tempPoint,vehicle);
                 tempPoint.Y = tempPoint.Y + widthBetweenVehicles + vehicle.Width;// TODO tempPoint.Z = tempPoint.Z + widthBetweenVehicles + vehicle.Width;
                 PutCargoInfoInTextBox(vehicle, textBox);
