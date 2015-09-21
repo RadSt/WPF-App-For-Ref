@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\Calculation2D.cs" />
     <Compile Include="ViewModels\Calculation3D.cs" />
     <Compile Include="ViewModels\CalculationContainerList.cs" />
+    <Compile Include="ViewModels\LocateContainers.cs" />
     <Compile Include="ViewModels\TransferContAnotherGO.cs" />
     <Compile Include="ViewModels\LoadSchemeCalculation.cs" />
     <Compile Include="ViewModels\CargoArrangment.cs" />

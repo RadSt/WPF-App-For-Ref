@@ -41,7 +41,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\ContainerLi
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\InputDialog.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\MainWindow.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\PreferenceWindow.baml
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\ReportWindow.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Resources\StringResources.ru-RU.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Resources\StringResources.baml
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\view2d.baml
@@ -52,7 +51,6 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\ContainerLi
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\InputDialog.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\MainWindow.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\PreferenceWindow.g.cs
-C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\ReportWindow.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\view2d.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\view3d.g.cs
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\App.g.cs
@@ -60,3 +58,5 @@ C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\VisualPacker_Mark
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\VisualPacker.g.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\VisualPacker.Properties.Resources.resources
 C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\VisualPacker.csproj.GenerateResource.Cache
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\LoadScheme.baml
+C:\Users\StepanovRI\1\WPF Project\VisualPacker\obj\x86\Release\Views\LoadScheme.g.cs
